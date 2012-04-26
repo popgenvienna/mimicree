@@ -35,6 +35,12 @@ public class MimicrEE {
         logger.addHandler(mimhandler);
         logger.setUseParentHandlers(false);
         logger.setLevel(Level.ALL);
+        
+        mimicree.MimicreeFramework mimframe= new mimicree.MimicreeFramework(arguments.haplotypeFile(),arguments.inversionFile(),arguments.recombinationFile(),
+        		arguments.additiveFile(),arguments.epistasisFile(),arguments.outputDir(),arguments.outputGenerations(),arguments.replicateRuns(),logger);
+        
+        mimframe.run();
+        
 	}
 
 }
