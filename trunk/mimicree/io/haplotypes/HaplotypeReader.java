@@ -23,6 +23,7 @@ public class HaplotypeReader {
 	{
 		this.logger.info("Starting reading haplotypes from file "+this.haplotypeFile);
 		ArrayList<SNP> snps= new HaplotypeSNPReader(this.haplotypeFile).getSNPs();
+
 		
 	}
 

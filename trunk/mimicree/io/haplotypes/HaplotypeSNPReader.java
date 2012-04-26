@@ -2,8 +2,8 @@ package mimicree.io.haplotypes;
 
 import java.io.*;
 import java.util.ArrayList;
-
-import mimicree.data.haplotypes.*;
+import mimicree.data.haplotypes.SNP;
+import mimicree.data.GenomicPosition;
 
 /**
  * Read only the SNPs from a haplotype file.
@@ -84,7 +84,8 @@ class HaplotypeSNPReader {
 		char ref=a[2].charAt(0);
 		char maj=a[3].charAt(0);
 		char min=a[3].charAt(2);
-		return new SNP(a[0],Integer.parseInt(a[1]),ref,maj,min);
+		GenomicPosition genpos=new GenomicPosition(a[0],Integer.parseInt(a[1]));
+		return new SNP(genpos,ref,maj,min);
 	}
 	
 	
