@@ -5,7 +5,7 @@ import mimicree.data.GenomicPosition;
 
 /**
  * Immutable representation of a collection of SNPs.
- * Provides functionality for fast transformation of IGenomicPosition to arrayIndex
+ * Provides functionality for fast element access via GenomicPosition
  * @author robertkofler
  *
  */
@@ -34,7 +34,7 @@ public class SNPCollection {
 	 * @param gp
 	 * @return
 	 */
-	public int getIndex(GenomicPosition gp)
+	public int getIndexforPosition(GenomicPosition gp)
 	{
 		return this.pos2snp.get(gp);
 	}
@@ -46,7 +46,7 @@ public class SNPCollection {
 	 */
 	public SNP getSNPforPosition(GenomicPosition gp)
 	{
-		return getSNPforIndex(getIndex(gp));
+		return getSNPforIndex(getIndexforPosition(gp));
 	}
 	
 	
