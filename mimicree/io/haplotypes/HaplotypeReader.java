@@ -19,12 +19,20 @@ public class HaplotypeReader {
 		this.haplotypeFile=haplotypeFile;
 	}
 	
-	public void getHaplotypes()
+	public ArrayList<HaplotypeSNP> getHaplotypes()
 	{
 		this.logger.info("Starting reading haplotypes from file "+this.haplotypeFile);
-		ArrayList<SNP> snps= new HaplotypeSNPReader(this.haplotypeFile).getSNPs();
-
+		SNPCollection snpcol= new HaplotypeSNPReader(this.haplotypeFile).getSNPcollection();
+		ArrayList<BitArray> haps=new HaplotypeHaplotypeReader(this.haplotypeFile,snpcol).getHaplotypes();
 		
+		
+		ArrayList<HaplotypeSNP> haplotypes=new ArrayList<HaplotypeSNP>();
+		for (BitArray ba : haps)
+		{
+			haplotypes.add(new HaplotypeSNP(ba,snpcol));
+		}
+		
+		return haplotypes;
 	}
 
 }

@@ -21,9 +21,9 @@ public class SNP implements Comparable<SNP>{
 	public SNP(GenomicPosition genpos, char referenceCharacter, char majorAllele,char minorAllele)
 	{
 		this.genpos=genpos;
-		this.referenceCharacter=referenceCharacter;
-		this.majorAllele=majorAllele;
-		this.minorAllele=minorAllele;
+		this.referenceCharacter=Character.toUpperCase(referenceCharacter);
+		this.majorAllele=Character.toUpperCase(majorAllele);
+		this.minorAllele=Character.toUpperCase(minorAllele);
 	}
 
 	public GenomicPosition genomicPosition()

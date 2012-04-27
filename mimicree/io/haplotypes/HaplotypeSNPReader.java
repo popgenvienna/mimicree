@@ -2,8 +2,8 @@ package mimicree.io.haplotypes;
 
 import java.io.*;
 import java.util.ArrayList;
-import mimicree.data.haplotypes.SNP;
 import mimicree.data.GenomicPosition;
+import mimicree.data.haplotypes.*;
 
 /**
  * Read only the SNPs from a haplotype file.
@@ -11,12 +11,11 @@ import mimicree.data.GenomicPosition;
  *
  */
 class HaplotypeSNPReader {
-	private String haplotypeFile;
+
 	private BufferedReader bf;
 	
 	public HaplotypeSNPReader(String haplotypeFile)
 	{
-		this.haplotypeFile=haplotypeFile;
 		try
 		{
 		
@@ -33,7 +32,7 @@ class HaplotypeSNPReader {
 	 * Obtain all SNPs from a haplotype file.
 	 * @return a unsorted collection of SNPs
 	 */
-	public ArrayList<SNP> getSNPs()
+	public SNPCollection getSNPcollection()
 	{
 		
 		ArrayList<SNP> snpcol=new ArrayList<SNP>();
@@ -53,7 +52,7 @@ class HaplotypeSNPReader {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		return snpcol;
+		return new SNPCollection(snpcol);
 	}
 	
 	
@@ -77,6 +76,11 @@ class HaplotypeSNPReader {
 		return parseSNP(line);
 	}
 	
+	/**
+	 * Parse a line of the file to a SNP
+	 * @param line
+	 * @return
+	 */
 	private SNP parseSNP(String line)
 	{
 		//3L	13283707	T	G/T	GT GG GG GG
