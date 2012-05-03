@@ -56,7 +56,6 @@ public class MimicreeFramework {
 	public void run()
 	{
 		this.logger.info("Starting MimicrEE");
-		this.logger.info("Loading haplotypes");
 		ArrayList<HaplotypeSNP> haps= new mimicree.io.haplotypes.HaplotypeReader(this.haplotypeFile,this.logger).getHaplotypes();
 		
 		

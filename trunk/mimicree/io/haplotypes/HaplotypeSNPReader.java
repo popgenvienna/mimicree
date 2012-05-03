@@ -1,7 +1,9 @@
 package mimicree.io.haplotypes;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
+
+import mimicree.data.Chromosome;
 import mimicree.data.GenomicPosition;
 import mimicree.data.haplotypes.*;
 
@@ -52,9 +54,26 @@ class HaplotypeSNPReader {
 			e.printStackTrace();
 			System.exit(0);
 		}
+		
+		// Check if every SNP is only provided once;
+		 validateSNPs(snpcol);
+		
 		return new SNPCollection(snpcol);
 	}
 	
+	/**
+	 * Check if every SNP is only provided once; Considering only chromosome and position
+	 * @param snps
+	 */
+	private void validateSNPs(ArrayList<SNP> snps)
+	{
+		HashSet<GenomicPosition> posset=new HashSet<GenomicPosition>();
+		for(SNP s: snps)
+		{
+			if(posset.contains(s.genomicPosition()))  throw new IllegalArgumentException("Invalid SNPs, a SNP was provided several times "+ s.genomicPosition().toString());
+			posset.add(s.genomicPosition());
+		}
+	}
 	
 	/**
 	 * Read one SNP at the time from a haplotype file;
@@ -88,7 +107,7 @@ class HaplotypeSNPReader {
 		char ref=a[2].charAt(0);
 		char maj=a[3].charAt(0);
 		char min=a[3].charAt(2);
-		GenomicPosition genpos=new GenomicPosition(a[0],Integer.parseInt(a[1]));
+		GenomicPosition genpos=new GenomicPosition(Chromosome.getChromosome(a[0]),Integer.parseInt(a[1]));
 		return new SNP(genpos,ref,maj,min);
 	}
 	

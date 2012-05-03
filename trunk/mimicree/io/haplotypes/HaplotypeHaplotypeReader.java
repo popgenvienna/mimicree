@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import mimicree.data.haplotypes.*;
+import mimicree.data.Chromosome;
 import mimicree.data.GenomicPosition;
 
 /*
@@ -119,7 +120,7 @@ class HaplotypeHaplotypeReader {
 	{
 		//3L	13283707	T	G/T	GT GG GG GG
 		String[] a = line.split("\t");
-		GenomicPosition gp=new GenomicPosition(a[0],Integer.parseInt(a[1]));
+		GenomicPosition gp=new GenomicPosition(Chromosome.getChromosome(a[0]),Integer.parseInt(a[1]));
 		String[] temp=a[4].split(" ");
 		
 		ArrayList<Character> snplist=new ArrayList<Character>(2*temp.length);
@@ -128,6 +129,7 @@ class HaplotypeHaplotypeReader {
 			snplist.add(Character.toUpperCase(s.charAt(0)));
 			snplist.add(Character.toUpperCase(s.charAt(1)));
 		}
+		assert(gp!=null);
 		return new HapFileContainer(gp,snplist);
 	}
 
