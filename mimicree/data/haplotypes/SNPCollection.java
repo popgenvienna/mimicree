@@ -36,7 +36,9 @@ public class SNPCollection {
 	 */
 	public int getIndexforPosition(GenomicPosition gp)
 	{
-		return this.pos2snp.get(gp);
+		if(!this.pos2snp.containsKey(gp)) throw new IllegalArgumentException("Map does not contain key " +gp.toString());
+		int toret= this.pos2snp.get(gp);
+		return toret;
 	}
 	
 	/**

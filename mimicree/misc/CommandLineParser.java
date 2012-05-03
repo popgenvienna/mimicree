@@ -23,6 +23,7 @@ public class CommandLineParser {
 		String outputGenRaw="";
 		int replicateRuns=1;
 		boolean displayHelp=false;
+		boolean detailedLog=false;
 	
 		
         while(args.size()>0)
@@ -65,6 +66,10 @@ public class CommandLineParser {
             {
             	displayHelp=true;
             }
+            else if(cu.equals("--detailed-log"))
+            {
+            	detailedLog=true;
+            }
             else
             {
                 throw new IllegalArgumentException("Do not recognize command line option "+cu);
@@ -73,9 +78,8 @@ public class CommandLineParser {
     
         // Parse the string with the generations
         ArrayList<Integer> outputGen = parseOutputGenerations(outputGenRaw);
-    
         CommandLineArguments ca = new CommandLineArguments(haplotypeFile,inversionFile,recombinationrateFile,additiveFile,
-        		epistasisFile, outputDir, outputGen, replicateRuns, displayHelp);
+        		epistasisFile, outputDir, outputGen, replicateRuns, displayHelp,detailedLog);
         return ca;
 	}
 	

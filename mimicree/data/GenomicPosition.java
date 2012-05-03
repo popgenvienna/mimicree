@@ -8,16 +8,16 @@ package mimicree.data;
  *
  */
 public class GenomicPosition implements Comparable<GenomicPosition> {
-	private final String chromosome;
+	private final Chromosome chromosome;
 	private final int position;
 	
-	public GenomicPosition(String chromosome, int position)
+	public GenomicPosition(Chromosome chromosome, int position)
 	{
 		this.chromosome=chromosome;
 		this.position=position;
 	}
 	
-	public String chromosome()
+	public Chromosome chromosome()
 	{
 		return this.chromosome;
 	}
@@ -35,7 +35,7 @@ public class GenomicPosition implements Comparable<GenomicPosition> {
     @Override
     public int compareTo(GenomicPosition b)
     {
-        int chrcomp=this.chromosome.compareTo(b.chromosome());
+        int chrcomp=this.chromosome().compareTo(b.chromosome());
         if(chrcomp!=0) return chrcomp;
         if(this.position() < b.position()) return -1;
         if(this.position() > b.position()) return 1;
@@ -58,6 +58,12 @@ public class GenomicPosition implements Comparable<GenomicPosition> {
         GenomicPosition tc=(GenomicPosition)o; 
         if(tc.position() == this.position() && tc.chromosome().equals(this.chromosome())){return true;}
         return false;
+    }
+    
+    @Override
+    public String toString()
+    {
+    	return String.format("%s:%d", this.chromosome,this.position);
     }
 
 }

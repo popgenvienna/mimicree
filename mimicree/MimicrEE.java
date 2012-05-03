@@ -31,6 +31,7 @@ public class MimicrEE {
         java.util.logging.Logger logger=java.util.logging.Logger.getLogger("Mimicree Logger");
         java.util.logging.ConsoleHandler mimhandler =new java.util.logging.ConsoleHandler();
         mimhandler.setLevel(Level.INFO);
+        if(arguments.detailedLog())mimhandler.setLevel(Level.FINEST);
         mimhandler.setFormatter(new mimicree.misc.MimicreeLogFormatter());
         logger.addHandler(mimhandler);
         logger.setUseParentHandlers(false);
