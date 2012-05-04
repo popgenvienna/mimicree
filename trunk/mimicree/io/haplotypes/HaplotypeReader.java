@@ -4,8 +4,8 @@ import java.util.*;
 import mimicree.data.haplotypes.*;
 
 /**
- * Read the content of a haplotype file.
- * Return a collection of diploid specimen
+ * Read the haplotypes.
+ * Proper haplotypes actually contain SNP and inversion information
  * @author robertkofler
  *
  */
@@ -19,7 +19,7 @@ public class HaplotypeReader {
 		this.haplotypeFile=haplotypeFile;
 	}
 	
-	public ArrayList<HaplotypeSNP> getHaplotypes()
+	public ArrayList<Haplotype> getHaplotypes()
 	{
 		this.logger.info("Starting reading haplotypes from file "+this.haplotypeFile);
 		this.logger.fine("Start reading the SNPs");
@@ -29,10 +29,10 @@ public class HaplotypeReader {
 		ArrayList<BitArray> haps=new HaplotypeHaplotypeReader(this.haplotypeFile,snpcol).getHaplotypes();
 		this.logger.fine("Finished reading haplotype information; Haplotypes read " + haps.size());
 		
-		ArrayList<HaplotypeSNP> haplotypes=new ArrayList<HaplotypeSNP>();
+		ArrayList<Haplotype> haplotypes=new ArrayList<Haplotype>();
 		for (BitArray ba : haps)
 		{
-			haplotypes.add(new HaplotypeSNP(ba,snpcol));
+			haplotypes.add(new Haplotype(ba,snpcol));
 		}
 		this.logger.info("Finished reading haplotypes; Read "+snpcol.size() + " SNPs and " + haplotypes.size() + " haplotypes");
 		

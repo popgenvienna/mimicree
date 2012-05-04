@@ -4,7 +4,7 @@ import mimicree.data.GenomicPosition;
 
 
 /**
- * Representation of a SNP;
+ * Immutable representation of a SNP;
  * Only the information about IGenomicPositon is relevant (for sorting as well as for hashing
  * 
  * Only two allelic SNPs are permited. Representation is immutable thus may be hashed (only chromosome and position is used for hashing)
@@ -26,25 +26,43 @@ public class SNP implements Comparable<SNP>{
 		this.minorAllele=Character.toUpperCase(minorAllele);
 	}
 
+	/**
+	 * return the position of the SNP in the genome
+	 * @return
+	 */
 	public GenomicPosition genomicPosition()
 	{
 		return this.genpos;
 	}
 	
+	/**
+	 * return the character in the reference sequence
+	 * @return
+	 */
 	public char referenceCharacter()
 	{
 		return this.referenceCharacter;
 	}
+	
+	/**
+	 * return the major allele of the SNP
+	 * @return
+	 */
 	public char majorAllele()
 	{
 		return this.majorAllele;
 	}
+	
+	/**
+	 * return the minor allele of the SNP
+	 * @return
+	 */
 	public char minorAllele()
 	{
 		return this.minorAllele;
 	}
 	
-	@Override
+	@Override 
 	public int compareTo(SNP a){ 
 		return this.genomicPosition().compareTo(a.genomicPosition());
 	}

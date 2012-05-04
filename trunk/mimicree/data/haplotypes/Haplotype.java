@@ -1,15 +1,16 @@
 package mimicree.data.haplotypes;
 
 /**
- * Contains a haplotype for all SNPs
+ * Represents the haplotype of the SNPs
  * Immutable
  * @author robertkofler
  *
  */
-public class HaplotypeSNP {
+public class Haplotype {
 	private final SNPCollection snpcollection;
 	private final BitArray haplotype;
-	public HaplotypeSNP(BitArray haplotype, SNPCollection snpcollection)
+	
+	public Haplotype(BitArray haplotype, SNPCollection snpcollection)
 	{
 		this.haplotype=haplotype;
 		this.snpcollection=snpcollection;
