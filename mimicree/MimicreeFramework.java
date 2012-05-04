@@ -2,7 +2,7 @@ package mimicree;
 
 import java.util.ArrayList;
 import java.io.File;
-import mimicree.data.haplotypes.HaplotypeSNP;
+import mimicree.data.haplotypes.Haplotype;
 
 public class MimicreeFramework {
 	private final String haplotypeFile;
@@ -56,7 +56,7 @@ public class MimicreeFramework {
 	public void run()
 	{
 		this.logger.info("Starting MimicrEE");
-		ArrayList<HaplotypeSNP> haps= new mimicree.io.haplotypes.HaplotypeReader(this.haplotypeFile,this.logger).getHaplotypes();
+		ArrayList<Haplotype> haps= new mimicree.io.haplotypes.HaplotypeReader(this.haplotypeFile,this.logger).getHaplotypes();
 		
 		
 		
