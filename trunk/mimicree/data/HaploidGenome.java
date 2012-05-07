@@ -1,4 +1,6 @@
-package mimicree.data.haplotypes;
+package mimicree.data;
+
+import mimicree.data.haplotypes.Haplotype;
 
 /**
  * Represents a haploid genome.
@@ -7,5 +9,8 @@ package mimicree.data.haplotypes;
  *
  */
 public class HaploidGenome {
+	private final Haplotype haplotype;
+	private final InversionHaplotype invHaplotype;
+	
 
 }

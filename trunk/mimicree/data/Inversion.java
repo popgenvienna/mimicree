@@ -98,7 +98,7 @@ public class Inversion {
 	}
 	
 	/** 
-	 * Retrieve an inversion by its name
+	 * Obtain an instance of an inversion given its unique name
 	 * @param name
 	 * @return
 	 */
