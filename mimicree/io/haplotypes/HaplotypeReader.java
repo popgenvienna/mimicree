@@ -1,6 +1,8 @@
 package mimicree.io.haplotypes;
 
 import java.util.*;
+
+import mimicree.data.BitArray.BitArray;
 import mimicree.data.haplotypes.*;
 
 /**

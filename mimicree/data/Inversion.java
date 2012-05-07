@@ -109,6 +109,15 @@ public class Inversion {
 	}
 	
 	/**
+	 * Retrieve a non-redundant collection of all defined inversions
+	 * @return
+	 */
+	public static ArrayList<Inversion> getInversions()
+	{
+		return new ArrayList<Inversion>(inv2name.keySet());
+	}
+	
+	/**
 	 * Retrieve the name of an inversion
 	 * @param inv
 	 * @return
