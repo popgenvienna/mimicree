@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import mimicree.data.BitArray.*;
 import mimicree.data.haplotypes.*;
 import mimicree.data.Chromosome;
 import mimicree.data.GenomicPosition;
@@ -45,7 +46,7 @@ class HaplotypeHaplotypeReader {
 	
 	public ArrayList<BitArray> getHaplotypes()
 	{
-		ArrayList<BitArray.BitArrayBuilder> haplotypeCollection=null;
+		ArrayList<BitArrayBuilder> haplotypeCollection=null;
 		HapFileContainer hc =null;
 		while((hc=next())!=null)
 		{
@@ -65,7 +66,7 @@ class HaplotypeHaplotypeReader {
 		
 		// Convert the BitArrayBuilder into a BitArray
 		ArrayList<BitArray> toret=new ArrayList<BitArray>();
-		for(BitArray.BitArrayBuilder build: haplotypeCollection)
+		for(BitArrayBuilder build: haplotypeCollection)
 		{
 			toret.add(build.getBitArray());
 		}
@@ -79,12 +80,12 @@ class HaplotypeHaplotypeReader {
 	 * @param haplotypeCount will correspond to size of ArrayList 
 	 * @return
 	 */
-	private ArrayList<BitArray.BitArrayBuilder> initializeHaplotypeCollection(int snpcount, int haplotypeCount)
+	private ArrayList<BitArrayBuilder> initializeHaplotypeCollection(int snpcount, int haplotypeCount)
 	{
-		ArrayList<BitArray.BitArrayBuilder> ba=new ArrayList<BitArray.BitArrayBuilder>();
+		ArrayList<BitArrayBuilder> ba=new ArrayList<BitArrayBuilder>();
 		for(int i=0; i<haplotypeCount; i++)
 		{
-			ba.add(new BitArray.BitArrayBuilder(snpcount));
+			ba.add(new BitArrayBuilder(snpcount));
 		}
 		return ba;
 		

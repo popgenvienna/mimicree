@@ -1,5 +1,7 @@
 package mimicree.data.haplotypes;
 
+import mimicree.data.BitArray.BitArray;
+
 /**
  * Represents the haplotype of the SNPs
  * Immutable

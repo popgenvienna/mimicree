@@ -2,6 +2,8 @@ package mimicree.io.inversion;
 
 import java.io.*;
 import java.util.regex.*;
+import java.util.*;
+import java.util.logging.Logger;
 
 import mimicree.data.Chromosome;
 import mimicree.data.Inversion;
@@ -9,15 +11,22 @@ import mimicree.data.Inversion;
 public class InversionReader {
 	private final int  haplotpyeCount;
 	private final String inversionFile;
-	public InversionReader(String inversionFile,int haplotypeCount)
+	private Logger logger;
+	public InversionReader(String inversionFile,int haplotypeCount, Logger logger)
 	{
 		this.haplotpyeCount=haplotypeCount;
 		this.inversionFile=inversionFile;
+		this.logger=logger;
 	}
 	
 	
 	public ArrayList<Inversion> getInversions()
 	{
+		ArrayList<Inversion> inversions=new InversionDefinitionReader(inversionFile).setupInversionDefinitions();
+		boolean overlapping=new InversionValidator(inversions).areOverlapping();
+		if(overlapping) throw new IllegalArgumentException("blablabla");
+		
+		
 		
 	}
 }
@@ -48,7 +57,7 @@ class InversionDefinitionReader
 		}
 	}
 	
-	public void setupInversionDefinitions()
+	public ArrayList<Inversion> setupInversionDefinitions()
 	{
 		String line;
 		while((line=readNextLine())!=null)
@@ -73,6 +82,8 @@ class InversionDefinitionReader
 			e.printStackTrace();
 			System.exit(0);
 		}
+		
+		return Inversion.getInversions();
 	}
 	
 	private String readNextLine()

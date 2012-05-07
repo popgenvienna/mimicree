@@ -1,5 +1,7 @@
 package mimicree.data.haplotypes;
 
+import mimicree.data.BitArray.BitArray;
+
 /**
  * Immutable representation of a diploid genome
  * Only SNPs are encoded
