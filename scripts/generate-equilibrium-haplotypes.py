@@ -7,6 +7,9 @@ from optparse import OptionParser, OptionGroup
 #from rpy2.robjects.packages import importr
 
 
+# MimicrEE package
+# Author: Dr. Robert Kofler
+
 class Allele:
 	def __init__(self,allele,count):
 		self.allele=allele
@@ -23,7 +26,6 @@ def get_two_allele_array(p):
 	return (maj.allele,min.allele,basis)
 		
 
-#Author: Robert Kofler
 parser = OptionParser()
 parser.add_option("--input", dest="input", help="A synchronized file containging allele counts for a SINGLE populations")
 parser.add_option("--output",dest="output",help="A set of random haplotyes which may be used for analysis with MimicrEE")
