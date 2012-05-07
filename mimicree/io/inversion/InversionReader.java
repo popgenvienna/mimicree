@@ -1,12 +1,10 @@
 package mimicree.io.inversion;
 
-import java.io.*;
-import java.util.regex.*;
+
 import java.util.*;
 import java.util.logging.Logger;
 
-import mimicree.data.Chromosome;
-import mimicree.data.Inversion;
+import mimicree.data.*;
 
 public class InversionReader {
 	private final int  haplotpyeCount;
@@ -20,106 +18,21 @@ public class InversionReader {
 	}
 	
 	
-	public ArrayList<Inversion> getInversions()
+	public ArrayList<InversionHaplotype> getInversions()
 	{
+		this.logger.info("Start reading the inversions");
+		this.logger.fine("Start reading inversion definitions");
 		ArrayList<Inversion> inversions=new InversionDefinitionReader(inversionFile).setupInversionDefinitions();
+		this.logger.fine("Finished reading inversion definitions; Found " + inversions.size()+ " inversions");
+		this.logger.fine("Start validating inversions");
 		boolean overlapping=new InversionValidator(inversions).areOverlapping();
-		if(overlapping) throw new IllegalArgumentException("blablabla");
-		
-		
-		
+		if(overlapping) throw new IllegalArgumentException("Overlapping inversions are not allowed");
+		this.logger.fine("Finished validating inversions. All insertions are valid");
+		this.logger.fine("Start reading the inversion-haplotypes");
+		ArrayList<InversionHaplotype> invHap=new InversionHaplotypeReader(this.inversionFile,this.haplotpyeCount).getInversionHaplotypes();
+		this.logger.fine("Finished reading inversion-haplotypes. Read " + invHap.size() + " haplotypes");
+		this.logger.info("Finished reading Inversions; Found " + inversions.size() + " distinct inversions and read " + invHap.size() + " inversion-haplotypes");
+		return invHap;
 	}
 }
 
-
-/**
- * Read the inversion definition part from the inversion file
- * @author robertkofler
- *
- */
-class InversionDefinitionReader
-{
-	private BufferedReader bf;
-	private boolean started =false;
-	private static Pattern p= Pattern.compile("(\\w+)\\s*=\\s*([^:]+):(\\d+)-(\\d+)");
-			//("gene_id\\s+\"([^\"]+)\";");
-	
-	public InversionDefinitionReader(String inversionFile)
-	{
-		try
-		{
-			bf=new BufferedReader(new FileReader(inversionFile));
-		}
-		catch(FileNotFoundException e)
-		{
-			e.printStackTrace();
-			System.exit(0);
-		}
-	}
-	
-	public ArrayList<Inversion> setupInversionDefinitions()
-	{
-		String line;
-		while((line=readNextLine())!=null)
-		{
-			Matcher m= p.matcher(line);
-			if(!m.find()) throw new IllegalArgumentException("Could not parse inversion defintion "+ line);
-			String name =m.group(1);
-			Chromosome chromosome=Chromosome.getChromosome(m.group(2));
-			int start=Integer.parseInt(m.group(3));
-			int end=Integer.parseInt(m.group(4));
-			
-			// Set up the definition of the inversion
-			Inversion.setInversion(name, chromosome, start, end);
-		}
-		
-		try
-		{
-			bf.close();
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-			System.exit(0);
-		}
-		
-		return Inversion.getInversions();
-	}
-	
-	private String readNextLine()
-	{
-		String line;
-		try
-		{
-			while((line=bf.readLine())!=null)
-			{
-				// Treat the case when the second '>' is encountered marking the end of the Inversion definition part
-				if(started && line.startsWith(">")) return null;
-				if(started)
-				{
-					return line;
-				}
-				else if(line.startsWith(">"))
-				{
-					started=true;
-				}
-				
-			}
-
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-			System.exit(0);
-		}
-	
-		return null; // in case the end of the file has been reached
-	}
-}
-
-
-
-class InversionHaplotypeReader
-{
-	
-}

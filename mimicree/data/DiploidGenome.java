@@ -1,6 +1,7 @@
-package mimicree.data.haplotypes;
+package mimicree.data;
 
 import mimicree.data.BitArray.BitArray;
+import mimicree.data.haplotypes.SNPCollection;
 
 /**
  * Immutable representation of a diploid genome

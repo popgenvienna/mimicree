@@ -2,6 +2,7 @@ package mimicree.io;
 
 import java.util.*;
 
+import mimicree.data.*;
 import mimicree.data.haplotypes.*;
 import mimicree.io.haplotypes.HaplotypeReader;
 
@@ -22,6 +23,18 @@ public class HaploidGenomeReader {
 	public ArrayList<HaploidGenome> read()
 	{
 		ArrayList<Haplotype> haps= new mimicree.io.haplotypes.HaplotypeReader(this.haplotypeFile,this.logger).getHaplotypes();
+		ArrayList<InversionHaplotype> invs=new mimicree.io.inversion.InversionReader(inversionFile, haps.size(), logger).getInversions();
+		
+		assert(haps.size()==invs.size());
+		
+		ArrayList<HaploidGenome> toret=new ArrayList<HaploidGenome>();
+		for(int i =0; i<haps.size();  i++)
+		{
+			toret.add(new HaploidGenome());
+		}
+		
+		
+		
 
 	}
 
