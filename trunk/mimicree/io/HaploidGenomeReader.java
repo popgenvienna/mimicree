@@ -1,10 +1,12 @@
 package mimicree.io;
 
+import java.io.File;
 import java.util.*;
 
 import mimicree.data.*;
 import mimicree.data.haplotypes.*;
 import mimicree.io.haplotypes.HaplotypeReader;
+import mimicree.io.inversion.InversionReader;
 
 public class HaploidGenomeReader {
 	
@@ -20,22 +22,32 @@ public class HaploidGenomeReader {
 	}
 	
 	
-	public ArrayList<HaploidGenome> read()
+	public ArrayList<HaploidGenome> readHaploidGenomes()
 	{
 		ArrayList<Haplotype> haps= new mimicree.io.haplotypes.HaplotypeReader(this.haplotypeFile,this.logger).getHaplotypes();
-		ArrayList<InversionHaplotype> invs=new mimicree.io.inversion.InversionReader(inversionFile, haps.size(), logger).getInversions();
-		
+		ArrayList<InversionHaplotype> invs;
+		if(new File(inversionFile).exists())
+		{
+			this.logger.info("Detected an existing inversion file");
+			invs=new mimicree.io.inversion.InversionReader(inversionFile, haps.size(), logger).getInversions();
+		}
+		else
+		{
+			this.logger.info("Did not detect an existing inversion file; Loading default (=no inversions)");
+			invs=InversionReader.getEmptyInversions(haps.size());
+		}
 		assert(haps.size()==invs.size());
 		
 		ArrayList<HaploidGenome> toret=new ArrayList<HaploidGenome>();
 		for(int i =0; i<haps.size();  i++)
 		{
-			toret.add(new HaploidGenome());
+			toret.add(new HaploidGenome(haps.get(i),invs.get(0)));
 		}
 		
 		
+		this.logger.info("Finished creating haplotpyes consisting of SNPs and inversions");
+		return toret;
 		
-
 	}
 
 }

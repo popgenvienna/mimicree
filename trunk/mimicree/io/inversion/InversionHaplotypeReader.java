@@ -25,7 +25,8 @@ public class InversionHaplotypeReader {
 		}
 	}
 	
-	public InversionHaplotypeReader(String inversionFile, int size)
+	
+	public InversionHaplotypeReader(String inversionFile, int haplotypeCount)
 	{
 		try
 		{
@@ -37,7 +38,7 @@ public class InversionHaplotypeReader {
 			System.exit(0);
 		}
 
-		this.haplotypeCount=size;
+		this.haplotypeCount=haplotypeCount;
 	}
 	
 	/** 
@@ -47,11 +48,7 @@ public class InversionHaplotypeReader {
 	public ArrayList<InversionHaplotype> getInversionHaplotypes()
 	{
 		// Initialize default => empty list of inversion haplotypes
-		ArrayList<InversionHaplotype> toret=new ArrayList<InversionHaplotype>(this.haplotypeCount);
-		for(int i=0; i<haplotypeCount; i++)
-		{
-			toret.set(i, new InversionHaplotype(new ArrayList<Inversion>()));
-		}
+		ArrayList<InversionHaplotype> toret=InversionReader.getEmptyInversions(this.haplotypeCount);
 		
 		String line;
 		while((line=readNextLine())!=null)
@@ -75,6 +72,7 @@ public class InversionHaplotypeReader {
 		int tmpHapNum=Integer.parseInt(ar[0])-1;
 		int index1=tmpHapNum*2;
 		int index2=index1+1;
+		if(index1<0)throw new IllegalArgumentException("Index of any inversion-haplotype needs to be larger than zero in line " + line);
 		
 		ArrayList<Inversion> inv1=new ArrayList<Inversion>();
 		ArrayList<Inversion> inv2=new ArrayList<Inversion>();
@@ -98,7 +96,7 @@ public class InversionHaplotypeReader {
 	private ArrayList<Inversion> parseInvHaplotype(String invhaplotype)
 	{
 		ArrayList<String> rawInv=new ArrayList<String>();
-		if(invhaplotype=="-") {}
+		if(invhaplotype.equals("-")) {}
 		else if(invhaplotype.contains(","))
 		{
 			

@@ -17,6 +17,23 @@ public class InversionReader {
 		this.logger=logger;
 	}
 	
+	/**
+	 * Get the default Inversion haplotypes, i.e.: no inversion
+	 * @param haplotypeCount number of haplotypes for which to create emtpy inversions
+	 * @return a set of empty inversion haplotypes
+	 */
+	public static ArrayList<InversionHaplotype> getEmptyInversions(int haplotypeCount)
+	{
+		ArrayList<InversionHaplotype> toret=new ArrayList<InversionHaplotype>(haplotypeCount);
+		
+		for(int i=0; i<haplotypeCount; i++)
+		{
+			InversionHaplotype iht=new InversionHaplotype(new ArrayList<Inversion>());
+			toret.add(iht);
+		}
+		return toret;
+	}
+	
 	
 	public ArrayList<InversionHaplotype> getInversions()
 	{
