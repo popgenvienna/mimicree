@@ -2,7 +2,7 @@ package mimicree;
 
 import java.util.ArrayList;
 import java.io.File;
-import mimicree.data.haplotypes.Haplotype;
+import mimicree.data.*;
 
 public class MimicreeFramework {
 	private final String haplotypeFile;
@@ -21,7 +21,6 @@ public class MimicreeFramework {
 		// 'File' represents files and directories
 		// Test if input files exist
 		if(! new File(haplotypeFile).exists()) throw new IllegalArgumentException("Haplotype file does not exist "+haplotypeFile);
-		if(! new File(inversionFile).exists()) throw new IllegalArgumentException("Inversion file does not exist "+inversionFile);
 		if(! new File(recombinationFile).exists()) throw new IllegalArgumentException("Recombination file does not exist " + recombinationFile);
 		if(! new File(additiveFile).exists()) throw new IllegalArgumentException("File with additive fitness effects does not exist " + additiveFile);
 		if(! new File(epistasisFile).exists()) throw new IllegalArgumentException("File with epistatic fitness effects does not exist" + epistasisFile);
@@ -56,7 +55,8 @@ public class MimicreeFramework {
 	public void run()
 	{
 		this.logger.info("Starting MimicrEE");
-		ArrayList<Haplotype> haps= new mimicree.io.haplotypes.HaplotypeReader(this.haplotypeFile,this.logger).getHaplotypes();
+		ArrayList<HaploidGenome> hapGenomes= new mimicree.io.HaploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readHaploidGenomes();
+	
 		
 		
 		

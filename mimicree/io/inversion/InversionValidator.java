@@ -5,14 +5,14 @@ import mimicree.data.*;
 import mimicree.data.BitArray.*;
 class InversionValidator {
 
-	private HashMap<Chromosome,ArrayList<Inversion>> chrInversions;
+	private HashMap<Chromosome,ArrayList<Inversion>> chrInversions = new HashMap<Chromosome,ArrayList<Inversion>>();
 	public InversionValidator(ArrayList<Inversion> inversions)
 	{
 		// Map inversions to a chromosome based collection of Inversions
 		for(Inversion i: inversions)
 		{
 			Chromosome chr=i.chromosome();
-			if(!chrInversions.containsKey(chr)) chrInversions.put(chr, new ArrayList<Inversion>());	
+			if(!(chrInversions.containsKey(chr))) chrInversions.put(chr, new ArrayList<Inversion>());	
 			chrInversions.get(chr).add(i);	
 		}
 		
@@ -42,7 +42,7 @@ class InversionValidator {
 		{
 			if(inv.end()>endpos)endpos=inv.end();
 		}
-		BitArrayBuilder bita=new BitArrayBuilder(endpos);
+		BitArrayBuilder bita=new BitArrayBuilder(endpos+1);
 		
 		for(Inversion inv: inversions)
 		{

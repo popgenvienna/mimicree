@@ -81,6 +81,6 @@ for i in range(0,popsize):
 		invtype1="-"
 	if(not invtype2):
 		invtype2="-"
-	ofw.write("{0}\t{1}:{2}\n".format(i,invtype1,invtype2))
+	ofw.write("{0}\t{1}:{2}\n".format(i+1,invtype1,invtype2))
 	
 		
