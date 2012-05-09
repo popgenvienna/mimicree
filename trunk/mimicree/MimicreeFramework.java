@@ -3,6 +3,8 @@ package mimicree;
 import java.util.ArrayList;
 import java.io.File;
 import mimicree.data.*;
+import mimicree.data.fitness.*;
+import mimicree.io.fitness.*;
 
 public class MimicreeFramework {
 	private final String haplotypeFile;
@@ -55,7 +57,8 @@ public class MimicreeFramework {
 	public void run()
 	{
 		this.logger.info("Starting MimicrEE");
-		ArrayList<HaploidGenome> hapGenomes= new mimicree.io.HaploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readHaploidGenomes();
+		AdditiveSNPFitness addFit=new AdditiveSNPReader(this.additiveFile,this.logger).readAdditiveFitness();
+		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readDiploidGenomes();
 	
 		
 		

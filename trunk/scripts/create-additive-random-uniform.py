@@ -40,3 +40,4 @@ for gt in randgentypes:
 	topr.append(str(selcoefficient))
 	topr.append(str(heteffect))
 	ofh.write("\t".join(topr)+"\n")
+	
