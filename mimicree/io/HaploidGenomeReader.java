@@ -24,7 +24,7 @@ public class HaploidGenomeReader {
 	
 	public ArrayList<HaploidGenome> readHaploidGenomes()
 	{
-		ArrayList<Haplotype> haps= new mimicree.io.haplotypes.HaplotypeReader(this.haplotypeFile,this.logger).getHaplotypes();
+		ArrayList<Haplotype> haps= new HaplotypeReader(this.haplotypeFile,this.logger).getHaplotypes();
 		ArrayList<InversionHaplotype> invs;
 		if(new File(inversionFile).exists())
 		{
@@ -45,7 +45,7 @@ public class HaploidGenomeReader {
 		}
 		
 		
-		this.logger.info("Finished creating haplotpyes consisting of SNPs and inversions");
+		this.logger.info("Finished creating haploid genomes consisting of SNPs and inversions");
 		return toret;
 		
 	}

@@ -17,5 +17,10 @@ public class HaploidGenome {
 		this.invHaplotype=invHaplotype;
 	}
 	
+	public char getSNPAllele(GenomicPosition position)
+	{
+		return haplotype.getAllele(position);
+	}
+	
 
 }

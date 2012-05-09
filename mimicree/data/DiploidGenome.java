@@ -1,23 +1,35 @@
 package mimicree.data;
 
-import mimicree.data.BitArray.BitArray;
-import mimicree.data.haplotypes.SNPCollection;
+import mimicree.data.HaploidGenome;
+
 
 /**
  * Immutable representation of a diploid genome
- * Only SNPs are encoded
  * @author robertkofler
  *
  */
 public class DiploidGenome {
-	private final SNPCollection snpcol;
-	private final BitArray hapA;
-	private final BitArray hapB;
-	public DiploidGenome(SNPCollection snpcol,BitArray haplotypeA,BitArray haplotypeB)
+	private final HaploidGenome hap1;
+	private final HaploidGenome hap2;
+	
+
+	public DiploidGenome(HaploidGenome hap1, HaploidGenome hap2)
 	{
-		this.snpcol=snpcol;
-		this.hapA=haplotypeA;
-		this.hapB=haplotypeB;
+		this.hap1=hap1;
+		this.hap2=hap2;
+	}
+	
+	/**
+	 * Retrieve the genotype a given genomic Position
+	 * @param position
+	 * @return
+	 */
+	public char[] getSNPGenotype(GenomicPosition position)
+	{
+		char[] toret=new char[2];
+		toret[0]=hap1.getSNPAllele(position);
+		toret[1]=hap2.getSNPAllele(position);
+		return toret;
 	}
 
 }
