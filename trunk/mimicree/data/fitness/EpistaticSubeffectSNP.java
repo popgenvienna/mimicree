@@ -15,5 +15,15 @@ public class EpistaticSubeffectSNP {
 		this.epistaticChar=epistaticChar;
 	}
 	
+	public GenomicPosition position()
+	{
+		return this.position;
+	}
+	
+	public char epistaticChar()
+	{
+		return this.epistaticChar;
+	}
+	
 
 }

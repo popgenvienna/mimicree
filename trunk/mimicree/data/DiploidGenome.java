@@ -31,5 +31,16 @@ public class DiploidGenome {
 		toret[1]=hap2.getSNPAllele(position);
 		return toret;
 	}
+	
+	
+	/**
+	 * Get a gamete for the genome
+	 * @return
+	
+	public HaploidGenome getGamete()
+	{
+		
+	}
+	 */
 
 }
