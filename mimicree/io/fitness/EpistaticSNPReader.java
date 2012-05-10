@@ -12,8 +12,10 @@ public class EpistaticSNPReader {
 	private BufferedReader bf;
 	private String previous=null;
 	private Logger logger;
+	private String epistaticFile;
 	public EpistaticSNPReader(String epistaticFile,Logger logger)
 	{
+		this.epistaticFile=epistaticFile;
 		try
 		{
 			bf=new BufferedReader(new FileReader(epistaticFile));
@@ -31,7 +33,7 @@ public class EpistaticSNPReader {
 	{
 		ArrayList<EpistaticSNP> entrycol=new ArrayList<EpistaticSNP>();
 		ArrayList<String> rawentry;
-		this.logger.info("Start reading epistatic fitness effects");
+		this.logger.info("Start reading epistatic fitness effects from file "+ this.epistaticFile);
 		while((rawentry=getNextEntry())!=null)
 		{
 			EpistaticSNP entry=parseEntry(rawentry);

@@ -10,9 +10,11 @@ import java.util.logging.Logger;
 public class AdditiveSNPReader {
 	
 	private BufferedReader bf;
+	private String additiveFile;
 	private Logger logger;
 	public AdditiveSNPReader(String additiveFile, Logger logger)
 	{
+		this.additiveFile=additiveFile;
 		try{
 			bf=new BufferedReader(new FileReader(additiveFile));
 		}
@@ -31,7 +33,7 @@ public class AdditiveSNPReader {
 	public AdditiveSNPFitness readAdditiveFitness()
 	{
 		ArrayList<AdditiveSNP> addSNPs=new ArrayList<AdditiveSNP>();
-		this.logger.info("Start reading additive fitness effects of SNPs");
+		this.logger.info("Start reading additive fitness effects from file "+this.additiveFile);
 		String line;
 		try
 		{

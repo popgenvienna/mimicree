@@ -25,8 +25,7 @@ public class MimicreeFramework {
 		if(! new File(haplotypeFile).exists()) throw new IllegalArgumentException("Haplotype file does not exist "+haplotypeFile);
 		if(! new File(recombinationFile).exists()) throw new IllegalArgumentException("Recombination file does not exist " + recombinationFile);
 		if(! new File(additiveFile).exists()) throw new IllegalArgumentException("File with additive fitness effects does not exist " + additiveFile);
-		if(! new File(epistasisFile).exists()) throw new IllegalArgumentException("File with epistatic fitness effects does not exist" + epistasisFile);
-		// Test if output file exists
+				// Test if output file exists
 		if(! new File(outputDir).exists()) throw new IllegalArgumentException("Output directory does not exist " + outputDir);
 		
 		// simulations should be done for 'n' generations
@@ -57,9 +56,8 @@ public class MimicreeFramework {
 	public void run()
 	{
 		this.logger.info("Starting MimicrEE");
-		AdditiveSNPFitness addFit=new AdditiveSNPReader(this.additiveFile,this.logger).readAdditiveFitness();
-		EpistaticSNPFitness epiFit=new EpistaticSNPReader(this.epistasisFile,this.logger).readEpistaticFitness();
-		
+		FitnessFunction ff=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();
+
 		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readDiploidGenomes();
 	
 		
