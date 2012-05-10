@@ -58,6 +58,8 @@ public class MimicreeFramework {
 	{
 		this.logger.info("Starting MimicrEE");
 		AdditiveSNPFitness addFit=new AdditiveSNPReader(this.additiveFile,this.logger).readAdditiveFitness();
+		EpistaticSNPFitness epiFit=new EpistaticSNPReader(this.epistasisFile,this.logger).readEpistaticFitness();
+		
 		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readDiploidGenomes();
 	
 		

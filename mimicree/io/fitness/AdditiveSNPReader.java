@@ -45,6 +45,19 @@ public class AdditiveSNPReader {
 			e.printStackTrace();
 			System.exit(0);
 		}
+		
+		
+		try
+		{
+			bf.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+			System.exit(0);
+		}
+		
+		
 		this.logger.info("Finished reading " + addSNPs.size() + " additive fitness effects of SNPs");
 		return new AdditiveSNPFitness(addSNPs);
 	}
