@@ -77,6 +77,19 @@ public class Inversion {
 	private static HashMap<String,Inversion> name2inv=new HashMap<String,Inversion>();
 	private static HashMap<Inversion,String> inv2name=new HashMap<Inversion,String>();
 	
+	// create a default inversion, which indicates absence of an inversion
+	private static Inversion noInversion=new Inversion(Chromosome.getChromosome("none") ,-1,-1);
+	
+	/**
+	 * Obtain the default inversion, which indicates absence of any inversion
+	 * @return
+	 */
+	public static Inversion getDefaultInversion()
+	{
+		return noInversion;
+	}
+	
+	
 	/**
 	 * Create a new Inversion
 	 * Will throw an error if inversion already exists
