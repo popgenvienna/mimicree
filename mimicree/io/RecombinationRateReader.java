@@ -48,11 +48,11 @@ public class RecombinationRateReader {
 		
 		String[] a=line.split("\t");
 		String[] tmp1=a[0].split(":");
-		String[] tmp2=tmp1[1].split("..");
+		String[] tmp2=tmp1[1].split("\\.\\.");
 		
 		Chromosome chr=Chromosome.getChromosome(tmp1[0]);
-		int start=Integer.parseInt(tmp2[0])+1;
-		int end=Integer.parseInt(tmp2[1]);
+		int start=Integer.parseInt(tmp2[0].trim())+1;
+		int end=Integer.parseInt(tmp2[1].trim());
 		double recrate=Double.parseDouble(a[2]);
 		return new RecombinationWindow(chr,start,end,recrate);
 		

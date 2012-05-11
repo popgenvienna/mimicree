@@ -24,11 +24,12 @@ public class RecombinationWindow {
 	private boolean hasRecombinationEvent()
 	{
 		double rand=Math.random();
+		return false;
 	}
 	
 	private GenomicPosition getRandomPosition()
 	{
-		
+		return null;
 	}
 	
 }
