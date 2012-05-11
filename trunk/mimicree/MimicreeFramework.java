@@ -5,6 +5,8 @@ import java.io.File;
 import mimicree.data.*;
 import mimicree.data.fitness.*;
 import mimicree.io.fitness.*;
+import mimicree.data.recombination.RecombinationRate;
+import mimicree.io.RecombinationRateReader;
 
 public class MimicreeFramework {
 	private final String haplotypeFile;
@@ -56,10 +58,10 @@ public class MimicreeFramework {
 	public void run()
 	{
 		this.logger.info("Starting MimicrEE");
-		FitnessFunction ff=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();
-
+		RecombinationRate recRate=new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate();
+		FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();
 		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readDiploidGenomes();
-	
+		Population population=Population.loadPopulation(dipGenomes, recRate, fitnessFunction);
 		
 		
 		

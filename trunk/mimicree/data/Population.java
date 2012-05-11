@@ -7,7 +7,8 @@ import mimicree.data.fitness.FitnessFunction;
 import mimicree.data.fitness.MatingFunction;
 
 /**
- * A collection of specimen
+ * A population
+ * is a collection of specimen (individuals)
  * @author robertkofler
  *
  */
@@ -19,10 +20,10 @@ public class Population {
 		this.specimen=new ArrayList<Specimen>(specimen);
 	}
 	/**
-	 * Initialize a new population using a collection of diploid genomes, 
-	 * @param genomes
-	 * @param recRate
-	 * @param fitnessFunction
+	 * Initialize a new population using a collection of diploid genomes, the recombination rate and a fitness function
+	 * @param genomes a collection of diploid genomes which will constitute the final population
+	 * @param recRate the recombination rate every specimen will have the same recombination rate
+	 * @param fitnessFunction the fitness function will decided the fitness of a specimen
 	 * @return
 	 */
 	public static Population loadPopulation(ArrayList<DiploidGenome> genomes, RecombinationRate recRate,FitnessFunction fitnessFunction)
@@ -32,6 +33,7 @@ public class Population {
 		{
 			double fitness=fitnessFunction.getFitness(genome);
 			Specimen s=new Specimen(recRate,fitness,genome);
+			specimen.add(s);
 		}
 		
 		// Create a new population

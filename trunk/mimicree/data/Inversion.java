@@ -21,6 +21,12 @@ public class Inversion {
 		this.start=start;
 		this.end=end;
 	}
+	private Inversion()
+	{
+		this.chromosome=Chromosome.getChromosome("none");
+		this.start=-1;
+		this.end=-1;
+	}
 	
 	
 	public Chromosome chromosome(){
@@ -78,7 +84,7 @@ public class Inversion {
 	private static HashMap<Inversion,String> inv2name=new HashMap<Inversion,String>();
 	
 	// create a default inversion, which indicates absence of an inversion
-	private static Inversion noInversion=new Inversion(Chromosome.getChromosome("none") ,-1,-1);
+	private static Inversion noInversion=new Inversion(); // use default constructor
 	
 	/**
 	 * Obtain the default inversion, which indicates absence of any inversion
