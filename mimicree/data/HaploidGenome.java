@@ -22,5 +22,10 @@ public class HaploidGenome {
 		return haplotype.getAllele(position);
 	}
 	
+	public Inversion getInversionAllele(GenomicPosition position)
+	{
+		return invHaplotype.getGenotype(position);
+	}
+	
 
 }

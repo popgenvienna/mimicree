@@ -3,7 +3,7 @@ package mimicree.data.fitness;
 import mimicree.data.*;
 import java.util.*;
 
-import mimicree.data.*;
+
 
 /**
  * Immutable representation of an epistatic effect of several SNPs (>=2)
@@ -64,6 +64,11 @@ public class EpistaticSNP {
 		{
 			return 1.0;
 		}
+	}
+	
+	public String name()
+	{
+		return this.name;
 	}
 
 }

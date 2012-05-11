@@ -20,7 +20,7 @@ public class DiploidGenome {
 	}
 	
 	/**
-	 * Retrieve the genotype a given genomic Position
+	 * Retrieve the genotype a given genomic position
 	 * @param position
 	 * @return
 	 */
@@ -29,6 +29,22 @@ public class DiploidGenome {
 		char[] toret=new char[2];
 		toret[0]=hap1.getSNPAllele(position);
 		toret[1]=hap2.getSNPAllele(position);
+		return toret;
+	}
+	
+	/**
+	 * Retrieve the inversion-genotype for a given genomic position
+	 * An inversion-genotype consists of two inversion states. 
+	 * If no inversion is found the given postion, the default inversion-genotype will be returned,
+	 * which indicates the absence of any inversion.
+	 * @param position
+	 * @return
+	 */
+	public Inversion[] getInversionGenotype(GenomicPosition position)
+	{
+		Inversion[] toret= new Inversion[2];
+		toret[0]=hap1.getInversionAllele(position);
+		toret[1]=hap2.getInversionAllele(position);
 		return toret;
 	}
 	
