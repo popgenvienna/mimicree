@@ -10,7 +10,6 @@ import java.util.*;
  */
 public class Chromosome implements Comparable<Chromosome> {
 	private final String chrstr;
-	private static HashMap<String,Chromosome> buffer=new HashMap<String,Chromosome>();
 	
 	/**
 	 * does not allow public instance creation
@@ -21,21 +20,7 @@ public class Chromosome implements Comparable<Chromosome> {
 		this.chrstr=chromosome;
 	}
 	
-	
-	/**
-	 * Obtain a new instance of a chromosome
-	 * @param chromosome
-	 * @return
-	 */
-	public static Chromosome getChromosome(String chromosome)
-	{
-		if(buffer.containsKey(chromosome)) return buffer.get(chromosome);
 		
-		Chromosome chr= new Chromosome(chromosome);
-		buffer.put(chromosome,chr);
-		return chr;
-	}
-	
     @Override
     public int compareTo(Chromosome b)
     {
@@ -61,5 +46,35 @@ public class Chromosome implements Comparable<Chromosome> {
 	{
 		return this.chrstr;
 	}
+	
+	// ------------------ STATIC MEMBERS --------------------------- //
 
+	private static HashMap<String,Chromosome> buffer=new HashMap<String,Chromosome>();
+	private static Chromosome defaultChromosome=new Chromosome("__none__");
+	/**
+	 * Obtain an instance of a default chromosome (which is no chromosome
+	 * @return
+	 */
+	public static Chromosome getDefaultChromosome()
+	{
+		return defaultChromosome;
+	}
+	/**
+	 * Obtain a new instance of a chromosome
+	 * @param chromosome
+	 * @return
+	 */
+	public static Chromosome getChromosome(String chromosome)
+	{
+		if(buffer.containsKey(chromosome)) return buffer.get(chromosome);
+		
+		Chromosome chr= new Chromosome(chromosome);
+		buffer.put(chromosome,chr);
+		return chr;
+	}
+	
+	public static ArrayList<Chromosome> getChromosome()
+	{
+		return new ArrayList<Chromosome>(buffer.values());
+	}
 }

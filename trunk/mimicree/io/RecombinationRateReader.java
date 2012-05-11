@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.logging.Logger;
 import mimicree.data.recombination.*;
 import mimicree.data.Chromosome;
-import mimicree.data.GenomicPosition;
 import java.util.*;
 
 /**
@@ -36,6 +35,7 @@ public class RecombinationRateReader {
 			e.printStackTrace();
 			System.exit(0);
 		}
+		this.logger=logger;
 	}
 	
 	
@@ -66,6 +66,7 @@ public class RecombinationRateReader {
 		
 		String line;
 		ArrayList<RecombinationWindow> entries=new ArrayList<RecombinationWindow>();
+		this.logger.info("Start reading recombinaton rate from file "+this.recombinationFile);
 		try
 		{
 			while((line=bf.readLine())!=null)
@@ -90,6 +91,7 @@ public class RecombinationRateReader {
 			System.exit(0);
 		}
 		
+		this.logger.info("Finished reading recombination rate; Read "+entries.size()+ " entries");
 		return new RecombinationRate(entries);
 		
 		
