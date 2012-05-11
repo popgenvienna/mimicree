@@ -54,7 +54,6 @@ public class RecombinationRateReader {
 		int start=Integer.parseInt(tmp2[0])+1;
 		int end=Integer.parseInt(tmp2[1]);
 		double recrate=Double.parseDouble(a[2]);
-		
 		return new RecombinationWindow(chr,start,end,recrate);
 		
 	}

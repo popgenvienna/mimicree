@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.logging.Logger;
 import java.util.*;
 
-import mimicree.data.fitness.AdditiveSNPFitness;
-import mimicree.data.fitness.EpistaticSNPFitness;
 import mimicree.data.fitness.*;
 
 public class FitnessFunctionLoader {
@@ -21,7 +19,19 @@ public class FitnessFunctionLoader {
 	
 	public FitnessFunction loadFitnessFunction()
 	{
-		AdditiveSNPFitness addFit=new AdditiveSNPReader(this.additiveFile,this.logger).readAdditiveFitness();
+		AdditiveSNPFitness addFit;
+		if(new File(additiveFile).exists())
+		{
+			this.logger.info("Found an existing file for additive effects");
+			addFit=new AdditiveSNPReader(this.additiveFile,this.logger).readAdditiveFitness();
+		}
+		else
+		{
+			this.logger.info("Did not find an additive file; Using default (no additive effects)");
+			addFit=new AdditiveSNPFitness(new ArrayList<AdditiveSNP>());
+		}
+		
+		
 		EpistaticSNPFitness epiFit;
 		if(new File(this.epistaticFile).exists()){ 
 			this.logger.info("Found an existing file for epistatic effects"); 

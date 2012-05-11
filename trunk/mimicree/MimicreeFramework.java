@@ -24,8 +24,8 @@ public class MimicreeFramework {
 		// Test if input files exist
 		if(! new File(haplotypeFile).exists()) throw new IllegalArgumentException("Haplotype file does not exist "+haplotypeFile);
 		if(! new File(recombinationFile).exists()) throw new IllegalArgumentException("Recombination file does not exist " + recombinationFile);
-		if(! new File(additiveFile).exists()) throw new IllegalArgumentException("File with additive fitness effects does not exist " + additiveFile);
-				// Test if output file exists
+		
+					// Test if output file exists
 		if(! new File(outputDir).exists()) throw new IllegalArgumentException("Output directory does not exist " + outputDir);
 		
 		// simulations should be done for 'n' generations
