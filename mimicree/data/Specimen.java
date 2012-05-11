@@ -20,5 +20,16 @@ public class Specimen {
 		this.genome=genome;
 	}
 	
+	
+	/**
+	 * Get a gamete of the specimen
+	 * This 
+	 * @return
+	 */
+	public HaploidGenome getGamete()
+	{
+		return null;
+	}
+	
 
 }
