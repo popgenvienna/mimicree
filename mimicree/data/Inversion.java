@@ -23,7 +23,7 @@ public class Inversion {
 	}
 	private Inversion()
 	{
-		this.chromosome=Chromosome.getChromosome("none");
+		this.chromosome=Chromosome.getDefaultChromosome();
 		this.start=-1;
 		this.end=-1;
 	}

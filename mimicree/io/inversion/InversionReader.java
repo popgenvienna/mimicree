@@ -37,7 +37,7 @@ public class InversionReader {
 	
 	public ArrayList<InversionHaplotype> getInversions()
 	{
-		this.logger.info("Start reading the inversions");
+		this.logger.info("Start reading the inversions from file "+this.inversionFile);
 		this.logger.fine("Start reading inversion definitions");
 		ArrayList<Inversion> inversions=new InversionDefinitionReader(inversionFile).setupInversionDefinitions();
 		this.logger.fine("Finished reading inversion definitions; Found " + inversions.size()+ " inversions");
