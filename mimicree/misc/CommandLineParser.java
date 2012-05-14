@@ -21,6 +21,7 @@ public class CommandLineParser {
 		String epistasisFile="";
 		String outputDir="";
 		String outputGenRaw="";
+		String chromosomeDefinition="";
 		int replicateRuns=1;
 		boolean displayHelp=false;
 		boolean detailedLog=false;
@@ -50,6 +51,10 @@ public class CommandLineParser {
             {
             	epistasisFile=args.remove(0);
             }
+            else if(cu.equals("--chromosome-definition"))
+            {
+            	chromosomeDefinition=args.remove(0);
+            }
             else if(cu.equals("--output-generations"))
             {
             	outputGenRaw=args.remove(0);
@@ -78,7 +83,7 @@ public class CommandLineParser {
     
         // Parse the string with the generations
         ArrayList<Integer> outputGen = parseOutputGenerations(outputGenRaw);
-        CommandLineArguments ca = new CommandLineArguments(haplotypeFile,inversionFile,recombinationrateFile,additiveFile,
+        CommandLineArguments ca = new CommandLineArguments(haplotypeFile,inversionFile,recombinationrateFile,chromosomeDefinition, additiveFile,
         		epistasisFile, outputDir, outputGen, replicateRuns, displayHelp,detailedLog);
         return ca;
 	}

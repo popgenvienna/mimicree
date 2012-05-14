@@ -40,7 +40,20 @@ public class Haplotype {
 		{
 			return snp.minorAllele();
 		}
-		
 	}
 	
+	/**
+	 * Is the major allele set at the given index
+	 * @param index
+	 * @return
+	 */
+	public boolean hasMajor(int index)
+	{
+		return haplotype.hasBit(index);
+	}
+	
+	public SNPCollection getSNPCollection()
+	{
+		return this.snpcollection;
+	}
 }

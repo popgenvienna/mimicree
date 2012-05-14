@@ -27,5 +27,15 @@ public class HaploidGenome {
 		return invHaplotype.getGenotype(position);
 	}
 	
+	public Haplotype getSNPHaplotype()
+	{
+		return this.haplotype;
+	}
+	
+	public InversionHaplotype getInversionHaplotype()
+	{
+		return this.invHaplotype;
+	}
+	
 
 }

@@ -26,13 +26,13 @@ public class Population {
 	 * @param fitnessFunction the fitness function will decided the fitness of a specimen
 	 * @return
 	 */
-	public static Population loadPopulation(ArrayList<DiploidGenome> genomes, RecombinationRate recRate,FitnessFunction fitnessFunction)
+	public static Population loadPopulation(ArrayList<DiploidGenome> genomes, RecombinationLandscape recLandscape,FitnessFunction fitnessFunction)
 	{
 		ArrayList<Specimen> specimen=new ArrayList<Specimen>();
 		for(DiploidGenome genome: genomes)
 		{
 			double fitness=fitnessFunction.getFitness(genome);
-			Specimen s=new Specimen(recRate,fitness,genome);
+			Specimen s=new Specimen(recLandscape,fitness,genome);
 			specimen.add(s);
 		}
 		
