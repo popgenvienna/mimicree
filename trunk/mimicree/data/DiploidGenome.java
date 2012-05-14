@@ -49,6 +49,15 @@ public class DiploidGenome {
 	}
 	
 	
+	public HaploidGenome getHaplotypeA()
+	{
+		return this.hap1;
+	}
+	public HaploidGenome getHaplotypeB()
+	{
+		return this.hap2;
+	}
+	
 	/**
 	 * Get a gamete for the genome
 	 * @return
