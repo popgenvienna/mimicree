@@ -21,15 +21,20 @@ public class Specimen {
 	}
 	
 	
-	/**
-	 * Get a gamete of the specimen
-	 * This 
-	 * @return
-	 */
-	public HaploidGenome getGamete()
+	public DiploidGenome getGenome()
 	{
-		return null;
+		return this.genome;
 	}
 	
+	
+	public double fitness()
+	{
+		return this.fitness;
+	}
+	
+	public double RecombinationLandscape recombinationLandscape()
+	{
+		return this.recLandscape;
+	}
 
 }

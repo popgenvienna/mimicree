@@ -151,7 +151,7 @@ public class Inversion {
 	 * Get the number of distinct inversions.
 	 * @return
 	 */
-	private static int getInversionCount()
+	public static int getInversionCount()
 	{
 		return inv2name.size();
 	}
