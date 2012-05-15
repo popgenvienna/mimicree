@@ -48,9 +48,29 @@ public class Population {
 	 * @param environment 
 	 * @return
 	 */
-	public Population getNextGeneration(MatingFunction matingFunction)
+	public Population getNextGeneration(FitnessFunction fitnessFunction)
 	{
-		return null;
+		MatingFunction mf=MatingFunction.getMatingFunction(this);
+		ArrayList<Specimen> nextGen=new ArrayList<Specimen>();
+		
+		for(int i=0; i<this.size(); i++)
+		{
+			Specimen[] merryCouple= mf.getCouple();
+			HaploidGenome semen	=merryCouple[0].getGamete();
+			HaploidGenome egg	=merryCouple[1].getGamete();
+			DiploidGenome fertilizedEgg=new DiploidGenome(semen,egg);
+			Specimen progeny=new Specimen(merryCouple[0].recombinationLandscape(),fitnessFunction.getFitness(fertilizedEgg),fertilizedEgg);
+			nextGen.add(progeny);
+		}
+		return new Population(nextGen);
+		
+		
+		
+		
+		
+		
+		return new Population(nextGen);
+		
 	}
 	
 	/**
