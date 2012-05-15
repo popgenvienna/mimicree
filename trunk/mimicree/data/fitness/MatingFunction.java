@@ -16,20 +16,30 @@ public class MatingFunction {
 	private static class FitnessTransformedSpecimen
 	{
 		public Specimen specimen;
-		public double transformedFitness;
-		public FitnessTransformedSpecimen(Specimen specimen, double transformedFitness)
+		public double transformedFitnessSum;
+		public int index;
+		public FitnessTransformedSpecimen(Specimen specimen, double transformedFitnessSum, int index)
 		{
 			this.specimen=specimen;
-			this.transformedFitness=transformedFitness;
+			this.transformedFitnessSum=transformedFitnessSum;
+			this.index=index;
 		}
 	}
 	
-	private int getFitnessSum()
 	
 	
 	public MatingFunction(Population population)
 	{
-		ArrayList<Specimen> popSpecimen=population.
+		ArrayList<Specimen> popSpecimen=population.getSpecimen();
+		double fitnessEquivalent=1.0/population.fitnessSum();
+		double fitSum=0.0;
+		for(int i=0; i<popSpecimen.size(); i++)
+		{
+			Specimen spec=popSpecimen.get(i);
+			double transformedFitness=spec.fitness()*fitnessEquivalent;
+			fitSum+=transformedFitness;
+			this.specimens.add(new FitnessTransformedSpecimen(spec,fitSum,i));
+		}
 	}
 	
 	/**
@@ -38,7 +48,41 @@ public class MatingFunction {
 	 */
 	public Specimen[] getCouple()
 	{
-		return null;
+		
+		
+		FitnessTransformedSpecimen s1=getSpecimenForRandomNumber(Math.random());
+		FitnessTransformedSpecimen s2=getSpecimenForRandomNumber(Math.random());
+		while(s1.index==s2.index)
+		{
+			s2=getSpecimenForRandomNumber(Math.random());
+		}		
+		Specimen[] merryCouple=new Specimen[2];
+		merryCouple[0]=s1.specimen;
+		merryCouple[1]=s2.specimen;
+		return merryCouple;
+	}
+	
+	/**
+	 * Get the specimen for a given random number
+	 * @param random
+	 * @return
+	 */
+	private FitnessTransformedSpecimen getSpecimenForRandomNumber(double random)
+	{
+		// 0.1  0.1  0.2  0.2
+		// 0.1  0.2  0.4  0.6
+		// random 0.01 -> das erste mit 0.1
+		// random 0.0 -> das erste mit 0.1
+		// random 0.1 -> das zweite mit 0.2
+		// random 0.999 -> das letzte mit 1.0! das letzte sollte genau 1 haben
+		double runningSum=0.0;
+		for(FitnessTransformedSpecimen tspec:this.specimens)
+		{
+			if(random < tspec.transformedFitnessSum) return tspec;
+		}
+		throw new IllegalArgumentException("State not allowed in mating function");
+		
+		
 	}
 
 }

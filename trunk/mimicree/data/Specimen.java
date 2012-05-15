@@ -32,7 +32,7 @@ public class Specimen {
 		return this.fitness;
 	}
 	
-	public double RecombinationLandscape recombinationLandscape()
+	public RecombinationLandscape recombinationLandscape()
 	{
 		return this.recLandscape;
 	}
