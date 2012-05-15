@@ -64,13 +64,6 @@ public class Population {
 		}
 		return new Population(nextGen);
 		
-		
-		
-		
-		
-		
-		return new Population(nextGen);
-		
 	}
 	
 	/**
