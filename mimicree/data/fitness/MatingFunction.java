@@ -11,6 +11,17 @@ import java.util.*;
  */
 public class MatingFunction {
 	
+	
+	/**
+	 * accessor method for getting an instance of a mating function
+	 * @param population
+	 * @return
+	 */
+	public static MatingFunction getMatingFunction(Population population)
+	{
+		return new MatingFunction(population);
+	}
+	
 	private ArrayList<FitnessTransformedSpecimen> specimens;
 	
 	private static class FitnessTransformedSpecimen
@@ -28,7 +39,7 @@ public class MatingFunction {
 	
 	
 	
-	public MatingFunction(Population population)
+	private MatingFunction(Population population)
 	{
 		ArrayList<Specimen> popSpecimen=population.getSpecimen();
 		double fitnessEquivalent=1.0/population.fitnessSum();
@@ -42,13 +53,15 @@ public class MatingFunction {
 		}
 	}
 	
+	
+	
+	
 	/**
 	 * Choose a couple for mating
 	 * @return
 	 */
 	public Specimen[] getCouple()
 	{
-		
 		
 		FitnessTransformedSpecimen s1=getSpecimenForRandomNumber(Math.random());
 		FitnessTransformedSpecimen s2=getSpecimenForRandomNumber(Math.random());
@@ -75,14 +88,11 @@ public class MatingFunction {
 		// random 0.0 -> das erste mit 0.1
 		// random 0.1 -> das zweite mit 0.2
 		// random 0.999 -> das letzte mit 1.0! das letzte sollte genau 1 haben
-		double runningSum=0.0;
 		for(FitnessTransformedSpecimen tspec:this.specimens)
 		{
 			if(random < tspec.transformedFitnessSum) return tspec;
 		}
-		throw new IllegalArgumentException("State not allowed in mating function");
-		
-		
+		throw new IllegalArgumentException("State not allowed in mating function");	
 	}
 
 }

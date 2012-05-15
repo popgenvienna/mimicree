@@ -63,7 +63,7 @@ public class RecombinationLandscape {
 			// Get the SNP at the given index
 			SNP s=scol.getSNPforIndex(i);
 			Chromosome chr=s.genomicPosition().chromosome();
-			int pos=s.genomicPosition().position();
+			int position=s.genomicPosition().position();
 
 			if(!(chr.equals(activeChr))){
 				// the SNP is in a new chromosome -> switch chromosomes
@@ -71,8 +71,9 @@ public class RecombinationLandscape {
 				isHaplotypeA=randas.startWithFirstHaplotype(chr);
 				activeCrossovers =crossovers.getCrossovers(chr);
 			}
-
-			while((!activeCrossovers.isEmpty()) && pos > activeCrossovers.peekFirst().position())
+			// SNPs at 30 and 31; Crossover at 30
+			// Start haplotype=A     => 30=A 31=B => thus crossover at 30 occurs directly after base
+			while((!activeCrossovers.isEmpty()) && activeCrossovers.peekFirst().position() < position)
 			{
 				// a crossover event occured before the SNPs -> switch haplotype
 				activeCrossovers.pollFirst();
@@ -99,6 +100,7 @@ public class RecombinationLandscape {
 
 	
 	/**
+	 * Compute the new inversion-haplotype considering a parent, a random assortment and given crossover events
 	 * create a inversion gamete (incorporating the crossovers)
 	 * @param crossovers
 	 * @param randas
@@ -112,7 +114,7 @@ public class RecombinationLandscape {
 		
 		ArrayList<Inversion> newinvHap=new ArrayList<Inversion>();
 
-		
+
 		for(Inversion inv: Inversion.getInversions())
 		{
 			Chromosome chr=inv.chromosome();
@@ -120,7 +122,11 @@ public class RecombinationLandscape {
 			LinkedList<GenomicPosition> actcross=crossovers.getCrossovers(chr);
 			
 			boolean isHaplotypeA=randas.startWithFirstHaplotype(chr);
-			while((!actcross.isEmpty()) && position > actcross.peekFirst().position())
+			
+			// recombinations at 10 20 30  inversion at 31
+			// starting with hapA -> B -> A -> B  
+			// all three recombinations are smaller than the inversion at 31; inversion at 31 is thus at haplotype B
+			while((!actcross.isEmpty()) &&  actcross.peekFirst().position() < position)
 			{
 				// a crossover event occured before the SNPs -> switch haplotype
 				actcross.pollFirst();

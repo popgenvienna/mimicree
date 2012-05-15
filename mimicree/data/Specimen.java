@@ -26,6 +26,15 @@ public class Specimen {
 		return this.genome;
 	}
 	
+	/**
+	 * Obtain a gamete from the given Specimen i.e.: get a semen or an egg
+	 * The gamete is a haploid and recombined product of the diploid genome
+	 * @return
+	 */
+	public HaploidGenome getGamete()
+	{
+		return this.recLandscape.getGamete(this.genome);
+	}
 	
 	public double fitness()
 	{
