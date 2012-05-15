@@ -38,7 +38,7 @@ public class MimicrEE {
         logger.setLevel(Level.ALL);
         
         mimicree.MimicreeFramework mimframe= new mimicree.MimicreeFramework(arguments.haplotypeFile(),arguments.inversionFile(),arguments.recombinationFile(),arguments.chromosomeDefintion(),
-        		arguments.additiveFile(),arguments.epistasisFile(),arguments.outputDir(),arguments.outputGenerations(),arguments.replicateRuns(),logger);
+        		arguments.additiveFile(),arguments.epistasisFile(),arguments.outputDir(),arguments.outputGenerations(),arguments.replicateRuns(),arguments.threads(),logger);
         
         mimframe.run();
         

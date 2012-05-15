@@ -16,11 +16,12 @@ public class CommandLineArguments {
 	private final String chromosomeDefinition;
 	private final ArrayList<Integer> outputGenerations;
 	private final int replicateRuns;
+	private final int threads;
 	private final boolean displayHelp;
 	private final boolean detailedLog;
 	
 	public CommandLineArguments(String haplotypeFile, String inversionFile, String recombinationFile, String chromosomeDefinition, String additiveFile, String epistasisFile,
-			String outputDir, ArrayList<Integer> outputGenerations, int replicateRuns,boolean displayHelp,boolean detailedLog)
+			String outputDir, ArrayList<Integer> outputGenerations, int replicateRuns, int threads,boolean displayHelp,boolean detailedLog)
 	{
 		this.haplotypeFile=haplotypeFile;
 		this.inversionFile=inversionFile;
@@ -33,6 +34,11 @@ public class CommandLineArguments {
 		this.replicateRuns=replicateRuns;
 		this.displayHelp=displayHelp;
 		this.detailedLog=detailedLog;
+		this.threads=threads;
+	}
+	public int threads()
+	{
+		return this.threads;
 	}
 	
 	public String haplotypeFile()
