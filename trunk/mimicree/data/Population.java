@@ -48,8 +48,38 @@ public class Population {
 	 * @param environment 
 	 * @return
 	 */
-	public Population getNextGeneration(FitnessFunction fitnessFunction, MatingFunction matingFunction)
+	public Population getNextGeneration(MatingFunction matingFunction)
 	{
 		return null;
 	}
+	
+	/**
+	 * Retrieve the specimen constituting a population
+	 * @return
+	 */
+	public ArrayList<Specimen> getSpecimen()
+	{
+		return new ArrayList<Specimen>(this.specimen);
+	}
+	
+	/**
+	 * Return the sum of the fitness of all specimen for the given population
+	 * @return
+	 */
+	public double fitnessSum()
+	{
+		double toret=0;
+		for(Specimen spec: this.specimen)
+		{
+			toret+=spec.fitness();
+		}
+		return toret;
+	}
+	
+	public int size()
+	{
+		return this.specimen.size();
+	}
+			
+	
 }

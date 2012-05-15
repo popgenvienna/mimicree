@@ -13,9 +13,11 @@ public class InversionHaplotype {
 	// the array collection can not be accessed from outside
 	// the composing objects (Inversion) are immutable by itself
 	private final ArrayList<Inversion> inversions;
+	private final HashSet<Inversion> invSet;
 	public InversionHaplotype(ArrayList<Inversion> inversions)
 	{
 		this.inversions=new ArrayList<Inversion>(inversions);
+		invSet=new HashSet<Inversion>(inversions);
 	}
 	
 	
@@ -41,8 +43,17 @@ public class InversionHaplotype {
 		// If no inversion was found return the default = absence of inversion
 		if(toret==null) toret=Inversion.getDefaultInversion();
 		return toret;
-		
-		
+	}
+	
+	
+	/**
+	 * does the inversion-haplotpye have the given inversion
+	 * @param inv
+	 * @return
+	 */
+	public boolean hasInversion(Inversion inv)
+	{
+		return this.invSet.contains(inv);
 	}
 	
 	

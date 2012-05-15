@@ -36,10 +36,15 @@ public class RecombinationLandscape {
 		Haplotype hapSNP=getCrossoverHaplotype(crossovers,randas,genome);
 		InversionHaplotype hapInv=getCrossoverInversionHaplotype(crossovers,randas,genome);
 		return new HaploidGenome(hapSNP,hapInv);
-		
-		
 	}
 	
+	/**
+	 * get a SNP gamete, incorporating the crossovers
+	 * @param crossovers
+	 * @param randas
+	 * @param genome
+	 * @return
+	 */
 	private Haplotype getCrossoverHaplotype(CrossoverEvents crossovers,RandomAssortment randas,DiploidGenome genome)
 	{
 		Haplotype hA=genome.getHaplotypeA().getSNPHaplotype();
@@ -51,7 +56,7 @@ public class RecombinationLandscape {
 		
 		Chromosome activeChr=Chromosome.getDefaultChromosome();
 		LinkedList<GenomicPosition> activeCrossovers=new LinkedList<GenomicPosition>();
-		boolean activeHaplotype=false;
+		boolean isHaplotypeA=false;
 		
 		for(int i=0; i<scol.size(); i++)
 		{
@@ -60,26 +65,22 @@ public class RecombinationLandscape {
 			Chromosome chr=s.genomicPosition().chromosome();
 			int pos=s.genomicPosition().position();
 
-					
 			if(!(chr.equals(activeChr))){
 				// the SNP is in a new chromosome -> switch chromosomes
 				activeChr=chr;
-				activeHaplotype=randas.startWithFirstHaplotype(chr);
+				isHaplotypeA=randas.startWithFirstHaplotype(chr);
 				activeCrossovers =crossovers.getCrossovers(chr);
 			}
-			
-
 
 			while((!activeCrossovers.isEmpty()) && pos > activeCrossovers.peekFirst().position())
 			{
 				// a crossover event occured before the SNPs -> switch haplotype
 				activeCrossovers.pollFirst();
-				activeHaplotype= !activeHaplotype;
+				isHaplotypeA= !isHaplotypeA;
 			}
 			
-			
 			boolean majorHaplotype=false;
-			if(activeHaplotype)
+			if(isHaplotypeA)
 			{
 				majorHaplotype=hA.hasMajor(i);
 			}
@@ -92,18 +93,51 @@ public class RecombinationLandscape {
 			if(majorHaplotype) newHap.setBit(i);
 			// else leave the default => no haplotype
 		}
-		
-		//
 		return new Haplotype(newHap.getBitArray(),scol);
-		
 	}
 	
 
 	
-	
+	/**
+	 * create a inversion gamete (incorporating the crossovers)
+	 * @param crossovers
+	 * @param randas
+	 * @param genome
+	 * @return
+	 */
 	private InversionHaplotype getCrossoverInversionHaplotype(CrossoverEvents crossovers,RandomAssortment randas,DiploidGenome genome)
 	{
-		return null;
+		InversionHaplotype iA=genome.getHaplotypeA().getInversionHaplotype();
+		InversionHaplotype iB=genome.getHaplotypeB().getInversionHaplotype();
+		
+		ArrayList<Inversion> newinvHap=new ArrayList<Inversion>();
+
+		
+		for(Inversion inv: Inversion.getInversions())
+		{
+			Chromosome chr=inv.chromosome();
+			int position=inv.start();
+			LinkedList<GenomicPosition> actcross=crossovers.getCrossovers(chr);
+			
+			boolean isHaplotypeA=randas.startWithFirstHaplotype(chr);
+			while((!actcross.isEmpty()) && position > actcross.peekFirst().position())
+			{
+				// a crossover event occured before the SNPs -> switch haplotype
+				actcross.pollFirst();
+				isHaplotypeA= !isHaplotypeA;
+			}
+			
+			if(isHaplotypeA)
+			{
+				if(iA.hasInversion(inv)) newinvHap.add(inv);
+			}
+			else
+			{
+				if(iB.hasInversion(inv)) newinvHap.add(inv);
+			}
+		}
+		
+		return new InversionHaplotype(newinvHap);
 	}
 	
 	
