@@ -18,7 +18,7 @@ public class MimicreeFramework {
 	private final String outputDir;
 	private final ArrayList<Integer> outputGenerations;
 	private final int replicateRuns;
-	private final int maxGeneration;
+
 	private final java.util.logging.Logger logger;
 	public MimicreeFramework(String haplotypeFile, String inversionFile, String recombinationFile, String chromosomeDefinition, String additiveFile, String epistasisFile,
 			String outputDir, ArrayList<Integer> outputGenerations, int replicateRuns, java.util.logging.Logger logger)
@@ -38,8 +38,6 @@ public class MimicreeFramework {
 			if(i>tmaxgeneration) tmaxgeneration=i;
 		}
 		if(!(tmaxgeneration>0)) throw new IllegalArgumentException("Runtime of the simulations must be >0 simulations; Provided by user "+tmaxgeneration);
-		this.maxGeneration=tmaxgeneration;
-		
 		// te
 		if(!(replicateRuns>0)) throw new IllegalArgumentException("At least one replicate run should be provided; Provided by the user "+replicateRuns);
 		
