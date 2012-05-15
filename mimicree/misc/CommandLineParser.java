@@ -22,6 +22,7 @@ public class CommandLineParser {
 		String outputDir="";
 		String outputGenRaw="";
 		String chromosomeDefinition="";
+		int threads=1;
 		int replicateRuns=1;
 		boolean displayHelp=false;
 		boolean detailedLog=false;
@@ -66,6 +67,10 @@ public class CommandLineParser {
             else if(cu.equals("--output-dir"))
             {
             	outputDir=args.remove(0);
+            }
+            else if(cu.equals("--threads"))
+            {
+            	threads=Integer.parseInt(args.remove(0));
             }
             else if(cu.equals("--help"))
             {

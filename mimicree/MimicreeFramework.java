@@ -18,10 +18,11 @@ public class MimicreeFramework {
 	private final String outputDir;
 	private final ArrayList<Integer> outputGenerations;
 	private final int replicateRuns;
+	private final int threads;
 
 	private final java.util.logging.Logger logger;
 	public MimicreeFramework(String haplotypeFile, String inversionFile, String recombinationFile, String chromosomeDefinition, String additiveFile, String epistasisFile,
-			String outputDir, ArrayList<Integer> outputGenerations, int replicateRuns, java.util.logging.Logger logger)
+			String outputDir, ArrayList<Integer> outputGenerations, int replicateRuns,int threads, java.util.logging.Logger logger)
 	{
 		// 'File' represents files and directories
 		// Test if input files exist
@@ -40,7 +41,7 @@ public class MimicreeFramework {
 		if(!(tmaxgeneration>0)) throw new IllegalArgumentException("Runtime of the simulations must be >0 simulations; Provided by user "+tmaxgeneration);
 		// te
 		if(!(replicateRuns>0)) throw new IllegalArgumentException("At least one replicate run should be provided; Provided by the user "+replicateRuns);
-		
+		if(!(threads>0)) throw new IllegalArgumentException("Number of threads needs to be larger than zero");
 		
 		this.haplotypeFile=haplotypeFile;
 		this.inversionFile=inversionFile;
@@ -52,6 +53,7 @@ public class MimicreeFramework {
 		this.outputGenerations=new ArrayList<Integer>(outputGenerations);
 		this.replicateRuns=replicateRuns;
 		this.logger=logger;
+		this.threads=threads;
 	}
 	
 	
