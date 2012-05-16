@@ -1,12 +1,17 @@
 package mimicree;
 
+
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.io.File;
 import mimicree.data.*;
 import mimicree.data.fitness.*;
 import mimicree.io.fitness.*;
 import mimicree.data.recombination.*;
 import mimicree.io.*;
+import mimicree.simulate.SingleSimulation;
 
 public class MimicreeFramework {
 	private final String haplotypeFile;
@@ -67,7 +72,25 @@ public class MimicreeFramework {
 		Population population=Population.loadPopulation(dipGenomes, recLandscape, fitnessFunction);
 		
 		
+		ExecutorService executor=Executors.newFixedThreadPool(threads);
+		ArrayList<Callable<Object>> call=new ArrayList<Callable<Object>>();
+		for(int i=0; i<this.replicateRuns; i++)
+		{
+			call.add(Executors.callable(new SingleSimulation(i+1,population,fitnessFunction,this.outputDir,this.outputGenerations,this.logger)));
+		}
 		
+		try
+		{	
+			// Run them all!
+			executor.invokeAll(call);	
+		}
+		catch(InterruptedException e)
+		{
+			e.printStackTrace();
+			System.exit(0);
+		}
+		this.logger.info("Finished simulations");
+		this.logger.info("Thank you for using MimicrEE");
 		
 		
 	}
