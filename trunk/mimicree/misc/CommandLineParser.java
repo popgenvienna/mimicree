@@ -89,7 +89,7 @@ public class CommandLineParser {
         // Parse the string with the generations
         ArrayList<Integer> outputGen = parseOutputGenerations(outputGenRaw);
         CommandLineArguments ca = new CommandLineArguments(haplotypeFile,inversionFile,recombinationrateFile,chromosomeDefinition, additiveFile,
-        		epistasisFile, outputDir, outputGen, replicateRuns, displayHelp,detailedLog);
+        		epistasisFile, outputDir, outputGen, replicateRuns, threads, displayHelp, detailedLog);
         return ca;
 	}
 	
