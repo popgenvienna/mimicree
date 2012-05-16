@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.logging.Logger;
 import mimicree.io.PopulationWriter;
 
-public class SingleSimulation {
+public class SingleSimulation implements Runnable{
 	private Population population;
 	private final FitnessFunction fitness;
 	private final String outputDir;
