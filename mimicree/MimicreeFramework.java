@@ -33,8 +33,7 @@ public class MimicreeFramework {
 		// Test if input files exist
 		if(! new File(haplotypeFile).exists()) throw new IllegalArgumentException("Haplotype file does not exist "+haplotypeFile);
 		if(! new File(recombinationFile).exists()) throw new IllegalArgumentException("Recombination file does not exist " + recombinationFile);
-		
-					// Test if output file exists
+		// Test if output directory exists
 		if(! new File(outputDir).exists()) throw new IllegalArgumentException("Output directory does not exist " + outputDir);
 		
 		// simulations should be done for 'n' generations
@@ -66,11 +65,14 @@ public class MimicreeFramework {
 	{
 		this.logger.info("Starting MimicrEE");
 
+		// Load the data
 		FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();
 		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readDiploidGenomes();
-		RecombinationLandscape recLandscape = new RecombinationLandscape(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),new ChromosomeDefinitionReader(this.chromosomeDefinition).getRandomAssortmentGenerator());
-		Population population=Population.loadPopulation(dipGenomes, recLandscape, fitnessFunction);
+		RecombinationLandscape recLandscape = new RecombinationLandscape(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),
+				new ChromosomeDefinitionReader(this.chromosomeDefinition).getRandomAssortmentGenerator());
 		
+		// Create initial population
+		Population population=Population.loadPopulation(dipGenomes, recLandscape, fitnessFunction);
 		
 		ExecutorService executor=Executors.newFixedThreadPool(threads);
 		ArrayList<Callable<Object>> call=new ArrayList<Callable<Object>>();
@@ -79,6 +81,7 @@ public class MimicreeFramework {
 			call.add(Executors.callable(new SingleSimulation(i+1,population,fitnessFunction,this.outputDir,this.outputGenerations,this.logger)));
 		}
 		
+		this.logger.info("Starting simulations using "+this.threads+" threads");
 		try
 		{	
 			// Run them all!
