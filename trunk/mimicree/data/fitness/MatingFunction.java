@@ -41,7 +41,9 @@ public class MatingFunction {
 	
 	private MatingFunction(Population population)
 	{
+		
 		ArrayList<Specimen> popSpecimen=population.getSpecimen();
+		specimens=new ArrayList<FitnessTransformedSpecimen>();
 		double fitnessEquivalent=1.0/population.fitnessSum();
 		double fitSum=0.0;
 		for(int i=0; i<popSpecimen.size(); i++)

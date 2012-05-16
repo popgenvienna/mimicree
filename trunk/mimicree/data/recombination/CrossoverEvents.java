@@ -16,8 +16,9 @@ public class CrossoverEvents {
 	private final ArrayList<GenomicPosition> crossoverEvents;
 	private final HashMap<Chromosome,LinkedList<GenomicPosition>> reorganized;
 	
-	public CrossoverEvents(ArrayList<GenomicPosition> crossoverEvents){
-		this.crossoverEvents=new ArrayList<GenomicPosition>(this.crossoverEvents);
+	public CrossoverEvents(ArrayList<GenomicPosition> crossoverEvents)
+	{
+		this.crossoverEvents=new ArrayList<GenomicPosition>(crossoverEvents);
 		
 
 		HashMap<Chromosome,LinkedList<GenomicPosition>> toret=new HashMap<Chromosome,LinkedList<GenomicPosition>>();

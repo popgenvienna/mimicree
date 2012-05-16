@@ -83,7 +83,7 @@ public class ChromosomeDefinitionReader {
 	private ArrayList<Chromosome> parseSingleEntry(String s)
 	{
 		String[] t=s.split("=");
-		String[] chrs=t[1].split("+");
+		String[] chrs=t[1].split("\\+");
 		ArrayList<Chromosome> toret=new ArrayList<Chromosome>();
 		for(String tmp: chrs)
 		{
