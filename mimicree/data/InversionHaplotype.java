@@ -56,6 +56,15 @@ public class InversionHaplotype {
 		return this.invSet.contains(inv);
 	}
 	
+	/**
+	 * Return a collection of inversions
+	 * @return
+	 */
+	public ArrayList<Inversion> getInversions()
+	{
+		return new ArrayList<Inversion>(this.inversions);
+	}
+	
 	
 
 }

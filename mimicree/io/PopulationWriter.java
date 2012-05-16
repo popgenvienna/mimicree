@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import java.util.*;
 import mimicree.data.haplotypes.Haplotype;
 import java.io.*;
+import mimicree.io.haplotypes.HaplotypeWriter;
 
 public class PopulationWriter {
 	private final Population population;
@@ -33,8 +34,9 @@ public class PopulationWriter {
 			invHaplotypes.add(spec.getGenome().getHaplotypeB().getInversionHaplotype());
 		}
 		
-		String haplotypeOFile;
-		String inversionOFile;
+		String haplotypeOFile="";
+		String inversionOFile="";
+		
 		try
 		{
 			 haplotypeOFile = new File(this.outputDir,"haplotypes.r" + this.simulationNumber + ".g"+this.generation).getCanonicalPath();
@@ -55,6 +57,12 @@ public class PopulationWriter {
 			System.exit(0);
 		}
 		
+		new HaplotypeWriter(haplotypeOFile,this.logger).write(haplotypes);
+		// Inversions should only be written when they were present in the original sample
+		if(Inversion.getInversionCount()>0)
+		{
+			
+		}
 		
 	}
 	
