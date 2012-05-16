@@ -6,8 +6,8 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class HaplotypeWriter {
-	private	BufferedWriter bf; 
-	private String outputFile;
+	private BufferedWriter bf; 
+	private final String outputFile;
 	private Logger logger;
 	public HaplotypeWriter(String outputFile, Logger logger)
 	{
@@ -21,6 +21,7 @@ public class HaplotypeWriter {
 			e.printStackTrace();
 			System.exit(0);
 		}
+		this.outputFile=outputFile;
 	}
 	
 	
