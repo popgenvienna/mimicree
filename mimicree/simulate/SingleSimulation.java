@@ -41,6 +41,7 @@ public class SingleSimulation implements Runnable{
 		// For the number of requested simulations get the next generation, and write it to file if requested
 		for(int i=1; i<=this.maxGeneration; i++)
 		{
+			this.logger.info("Processing generation "+i+ " of replicate run "+this.simulationNumber);
 			this.population=population.getNextGeneration(this.fitness);
 			if(outputGenerations.contains(i)) new PopulationWriter(this.population,this.outputDir,i,this.simulationNumber,this.logger).write();
 			

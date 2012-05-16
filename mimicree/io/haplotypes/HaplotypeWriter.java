@@ -34,22 +34,23 @@ public class HaplotypeWriter {
 		SNPCollection scol=haplotypes.get(0).getSNPCollection();
 		for(int i=0; i<scol.size(); i++)
 		{
-			SNP active=scol.getSNPforIndex(i);
+			SNP activeSNP=scol.getSNPforIndex(i);
 			ArrayList<Character> chars=new ArrayList<Character>();
-			for(int k=0; k<haplotypes.size(); k++)
+			for(int k=0; k < haplotypes.size(); k++)
 			{
-				boolean hasMajor=haplotypes.get(k).hasMajor(i);
+				Haplotype activeHap=haplotypes.get(k);
+				boolean hasMajor=activeHap.hasMajor(i);
 				if(hasMajor)
 				{
-					chars.add(active.majorAllele());
+					chars.add(activeSNP.majorAllele());
 				}
 				else
 				{
-					chars.add(active.minorAllele());
+					chars.add(activeSNP.minorAllele());
 				}
 			}
 			
-			String toWrite=formatOutput(active,chars);
+			String toWrite=formatOutput(activeSNP,chars);
 			try
 			{
 				bf.write(toWrite+"\n");
@@ -87,14 +88,28 @@ public class HaplotypeWriter {
 		sb.append(snp.majorAllele());
 		sb.append("/");
 		sb.append(snp.minorAllele());
-		for(int i=0; i<chars.size(); i+=2){
-			sb.append("\t");
-			sb.append(chars.get(i));
-			sb.append(chars.get(i+1));
-		}
-		
+		sb.append("\t");
+		sb.append(formatHaplotypes(chars));
 		return sb.toString();
 		
 	}
+	
+	private String formatHaplotypes(ArrayList<Character> chars)
+	{
+		StringBuilder sb=new StringBuilder();
+		sb.append(chars.get(0));
+		sb.append(chars.get(1));
+		for(int i=2; i<chars.size(); i+=2)
+		{
+			sb.append(" ");
+			sb.append(chars.get(i));
+			sb.append(chars.get(i+1));
+		}
+		return sb.toString();
+		
+	}
+	
+	
+	
 	
 }
