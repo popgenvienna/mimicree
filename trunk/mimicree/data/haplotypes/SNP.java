@@ -67,6 +67,12 @@ public class SNP implements Comparable<SNP>{
 		return this.genomicPosition().compareTo(a.genomicPosition());
 	}
 	
+	@Override
+	public String toString()
+	{
+		return this.genpos.toString()+" "+this.majorAllele+"/"+this.minorAllele;
+	}
+	
 	
    
 	

@@ -15,6 +15,7 @@ public class Haplotype {
 	
 	public Haplotype(BitArray haplotype, SNPCollection snpcollection)
 	{
+		if(haplotype.size()!=snpcollection.size()) throw new IllegalArgumentException("Can not create haplotype; Number of SNPs and number of haplotypes has to be identical");
 		this.haplotype=haplotype;
 		this.snpcollection=snpcollection;
 	}
@@ -52,8 +53,22 @@ public class Haplotype {
 		return haplotype.hasBit(index);
 	}
 	
+	/**
+	 * Return the SNP collection
+	 * @return
+	 */
 	public SNPCollection getSNPCollection()
 	{
 		return this.snpcollection;
 	}
+	
+	/**
+	 * The size of the haplotype
+	 * @return
+	 */
+	public int size()
+	{
+		return this.haplotype.size();
+	}
+	
 }

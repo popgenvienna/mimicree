@@ -39,4 +39,13 @@ public class BitArray
 		return false;
 	}
 	
+	/**
+	 * Obtain the size of the BitArray
+	 * @return
+	 */
+	public int size()
+	{
+		return this.size;
+	}
+	
 }
