@@ -76,6 +76,11 @@ public class SharedDataFactory {
 		return snps;
 	}
 	
+	/**
+	 * A SNP collection
+	 * 2L-1, 2L-2, 2L-3, 2R-11, 2R-12, 2R-13, 3L-111, 3L-112, 3L-113, 3R-1111, 3R-1112, 3R-1113 
+	 * @return
+	 */
 	public static SNPCollection getSortedSNPCollection()
 	{
 		ArrayList<SNP> snps=getSNPCollection();
