@@ -16,18 +16,9 @@ class HaplotypeSNPReader {
 
 	private BufferedReader bf;
 	
-	public HaplotypeSNPReader(String haplotypeFile)
+	public HaplotypeSNPReader(BufferedReader bf )
 	{
-		try
-		{
-		
-			this.bf=new BufferedReader(new FileReader(haplotypeFile));
-		}
-		catch(FileNotFoundException fe)
-		{
-			fe.printStackTrace();
-			System.exit(0);
-		}
+		this.bf=bf;
 	}
 	
 	/**
