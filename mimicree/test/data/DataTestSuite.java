@@ -10,7 +10,7 @@ import org.junit.runners.Suite;
  * @author robertkofler
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({TestBitArrayBuilder.class,TestBitArray.class})
+@Suite.SuiteClasses({TestBitArrayBuilder.class,TestBitArray.class,TestChromosome.class})
 public class DataTestSuite {
 
 
