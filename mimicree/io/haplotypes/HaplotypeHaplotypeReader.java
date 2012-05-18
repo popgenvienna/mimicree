@@ -2,8 +2,6 @@ package mimicree.io.haplotypes;
 
 import java.util.*;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 import mimicree.data.BitArray.*;
@@ -30,17 +28,10 @@ class HaplotypeHaplotypeReader {
 	
 	private BufferedReader bf;
 	private SNPCollection snpcol;
-	public HaplotypeHaplotypeReader(String haplotypeFile,SNPCollection snpcol)
+	
+	public HaplotypeHaplotypeReader(BufferedReader bf,SNPCollection snpcol)
 	{
-		try
-		{
-			this.bf=new BufferedReader(new FileReader(haplotypeFile));
-		}
-		catch(FileNotFoundException fe)
-		{
-			fe.printStackTrace();
-			System.exit(0);
-		}
+		this.bf=bf;
 		this.snpcol=snpcol;
 	}
 	
