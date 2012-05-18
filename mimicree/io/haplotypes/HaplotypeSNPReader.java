@@ -56,8 +56,9 @@ class HaplotypeSNPReader {
 		}
 		
 		// Check if every SNP is only provided once;
-		 validateSNPs(snpcol);
-		
+		validateSNPs(snpcol);
+		 
+		Collections.sort(snpcol);
 		return new SNPCollection(snpcol);
 	}
 	
