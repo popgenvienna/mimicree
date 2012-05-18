@@ -89,7 +89,6 @@ public class TestHaplotype {
 		assertEquals(h.getAllele(new GenomicPosition(Chromosome.getChromosome("3R"),1112)),'G');
 		assertEquals(h.getAllele(new GenomicPosition(Chromosome.getChromosome("2L"),1)),'A');
 		
-		
 		// minor allele
 		assertEquals(h.getAllele(new GenomicPosition(Chromosome.getChromosome("2L"),2)),'C');
 		assertEquals(h.getAllele(new GenomicPosition(Chromosome.getChromosome("2L"),3)),'C');
@@ -100,6 +99,30 @@ public class TestHaplotype {
 		assertEquals(h.getAllele(new GenomicPosition(Chromosome.getChromosome("3L"),112)),'C');
 		assertEquals(h.getAllele(new GenomicPosition(Chromosome.getChromosome("3L"),111)),'G');
 		assertEquals(h.getAllele(new GenomicPosition(Chromosome.getChromosome("2R"),13)),'C');
+	}
+	
+	
+	@Test
+	public void test_hasMajor()
+	{
+		SNPCollection s=SharedDataFactory.getSortedSNPCollection();
+		BitArrayBuilder b=new BitArrayBuilder(12);
+		b.setBit(0); b.setBit(10); b.setBit(11); 
+		Haplotype h=new Haplotype(b.getBitArray(),s);
+		
+		assertTrue(h.hasMajor(0));
+		assertFalse(h.hasMajor(1));
+		assertFalse(h.hasMajor(2));
+		assertFalse(h.hasMajor(3));
+		assertFalse(h.hasMajor(4));
+		assertFalse(h.hasMajor(5));
+		assertFalse(h.hasMajor(6));
+		assertFalse(h.hasMajor(7));
+		assertFalse(h.hasMajor(8));
+		assertFalse(h.hasMajor(9));
+		assertTrue(h.hasMajor(10));
+		assertTrue(h.hasMajor(11));
+		
 		
 	}
 
