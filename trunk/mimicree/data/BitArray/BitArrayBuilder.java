@@ -55,7 +55,7 @@ public class BitArrayBuilder {
 			// Calculate the result of the logical and to see if the bit at the position is set
 			int res= this.bitar[real] & BitArrayBase.bitdec[mod];
 			
-			if(res>0) return true;
+			if(res!=0) return true;
 			return false;
 		}
 		
