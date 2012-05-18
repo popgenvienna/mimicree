@@ -188,5 +188,27 @@ public class TestBitArray {
 		assertFalse(b.hasBit(8));
 		assertTrue(b.hasBit(9));
 	}
+	
+	@Test
+	public void test_immutable() {
+		BitArrayBuilder c=new BitArrayBuilder(8);
+		c.setBit(1);
+		BitArray b=c.getBitArray();
+		c.setBit(2);
+		BitArray d=c.getBitArray();
+		
+		assertFalse(b.hasBit(0));
+		assertTrue(b.hasBit(1));
+		assertFalse(b.hasBit(2));
+		assertFalse(b.hasBit(3));
+		assertFalse(b.hasBit(4));
+		assertFalse(b.hasBit(5));
+		assertFalse(b.hasBit(6));
+		assertFalse(b.hasBit(7));
+		assertFalse(d.hasBit(0));
+		assertTrue(d.hasBit(1));
+		assertTrue(d.hasBit(2));
+		assertFalse(d.hasBit(3));
+	}
 
 }

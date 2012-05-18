@@ -15,9 +15,8 @@ public class SNPCollection {
 	
 	public SNPCollection(ArrayList<SNP> snps)
 	{
-		// First set the internal 
+		// First set the internals 
 		this.mysnps=new ArrayList<SNP>(snps);
-		Collections.sort(this.mysnps);
 		
 		HashMap<GenomicPosition,Integer> hm=new HashMap<GenomicPosition,Integer>();
 		for(int i=0; i<mysnps.size(); i++)
@@ -72,7 +71,23 @@ public class SNPCollection {
 	}
 	
 	
-	
+	/**
+	 * Test whether the given SNP collection is sorted; Sorting is for example a precondition for processing of recombination
+	 * @return
+	 */
+	public boolean isSorted()
+	{
+		ArrayList<SNP> sorted= new ArrayList<SNP>(this.mysnps);
+		Collections.sort(sorted);
+		for(int i=0; i<this.mysnps.size(); i++)
+		{
+			SNP sort=sorted.get(i);
+			SNP usort=this.mysnps.get(i);
+			if((sort.genomicPosition().position() != usort.genomicPosition().position()) ||  (!sort.genomicPosition().chromosome().equals(usort.genomicPosition().chromosome())) ) return false;
+			
+		}
+		return true;
+	}
 	
 	
 
