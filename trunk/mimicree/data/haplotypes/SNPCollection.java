@@ -12,6 +12,7 @@ import mimicree.data.GenomicPosition;
 public class SNPCollection {
 	private final ArrayList<SNP> mysnps;
 	private final HashMap<GenomicPosition,Integer> pos2snp;
+	private final boolean isSorted;
 	
 	public SNPCollection(ArrayList<SNP> snps)
 	{
@@ -25,6 +26,7 @@ public class SNPCollection {
 			hm.put(gp,i);
 		}
 		this.pos2snp=hm;
+		this.isSorted=isSortedList(snps);
 	}
 	
 	
@@ -72,17 +74,28 @@ public class SNPCollection {
 	
 	
 	/**
-	 * Test whether the given SNP collection is sorted; Sorting is for example a precondition for processing of recombination
+	 * Test whether the given SNP collection is sorted; 
+	 * Sorting is a precondition for several algorithm operating on SNPCollections
 	 * @return
 	 */
 	public boolean isSorted()
 	{
-		ArrayList<SNP> sorted= new ArrayList<SNP>(this.mysnps);
+		return isSorted;
+	}
+	
+	
+	
+	private boolean isSortedList(ArrayList<SNP> unsorted)
+	{
+		ArrayList<SNP> sorted= new ArrayList<SNP>(unsorted);
 		Collections.sort(sorted);
-		for(int i=0; i<this.mysnps.size(); i++)
+		assert(sorted.size() == unsorted.size()); 
+		
+		
+		for(int i=0; i<sorted.size(); i++)
 		{
 			SNP sort=sorted.get(i);
-			SNP usort=this.mysnps.get(i);
+			SNP usort=unsorted.get(i);
 			if((sort.genomicPosition().position() != usort.genomicPosition().position()) ||  (!sort.genomicPosition().chromosome().equals(usort.genomicPosition().chromosome())) ) return false;
 			
 		}
