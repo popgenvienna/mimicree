@@ -33,7 +33,8 @@ public class Specimen {
 	 */
 	public HaploidGenome getGamete()
 	{
-		return this.recLandscape.getGamete(this.genome);
+		RecombinationEvent recEv=recLandscape.getRecombinationEvent(this.genome);
+		return recEv.getGamete(this.genome);
 	}
 	
 	public double fitness()
