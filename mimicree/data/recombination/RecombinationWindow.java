@@ -63,4 +63,14 @@ public class RecombinationWindow {
 		
 	}
 	
+	
+	/**
+	 * Obtain the recombination rate in cM/Mb for the given window
+	 * @return
+	 */
+	public double recombinationRate()
+	{
+		return this.recRate;
+	}
+	
 }
