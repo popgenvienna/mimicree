@@ -68,7 +68,7 @@ public class MimicreeFramework {
 		// Load the data
 		FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();
 		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readDiploidGenomes();
-		RecombinationLandscape recLandscape = new RecombinationLandscape(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),
+		RecombinationGenerator recLandscape = new RecombinationGenerator(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),
 				new ChromosomeDefinitionReader(this.chromosomeDefinition).getRandomAssortmentGenerator());
 		
 		// Create initial population

@@ -61,7 +61,7 @@ public class RecombinationRateReader {
 
 	
 	
-	public RecombinationRate getRecombinationRate()
+	public CrossoverGenerator getRecombinationRate()
 	{
 		
 		String line;
@@ -92,7 +92,7 @@ public class RecombinationRateReader {
 		}
 		
 		this.logger.info("Finished reading recombination rate; Read "+entries.size()+ " entries");
-		return new RecombinationRate(entries);
+		return new CrossoverGenerator(entries);
 		
 		
 		

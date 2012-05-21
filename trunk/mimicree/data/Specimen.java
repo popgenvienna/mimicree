@@ -10,10 +10,10 @@ import mimicree.data.recombination.*;
  *
  */
 public class Specimen {
-	private final RecombinationLandscape recLandscape;
+	private final RecombinationGenerator recLandscape;
 	private final double fitness;
 	private final DiploidGenome genome;
-	public Specimen(RecombinationLandscape recLandscape, double fitness, DiploidGenome genome)
+	public Specimen(RecombinationGenerator recLandscape, double fitness, DiploidGenome genome)
 	{
 		this.recLandscape=recLandscape;
 		this.fitness=fitness;
@@ -41,7 +41,7 @@ public class Specimen {
 		return this.fitness;
 	}
 	
-	public RecombinationLandscape recombinationLandscape()
+	public RecombinationGenerator recombinationLandscape()
 	{
 		return this.recLandscape;
 	}

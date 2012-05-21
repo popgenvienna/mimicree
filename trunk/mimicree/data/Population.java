@@ -26,7 +26,7 @@ public class Population {
 	 * @param fitnessFunction the fitness function will decided the fitness of a specimen
 	 * @return
 	 */
-	public static Population loadPopulation(ArrayList<DiploidGenome> genomes, RecombinationLandscape recLandscape,FitnessFunction fitnessFunction)
+	public static Population loadPopulation(ArrayList<DiploidGenome> genomes, RecombinationGenerator recLandscape,FitnessFunction fitnessFunction)
 	{
 		ArrayList<Specimen> specimen=new ArrayList<Specimen>();
 		for(DiploidGenome genome: genomes)

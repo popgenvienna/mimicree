@@ -2,10 +2,10 @@ package mimicree.data.recombination;
 
 import java.util.*;
 import mimicree.data.*;
-public class RecombinationRate {
+public class CrossoverGenerator {
 	private final ArrayList<RecombinationWindow> windows;
 	
-	public RecombinationRate(ArrayList<RecombinationWindow> windows)
+	public CrossoverGenerator(ArrayList<RecombinationWindow> windows)
 	{
 		this.windows=new ArrayList<RecombinationWindow>(windows);
 	}

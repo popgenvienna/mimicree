@@ -11,11 +11,11 @@ import mimicree.data.BitArray.*;
  * Summarizes the recombination rate and the random assortment of chromosomes
  * @author robertkofler
  */
-public class RecombinationLandscape {
-	private final RecombinationRate recRate;
+public class RecombinationGenerator {
+	private final CrossoverGenerator recRate;
 	private final RandomAssortmentGenerator assortGen;
 	
-	public RecombinationLandscape(RecombinationRate recRate, RandomAssortmentGenerator assortGen)
+	public RecombinationGenerator(CrossoverGenerator recRate, RandomAssortmentGenerator assortGen)
 	{
 		this.recRate=recRate;
 		this.assortGen=assortGen;
