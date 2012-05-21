@@ -54,6 +54,24 @@ public class Haplotype {
 	}
 	
 	/**
+	 * Get the allele at a given index
+	 * @param index
+	 * @return
+	 */
+	public char getAllele(int index)
+	{
+		SNP snp=this.snpcollection.getSNPforIndex(index);
+		if(hasMajor(index))
+		{
+			return snp.majorAllele();
+		}
+		else
+		{
+			return snp.minorAllele();
+		}
+	}
+	
+	/**
 	 * Return the SNP collection
 	 * @return
 	 */
