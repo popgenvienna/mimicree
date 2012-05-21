@@ -6,6 +6,9 @@ import mimicree.data.haplotypes.SNP;
 import java.util.*;
 import java.util.logging.Logger;
 import mimicree.data.haplotypes.SNPCollection;
+import mimicree.data.haplotypes.Haplotype;
+import mimicree.data.BitArray.*;
+import mimicree.data.recombination.RandomAssortment;
 
 public class SharedDataFactory {
 	
@@ -26,11 +29,28 @@ public class SharedDataFactory {
 	public static SNP s7=new SNP(new GenomicPosition(Chromosome.getChromosome("3L"),111),'A','A','G');
 	public static SNP s6=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),13),'T','G','C');
 	
-	public static SNP s13=new SNP(new GenomicPosition(Chromosome.getChromosome("X"),11111),'T','A','C');
-	public static SNP s14=new SNP(new GenomicPosition(Chromosome.getChromosome("X"),11112),'T','T','G');
-	public static SNP s15=new SNP(new GenomicPosition(Chromosome.getChromosome("X"),11113),'T','T','G'); 
-	public static SNP s16=new SNP(new GenomicPosition(Chromosome.getChromosome("X"),11114),'T','T','C');
-	public static SNP s17=new SNP(new GenomicPosition(Chromosome.getChromosome("X"),11115),'A','C','T');
+	
+	public static SNP c1=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'A','A','T');
+	public static SNP c2=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),2),'A','A','T');
+	public static SNP c3=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),3),'A','A','T');
+	public static SNP c4=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),4),'A','A','T');
+	public static SNP c5=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),5),'A','A','T');
+	public static SNP c6=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),6),'A','A','T');
+	public static SNP c7=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),7),'A','A','T');
+	public static SNP c8=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),8),'A','A','T');
+	public static SNP c9=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),9),'A','A','T');
+	public static SNP c10=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),10),'A','A','T');
+	public static SNP c11=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),1),'A','C','G');
+	public static SNP c12=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),2),'A','C','G');
+	public static SNP c13=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),3),'A','C','G');
+	public static SNP c14=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),4),'A','C','G');
+	public static SNP c15=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),5),'A','C','G');
+	public static SNP c16=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),6),'A','C','G');
+	public static SNP c17=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),7),'A','C','G');
+	public static SNP c18=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),8),'A','C','G');
+	public static SNP c19=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),9),'A','C','G');
+	public static SNP c20=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),10),'A','C','G');
+	
 	
 	// Static constructor
 	static 
@@ -83,31 +103,87 @@ public class SharedDataFactory {
 				
 	}
 	
+	
 	/**
-	 * A SNPCollection
-	 * 2L-1, 2L-2, 2L-3, 2R-11, 2R-12, 2R-13, 3L-111, 3L-112, 3L-113, 3R-1111, 3R-1112, 3R-1113, X-11111, X-11112, X-11114, X-11115, X-11116 
+	 * Get a SNP collection for testing crossover
 	 * @return
 	 */
-	public static SNPCollection getExtendedSNPCollection()
+	public static SNPCollection getCrossoverSNPCollection()
 	{
-		ArrayList<SNP> snps=getSNPCollection();
-		snps.add(s13); snps.add(s14); snps.add(s15); snps.add(s16); snps.add(s17);
+		ArrayList<SNP> snps=new ArrayList<SNP>();
+		snps.add(c1);
+		snps.add(c2);
+		snps.add(c3);
+		snps.add(c4);
+		snps.add(c5);
+		snps.add(c6);
+		snps.add(c7);
+		snps.add(c8);
+		snps.add(c9);
+		snps.add(c10);
+		snps.add(c11);
+		snps.add(c12);
+		snps.add(c13);
+		snps.add(c14);
+		snps.add(c15);
+		snps.add(c16);
+		snps.add(c17);
+		snps.add(c18);
+		snps.add(c19);
+		snps.add(c20);
 		Collections.sort(snps);
 		return new SNPCollection(snps);
 	}
 	
-	/**
-	 * A SNP collection
-	 * X-11111, X-11112, X-11114, X-11115, X-11116
-	 * @return
-	 */
-	public static SNPCollection getXSNPCollection()
+	public static Haplotype getCrossoverHaplotypeMinor()
 	{
-		ArrayList<SNP> snps=new ArrayList<SNP>();
-		snps.add(s13); snps.add(s14); snps.add(s15); snps.add(s16); snps.add(s17);
-		Collections.sort(snps);
-		return new SNPCollection(snps);
+		BitArray ba=new BitArrayBuilder(20).getBitArray();
+		return new Haplotype(ba,getCrossoverSNPCollection());
 	}
+	
+	public static Haplotype getCrossoverHaplotypeMajor()
+	{
+		BitArrayBuilder b=new BitArrayBuilder(20);
+		b.setBit(0); b.setBit(1);b.setBit(2); b.setBit(3); b.setBit(4);b.setBit(5); b.setBit(6); b.setBit(7);b.setBit(8); b.setBit(9);
+		b.setBit(10); b.setBit(11); b.setBit(12); b.setBit(13); b.setBit(14); b.setBit(15); b.setBit(16); b.setBit(17); b.setBit(18);
+		b.setBit(19);
+		BitArray ba=b.getBitArray();
+		return new Haplotype(ba,getCrossoverSNPCollection());
+	}
+	
+	public static RandomAssortment getRandomAssortment00()
+	{
+		HashMap<Chromosome,Boolean> tr=new HashMap<Chromosome,Boolean>();
+		tr.put(Chromosome.getChromosome("2L"), false);
+		tr.put(Chromosome.getChromosome("2R"), false);
+		return new RandomAssortment(tr);
+	}
+	
+	public static RandomAssortment getRandomAssortment01()
+	{
+		HashMap<Chromosome,Boolean> tr=new HashMap<Chromosome,Boolean>();
+		tr.put(Chromosome.getChromosome("2L"), false);
+		tr.put(Chromosome.getChromosome("2R"), true);
+		return new RandomAssortment(tr);
+	}
+	
+	public static RandomAssortment getRandomAssortment11()
+	{
+		HashMap<Chromosome,Boolean> tr=new HashMap<Chromosome,Boolean>();
+		tr.put(Chromosome.getChromosome("2L"), true);
+		tr.put(Chromosome.getChromosome("2R"), true);
+		return new RandomAssortment(tr);
+	}
+	
+	public static RandomAssortment getRandomAssortment10()
+	{
+		HashMap<Chromosome,Boolean> tr=new HashMap<Chromosome,Boolean>();
+		tr.put(Chromosome.getChromosome("2L"), true);
+		tr.put(Chromosome.getChromosome("2R"), false);
+		return new RandomAssortment(tr);
+	}
+	
+
 	
 	
 
