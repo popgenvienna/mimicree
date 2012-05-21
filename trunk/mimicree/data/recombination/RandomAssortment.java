@@ -13,7 +13,7 @@ import mimicree.data.*;
  * @author robertkofler
  *
  */
-class RandomAssortment {
+public class RandomAssortment {
 	
 	private final HashMap<Chromosome,Boolean> randomAssortment;
 	

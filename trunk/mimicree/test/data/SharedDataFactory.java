@@ -26,6 +26,11 @@ public class SharedDataFactory {
 	public static SNP s7=new SNP(new GenomicPosition(Chromosome.getChromosome("3L"),111),'A','A','G');
 	public static SNP s6=new SNP(new GenomicPosition(Chromosome.getChromosome("2R"),13),'T','G','C');
 	
+	public static SNP s13=new SNP(new GenomicPosition(Chromosome.getChromosome("X"),11111),'T','A','C');
+	public static SNP s14=new SNP(new GenomicPosition(Chromosome.getChromosome("X"),11112),'T','T','G');
+	public static SNP s15=new SNP(new GenomicPosition(Chromosome.getChromosome("X"),11113),'T','T','G'); 
+	public static SNP s16=new SNP(new GenomicPosition(Chromosome.getChromosome("X"),11114),'T','T','C');
+	public static SNP s17=new SNP(new GenomicPosition(Chromosome.getChromosome("X"),11115),'A','C','T');
 	
 	// Static constructor
 	static 
@@ -44,18 +49,7 @@ public class SharedDataFactory {
 	
 	/**
 	 * Get a collection of 12 SNPs on chromosomes 2L, 2R, 3L, 3R;
-	 * 2L 2; 
-	 * 3R 1113;
-	 * 3R 1112;
-	 * 2L 1; 
-	 * 2L 3; 
-	 * 2R 11; 
-	 * 2R 12; 
-	 * 3R 1111; 
-	 * 3L 113; 
-	 * 3L 112; 
-	 * 3L 111; 
-	 * 2R 13; 
+	 * 2L-2, 3R-1113, 3R-1112, 2L-1, 2L-3, 2R-11, 2R-12, 3R-1111, 3L-113, 3L-112, 3L-111, 2R-13
 	 * @return
 	 */
 	public static ArrayList<SNP> getSNPCollection()
@@ -87,6 +81,32 @@ public class SharedDataFactory {
 		Collections.sort(snps);
 		return new SNPCollection(snps);
 				
+	}
+	
+	/**
+	 * A SNPCollection
+	 * 2L-1, 2L-2, 2L-3, 2R-11, 2R-12, 2R-13, 3L-111, 3L-112, 3L-113, 3R-1111, 3R-1112, 3R-1113, X-11111, X-11112, X-11114, X-11115, X-11116 
+	 * @return
+	 */
+	public static SNPCollection getExtendedSNPCollection()
+	{
+		ArrayList<SNP> snps=getSNPCollection();
+		snps.add(s13); snps.add(s14); snps.add(s15); snps.add(s16); snps.add(s17);
+		Collections.sort(snps);
+		return new SNPCollection(snps);
+	}
+	
+	/**
+	 * A SNP collection
+	 * X-11111, X-11112, X-11114, X-11115, X-11116
+	 * @return
+	 */
+	public static SNPCollection getXSNPCollection()
+	{
+		ArrayList<SNP> snps=new ArrayList<SNP>();
+		snps.add(s13); snps.add(s14); snps.add(s15); snps.add(s16); snps.add(s17);
+		Collections.sort(snps);
+		return new SNPCollection(snps);
 	}
 	
 	
