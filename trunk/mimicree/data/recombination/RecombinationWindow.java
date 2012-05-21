@@ -20,11 +20,24 @@ public class RecombinationWindow {
 	}
 	
 	
-	
 	private double calculateP(double recRate,int windowsize)
 	{
 		// first adjust by windowsize 
 		// recRate cM/Mb 		d-> cM (for the window)
+		if(windowsize > 1000000.0) throw new IllegalArgumentException("Window size for recombination needs to be smaller than 1Mbp");
+		double d=recRate*(((double)(windowsize))/1000000.0);
+		double p=d/100.0;
+		
+		assert(p>=0.0 && p<=1.0);
+		return p;
+	}
+	
+	/*
+	private double calculatePold(double recRate,int windowsize)
+	{
+		// first adjust by windowsize 
+		// recRate cM/Mb 		d-> cM (for the window)
+		if(windowsize > 1000000.0) throw new IllegalArgumentException("Window size for recombination needs to be smaller than 1Mbp");
 		double d=recRate*(((double)(windowsize))/1000000.0);
 		double exponent = (-2.0 * d)/100.0;
 		double eexponent=Math.pow(Math.E, exponent);
@@ -33,6 +46,10 @@ public class RecombinationWindow {
 		assert(p>=0.0 && p<=1.0);
 		return p;
 	}
+	
+	*/
+	
+	
 	
 	/**
 	 * A random number generator decides whether a recombination event takes place within the given window
