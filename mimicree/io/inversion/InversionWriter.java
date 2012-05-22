@@ -86,9 +86,9 @@ public class InversionWriter {
 			System.exit(0);
 		}
 		
-		for(int i=0; i<inversions.size(); i+=2)
+		for(int i=0, counter=1; i<inversions.size(); i+=2,counter++)
 		{
-			String toWrite = formatInversionString(i+1,inversions.get(i),inversions.get(i+1));
+			String toWrite = formatInversionString(counter,inversions.get(i),inversions.get(i+1));
 			try
 			{
 				bf.write(toWrite+"\n");
