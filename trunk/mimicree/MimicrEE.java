@@ -19,29 +19,28 @@ public class MimicrEE {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) 
+	{
 
-      
 		// Parse command lines to determine the analysis mode and the LOG
 		LinkedList<String> arguments=new LinkedList<String>(Arrays.asList(args));
 		boolean detailedLog=false;
-		String mode="";		
-        while(arguments.size()>0)
-        {
-            String cu=arguments.remove(0);
-            
+		String mode="";	
+		
+		for(int i=0; i<arguments.size(); i++)
+		{
+			String cu=arguments.get(i);
             if(cu.equals("--detailed-log"))
             {
+            	arguments.remove(i);
             	detailedLog=true;
             }
             else if(cu.equals("--mode"))
             {
-                mode = arguments.remove(0);
+            	arguments.remove(i);
+                mode = arguments.remove(i);
             }
-        }
-
-		
+		}
 		
         // Create a logger to System.err
         java.util.logging.Logger logger=java.util.logging.Logger.getLogger("Mimicree Logger");

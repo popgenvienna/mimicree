@@ -9,6 +9,7 @@ import mimicree.data.haplotypes.SNPCollection;
 import mimicree.data.haplotypes.Haplotype;
 import mimicree.data.BitArray.*;
 import mimicree.data.recombination.RandomAssortment;
+import mimicree.data.fitness.*;
 
 public class SharedDataFactory {
 	
@@ -183,9 +184,46 @@ public class SharedDataFactory {
 		return new RandomAssortment(tr);
 	}
 	
+	/**
+	 * Get an additive SNP for 2L-5 A/T; 
+	 * w11=A s=-0.1 h=0.5	
+	 * @return
+	 */
+	public static AdditiveSNP getAdditiveSNP_int1()
+	{
+		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2L"),5),'A',-0.1,0.5);
 
+	}
 	
+	/**
+	 * Get an additive SNP for 2R-5 C/G
+	 * w11=C s=0.5 h=0.5
+	 * @return
+	 */
+	public static AdditiveSNP  getAdditiveSNP_int2()
+	{
+		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2R"),5),'C', 0.5, 0.5);
+	}
 	
+	/**
+	 * Get an additive SNP for 2L-6 A/T; 
+	 * w11=A s=-0.1 h=0.0	
+	 * @return
+	 */
+	public static AdditiveSNP getAdditiveSNP_domW11()
+	{
+		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2L"),6),'A',-0.1,0.0);
+	}
+	
+	/**
+	 * Get an additive SNP for 2L-7 A/T; 
+	 * w11=A s=-0.1 h=1.0	
+	 * @return
+	 */
+	public static AdditiveSNP getAdditiveSNP_domW22()
+	{
+		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2L"),7),'A',-0.1,1.0);
+	}
 
 
 }

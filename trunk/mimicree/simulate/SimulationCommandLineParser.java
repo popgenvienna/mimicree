@@ -23,8 +23,7 @@ public class SimulationCommandLineParser {
 		String chromosomeDefinition="";
 		int threads=1;
 		int replicateRuns=1;
-		boolean displayHelp=false;
-		boolean detailedLog=false;
+
 	
 		
         while(args.size()>0)
