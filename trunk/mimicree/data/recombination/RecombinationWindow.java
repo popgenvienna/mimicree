@@ -15,7 +15,10 @@ public class RecombinationWindow {
 		this.startPosition=startPosition;
 		this.endPosition=endPosition;
 		this.recRate=recRate;
-		this.p_recombination=calculateP(recRate,endPosition-startPosition+1);
+		int windowsize=endPosition-startPosition+1;
+		if(recRate>50.0) throw new IllegalArgumentException("Recombination rate must not exceed 50");
+		if(windowsize > 1000000.0) throw new IllegalArgumentException("Window size for recombination events needs to be smaller than 1Mbp");
+		this.p_recombination=calculateP(recRate,windowsize);
 
 	}
 	
@@ -24,7 +27,7 @@ public class RecombinationWindow {
 	{
 		// first adjust by windowsize 
 		// recRate cM/Mb 		d-> cM (for the window)
-		if(windowsize > 1000000.0) throw new IllegalArgumentException("Window size for recombination needs to be smaller than 1Mbp");
+	
 		double d=recRate*(((double)(windowsize))/1000000.0);
 		double p=d/100.0;
 		

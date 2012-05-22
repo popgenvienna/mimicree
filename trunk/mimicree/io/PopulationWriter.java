@@ -6,6 +6,7 @@ import java.util.*;
 import mimicree.data.haplotypes.Haplotype;
 import java.io.*;
 import mimicree.io.haplotypes.HaplotypeWriter;
+import mimicree.io.inversion.InversionWriter;
 
 public class PopulationWriter {
 	private final Population population;
@@ -61,7 +62,7 @@ public class PopulationWriter {
 		// Inversions should only be written when they were present in the original sample
 		if(Inversion.getInversionCount()>0)
 		{
-			
+			new InversionWriter(inversionOFile,this.logger).write(invHaplotypes);
 		}
 		
 	}

@@ -1,4 +1,4 @@
-package mimicree;
+package mimicree.simulate;
 
 
 import java.util.ArrayList;
@@ -11,9 +11,8 @@ import mimicree.data.fitness.*;
 import mimicree.io.fitness.*;
 import mimicree.data.recombination.*;
 import mimicree.io.*;
-import mimicree.simulate.SingleSimulation;
 
-public class MimicreeFramework {
+public class SimulationFramework {
 	private final String haplotypeFile;
 	private final String inversionFile;
 	private final String recombinationFile;
@@ -26,7 +25,7 @@ public class MimicreeFramework {
 	private final int threads;
 
 	private final java.util.logging.Logger logger;
-	public MimicreeFramework(String haplotypeFile, String inversionFile, String recombinationFile, String chromosomeDefinition, String additiveFile, String epistasisFile,
+	public SimulationFramework(String haplotypeFile, String inversionFile, String recombinationFile, String chromosomeDefinition, String additiveFile, String epistasisFile,
 			String outputDir, ArrayList<Integer> outputGenerations, int replicateRuns,int threads, java.util.logging.Logger logger)
 	{
 		// 'File' represents files and directories
