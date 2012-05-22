@@ -7,6 +7,7 @@ import mimicree.data.haplotypes.Haplotype;
 import java.io.*;
 import mimicree.io.haplotypes.HaplotypeWriter;
 import mimicree.io.inversion.InversionWriter;
+import mimicree.io.fitness.FitnessWriter;
 
 public class PopulationWriter {
 	private final Population population;
@@ -28,7 +29,8 @@ public class PopulationWriter {
 	{
 		ArrayList<Haplotype> haplotypes=new ArrayList<Haplotype>();
 		ArrayList<InversionHaplotype> invHaplotypes =new ArrayList<InversionHaplotype>();
-		for(Specimen spec: population.getSpecimen()){
+		ArrayList<Specimen> specimens=population.getSpecimen();
+		for(Specimen spec: specimens){
 			haplotypes.add(spec.getGenome().getHaplotypeA().getSNPHaplotype());
 			haplotypes.add(spec.getGenome().getHaplotypeB().getSNPHaplotype());
 			invHaplotypes.add(spec.getGenome().getHaplotypeA().getInversionHaplotype());
@@ -37,6 +39,7 @@ public class PopulationWriter {
 		
 		String haplotypeOFile="";
 		String inversionOFile="";
+		String fitnessOFile="";
 		
 		try
 		{
@@ -50,6 +53,16 @@ public class PopulationWriter {
 		}
 		
 		try{
+			fitnessOFile = new File(this.outputDir,"fitness.r" + this.simulationNumber + ".g"+this.generation).getCanonicalPath();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+			System.exit(0);
+		}
+		
+		
+		try{
 			inversionOFile=new File(this.outputDir,"inversions.r"+this.simulationNumber+".g"+this.generation).getCanonicalPath();
 		}
 		catch(IOException e)
@@ -58,7 +71,8 @@ public class PopulationWriter {
 			System.exit(0);
 		}
 		
-		new HaplotypeWriter(haplotypeOFile,this.logger).write(haplotypes);
+		new HaplotypeWriter(haplotypeOFile,this.logger).write(haplotypes); 
+		new FitnessWriter(fitnessOFile,this.logger).write(specimens);
 		// Inversions should only be written when they were present in the original sample
 		if(Inversion.getInversionCount()>0)
 		{
