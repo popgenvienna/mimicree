@@ -26,13 +26,12 @@ public class Population {
 	 * @param fitnessFunction the fitness function will decided the fitness of a specimen
 	 * @return
 	 */
-	public static Population loadPopulation(ArrayList<DiploidGenome> genomes, RecombinationGenerator recLandscape,FitnessFunction fitnessFunction)
+	public static Population loadPopulation(ArrayList<DiploidGenome> genomes,FitnessFunction fitnessFunction)
 	{
 		ArrayList<Specimen> specimen=new ArrayList<Specimen>();
 		for(DiploidGenome genome: genomes)
 		{
-			double fitness=fitnessFunction.getFitness(genome);
-			Specimen s=new Specimen(recLandscape,fitness,genome);
+			Specimen s=fitnessFunction.getSpecimen(genome);
 			specimen.add(s);
 		}
 		
@@ -48,7 +47,7 @@ public class Population {
 	 * @param environment 
 	 * @return
 	 */
-	public Population getNextGeneration(FitnessFunction fitnessFunction)
+	public Population getNextGeneration(FitnessFunction fitnessFunction, RecombinationGenerator recGenerator)
 	{
 		MatingFunction mf=MatingFunction.getMatingFunction(this);
 		ArrayList<Specimen> nextGen=new ArrayList<Specimen>();
@@ -56,10 +55,10 @@ public class Population {
 		for(int i=0; i<this.size(); i++)
 		{
 			Specimen[] merryCouple= mf.getCouple();
-			HaploidGenome semen	=merryCouple[0].getGamete();
-			HaploidGenome egg	=merryCouple[1].getGamete();
+			HaploidGenome semen	=merryCouple[0].getGamete(recGenerator);
+			HaploidGenome egg	=merryCouple[1].getGamete(recGenerator);
 			DiploidGenome fertilizedEgg=new DiploidGenome(semen,egg);
-			Specimen progeny=new Specimen(merryCouple[0].recombinationLandscape(),fitnessFunction.getFitness(fertilizedEgg),fertilizedEgg);
+			Specimen progeny=fitnessFunction.getSpecimen(fertilizedEgg);
 			nextGen.add(progeny);
 		}
 		return new Population(nextGen);

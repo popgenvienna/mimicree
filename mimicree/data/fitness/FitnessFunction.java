@@ -26,10 +26,32 @@ public class FitnessFunction {
 	public double getFitness(DiploidGenome genome)
 	{
 		double toret=1.0;
-		toret*=epiFitness.getEpistaticFitness(genome);
-		toret*=addFitness.getAdditiveFitness(genome);
+		toret*=this.getEpistaticFitness(genome);
+		toret*=this.getAdditiveFitness(genome);
 		return toret;
 	}
 	
+	public double getAdditiveFitness(DiploidGenome genome)
+	{
+		return addFitness.getAdditiveFitness(genome);
+	}
+	
+	public double getEpistaticFitness(DiploidGenome genome)
+	{
+		return epiFitness.getEpistaticFitness(genome);
+	}
+	
+	/**
+	 * Obtain a new specimen
+	 * @param genome
+	 * @return
+	 */
+	public Specimen getSpecimen(DiploidGenome genome)
+	{
+		double addi=getAdditiveFitness(genome);
+		double epi=getEpistaticFitness(genome);
+		double fitness=addi*epi;
+		return new Specimen(fitness,addi,epi,genome);
+	}
 
 }

@@ -67,17 +67,17 @@ public class SimulationFramework {
 		// Load the data
 		FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();
 		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readDiploidGenomes();
-		RecombinationGenerator recLandscape = new RecombinationGenerator(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),
+		RecombinationGenerator recGenerator = new RecombinationGenerator(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),
 				new ChromosomeDefinitionReader(this.chromosomeDefinition).getRandomAssortmentGenerator());
 		
 		// Create initial population
-		Population population=Population.loadPopulation(dipGenomes, recLandscape, fitnessFunction);
+		Population population=Population.loadPopulation(dipGenomes, fitnessFunction);
 		
 		ExecutorService executor=Executors.newFixedThreadPool(threads);
 		ArrayList<Callable<Object>> call=new ArrayList<Callable<Object>>();
 		for(int i=0; i<this.replicateRuns; i++)
 		{
-			call.add(Executors.callable(new SingleSimulation(i+1,population,fitnessFunction,this.outputDir,this.outputGenerations,this.logger)));
+			call.add(Executors.callable(new SingleSimulation(i+1,population,fitnessFunction,recGenerator,this.outputDir,this.outputGenerations,this.logger)));
 		}
 		
 		this.logger.info("Starting simulations using "+this.threads+" threads");

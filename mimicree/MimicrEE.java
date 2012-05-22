@@ -60,7 +60,7 @@ public class MimicrEE {
         }
         else if(mode.equals("measure-fitness"))
         {
-        	
+        	mimicree.analysis.measurefitness.AnalyseFitnessParser.parseArguments(logger, arguments);
         }
         else
         {
