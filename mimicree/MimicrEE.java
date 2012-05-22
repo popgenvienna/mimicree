@@ -6,6 +6,8 @@ package mimicree;
 import mimicree.misc.*;
 
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.logging.Level;
 
 /**
@@ -20,28 +22,53 @@ public class MimicrEE {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		CommandLineArguments arguments= CommandLineParser.getCommandLineArguments(args);
-        if(arguments.displayHelp())
-        {
-            System.out.print(mimicree.misc.CommandLineParser.helpMessage());
-            System.exit(1); // 1 means that programm exited correctly
-        }
       
+		// Parse command lines to determine the analysis mode and the LOG
+		LinkedList<String> arguments=new LinkedList<String>(Arrays.asList(args));
+		boolean detailedLog=false;
+		String mode="";		
+        while(arguments.size()>0)
+        {
+            String cu=arguments.remove(0);
+            
+            if(cu.equals("--detailed-log"))
+            {
+            	detailedLog=true;
+            }
+            else if(cu.equals("--mode"))
+            {
+                mode = arguments.remove(0);
+            }
+        }
+
+		
+		
         // Create a logger to System.err
         java.util.logging.Logger logger=java.util.logging.Logger.getLogger("Mimicree Logger");
         java.util.logging.ConsoleHandler mimhandler =new java.util.logging.ConsoleHandler();
         mimhandler.setLevel(Level.INFO);
-        if(arguments.detailedLog())mimhandler.setLevel(Level.FINEST);
+        if(detailedLog)mimhandler.setLevel(Level.FINEST);
         mimhandler.setFormatter(new mimicree.misc.MimicreeLogFormatter());
         logger.addHandler(mimhandler);
         logger.setUseParentHandlers(false);
         logger.setLevel(Level.ALL);
+       
+        // Start the appropriate sub-application of mimicree
+        mode=mode.toLowerCase();
+        if(mode.equals("simulate"))
+        {
+        	mimicree.simulate.SimulationCommandLineParser.runMimicreeSimulations(logger, arguments);
+        }
+        else if(mode.equals("measure-fitness"))
+        {
+        	
+        }
+        else
+        {
+        	throw new IllegalArgumentException("Do not recognise analysis mode "+mode);
+        }
         
-        mimicree.MimicreeFramework mimframe= new mimicree.MimicreeFramework(arguments.haplotypeFile(),arguments.inversionFile(),arguments.recombinationFile(),arguments.chromosomeDefintion(),
-        		arguments.additiveFile(),arguments.epistasisFile(),arguments.outputDir(),arguments.outputGenerations(),arguments.replicateRuns(),arguments.threads(),logger);
-        
-        mimframe.run();
-        
+
 	}
 
 }

@@ -1,22 +1,21 @@
-package mimicree.misc;
+package mimicree.simulate;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.*;
+import java.util.logging.Logger;
 
-public class CommandLineParser {
+public class SimulationCommandLineParser {
 	
 	/**
 	 * Parse the command line arguments and return the results
 	 * @param args the command line arguments
 	 * @return
 	 */
-	public static CommandLineArguments getCommandLineArguments(String[] arguments)
+	public static void runMimicreeSimulations(Logger logger, LinkedList<String> args)
 	{
-		LinkedList<String> args=new LinkedList<String>(Arrays.asList(arguments));
+
 		String haplotypeFile="";
 		String inversionFile="";
-		String recombinationrateFile="";
+		String recombinationFile="";
 		String additiveFile="";
 		String epistasisFile="";
 		String outputDir="";
@@ -42,7 +41,7 @@ public class CommandLineParser {
             }
             else if(cu.equals("--recombination-rate"))
             {
-            	recombinationrateFile=args.remove(0);
+            	recombinationFile=args.remove(0);
             }
             else if(cu.equals("--additive"))
             {
@@ -74,11 +73,7 @@ public class CommandLineParser {
             }
             else if(cu.equals("--help"))
             {
-            	displayHelp=true;
-            }
-            else if(cu.equals("--detailed-log"))
-            {
-            	detailedLog=true;
+            	printHelpMessage();
             }
             else
             {
@@ -88,16 +83,20 @@ public class CommandLineParser {
     
         // Parse the string with the generations
         ArrayList<Integer> outputGen = parseOutputGenerations(outputGenRaw);
-        CommandLineArguments ca = new CommandLineArguments(haplotypeFile,inversionFile,recombinationrateFile,chromosomeDefinition, additiveFile,
-        		epistasisFile, outputDir, outputGen, replicateRuns, threads, displayHelp, detailedLog);
-        return ca;
+
+        mimicree.simulate.SimulationFramework mimframe= new mimicree.simulate.SimulationFramework(haplotypeFile,inversionFile,recombinationFile,chromosomeDefinition,
+        		additiveFile,epistasisFile,outputDir,outputGen,replicateRuns,threads,logger);
+        
+        mimframe.run();
 	}
 	
 	
-	public static String helpMessage()
+	public static void printHelpMessage()
 	{
 		StringBuilder sb=new StringBuilder();
-		return sb.toString();
+		
+		System.out.print(sb.toString());
+		System.exit(1);
 	}
 	
 	
