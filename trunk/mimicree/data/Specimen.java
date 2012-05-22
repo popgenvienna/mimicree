@@ -10,14 +10,16 @@ import mimicree.data.recombination.*;
  *
  */
 public class Specimen {
-	private final RecombinationGenerator recLandscape;
 	private final double fitness;
+	private final double additiveFitness;
+	private final double epistaticFitness;
 	private final DiploidGenome genome;
-	public Specimen(RecombinationGenerator recLandscape, double fitness, DiploidGenome genome)
+	public Specimen( double fitness, double additiveFitness, double epistaticFitness, DiploidGenome genome)
 	{
-		this.recLandscape=recLandscape;
 		this.fitness=fitness;
 		this.genome=genome;
+		this.additiveFitness=additiveFitness;
+		this.epistaticFitness=epistaticFitness;
 	}
 	
 	
@@ -31,9 +33,9 @@ public class Specimen {
 	 * The gamete is a haploid and recombined product of the diploid genome
 	 * @return
 	 */
-	public HaploidGenome getGamete()
+	public HaploidGenome getGamete(RecombinationGenerator recGen)
 	{
-		RecombinationEvent recEv=recLandscape.getRecombinationEvent(this.genome);
+		RecombinationEvent recEv=recGen.getRecombinationEvent(this.genome);
 		return recEv.getGamete(this.genome);
 	}
 	
@@ -42,9 +44,13 @@ public class Specimen {
 		return this.fitness;
 	}
 	
-	public RecombinationGenerator recombinationLandscape()
+	public double additiveFitness()
 	{
-		return this.recLandscape;
+		 return this.additiveFitness;
+	}
+	public double epistaticFitness()
+	{
+		return this.epistaticFitness;
 	}
 
 }
