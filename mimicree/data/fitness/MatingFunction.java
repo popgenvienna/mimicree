@@ -92,9 +92,19 @@ public class MatingFunction {
 		// random 0.999 -> das letzte mit 1.0! das letzte sollte genau 1 haben
 		for(FitnessTransformedSpecimen tspec:this.specimens)
 		{
-			if(random < tspec.transformedFitnessSum) return tspec;
+			if(tspec.transformedFitnessSum > random) return tspec;
 		}
 		throw new IllegalArgumentException("State not allowed in mating function");	
+	}
+	
+	/**
+	 * Retrieve a specimen for a given number  [0,1)
+	 * @param random
+	 * @return
+	 */
+	public Specimen getSpecimen(double random)
+	{
+		return this.getSpecimenForRandomNumber(random).specimen;
 	}
 
 }
