@@ -246,5 +246,11 @@ public class SharedDataFactory {
 		return new DiploidGenome(g1,g2);
 	}
 
+	public static Specimen getSpecimen(double fitness, double additiveFitness)
+	{
+		DiploidGenome genome=getDiploidGenome_11();
+		Specimen s=new Specimen(fitness,additiveFitness,1.0,genome);
+		return s;
+	}
 
 }
