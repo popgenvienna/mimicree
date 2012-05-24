@@ -1,9 +1,9 @@
 import sys
 import random
 import collections
-from PyModules.Sync import SyncReader
-from PyModules.Utility import File
-from PyModules.Haplotype import HaplotypeIO
+from Sync import SyncReader
+from Utility import File
+from Haplotype import HaplotypeIO
 from optparse import OptionParser, OptionGroup
 import re
 
