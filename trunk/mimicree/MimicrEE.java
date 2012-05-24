@@ -40,6 +40,13 @@ public class MimicrEE {
             	arguments.remove(i);
                 mode = arguments.remove(i);
             }
+            else if(cu.equals("--threads"))
+            {		
+            	arguments.remove(i);
+            	int threadCount=Integer.parseInt(arguments.remove(i));
+            	MimicreeThreadPool.setThreads(threadCount);
+            }
+            
 		}
 		
         // Create a logger to System.err

@@ -66,10 +66,6 @@ public class SimulationCommandLineParser {
             {
             	outputDir=args.remove(0);
             }
-            else if(cu.equals("--threads"))
-            {
-            	threads=Integer.parseInt(args.remove(0));
-            }
             else if(cu.equals("--help"))
             {
             	printHelpMessage();

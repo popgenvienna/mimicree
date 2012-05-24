@@ -73,24 +73,12 @@ public class SimulationFramework {
 		// Create initial population
 		Population population=Population.loadPopulation(dipGenomes, fitnessFunction);
 		
-		ExecutorService executor=Executors.newFixedThreadPool(threads);
-		ArrayList<Callable<Object>> call=new ArrayList<Callable<Object>>();
+		// Running the replicates
 		for(int i=0; i<this.replicateRuns; i++)
 		{
-			call.add(Executors.callable(new SingleSimulation(i+1,population,fitnessFunction,recGenerator,this.outputDir,this.outputGenerations,this.logger)));
+			new SingleSimulation(i+1,population,fitnessFunction,recGenerator,this.outputDir,this.outputGenerations,this.logger).run();
 		}
 		
-		this.logger.info("Starting simulations using "+this.threads+" threads");
-		try
-		{	
-			// Run them all!
-			executor.invokeAll(call);	
-		}
-		catch(InterruptedException e)
-		{
-			e.printStackTrace();
-			System.exit(0);
-		}
 		this.logger.info("Finished simulations");
 		this.logger.info("Thank you for using MimicrEE");
 		
