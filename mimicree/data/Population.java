@@ -135,7 +135,9 @@ class SpecimenGenerator
 			e.printStackTrace();
 			System.exit(0);
 		}
-		return col.getSpecimen();
+		ArrayList<Specimen> specs=col.getSpecimen();
+		assert(specs.size()==populationSize);
+		return specs;
 	}
 	
 

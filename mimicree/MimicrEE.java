@@ -74,7 +74,7 @@ public class MimicrEE {
         	throw new IllegalArgumentException("Do not recognise analysis mode "+mode);
         }
         
-
+        MimicreeThreadPool.getExector().shutdown();
 	}
 
 }
