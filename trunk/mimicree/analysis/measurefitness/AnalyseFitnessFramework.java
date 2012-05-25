@@ -45,7 +45,6 @@ public class AnalyseFitnessFramework {
 		Population population=Population.loadPopulation(dipGenomes, fitnessFunction);
 		new FitnessWriter(this.outputFile,this.logger).write(population.getSpecimen());
 		this.logger.info("Finished measuring fitness");
-		this.logger.info("Thank you for using MimicrEE");
 		
 	}
 	private Logger logger;

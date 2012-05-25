@@ -1,0 +1,58 @@
+package mimicree.io.haplotypes;
+
+import mimicree.data.statistic.*;
+import mimicree.data.haplotypes.*;
+import java.util.*;
+import java.io.*;
+import java.util.logging.Logger;
+
+public class PopulationAlleleCountReader {
+	
+	private final ArrayList<String> haplotypeFiles;
+	private Logger logger;
+	
+	public PopulationAlleleCountReader(ArrayList<String> inputFiles, Logger logger)
+	{
+		this.haplotypeFiles=inputFiles;
+		this.logger=logger;
+	}
+	
+	
+	public ArrayList<PopulationAlleleCount> readPopulations()
+	{
+		assert(this.haplotypeFiles.size()>0);
+		String firstFile=this.haplotypeFiles.get(0);
+		this.logger.info("Reading SNP information from file "+firstFile);
+		SNPCollection snpCol= new HaplotypeSNPReader(getBufferedFileReader(firstFile)).getSNPcollection();
+		
+		
+		ArrayList<PopulationAlleleCount> pac=new ArrayList<PopulationAlleleCount>();
+		for(String file: this.haplotypeFiles)
+		{
+			this.logger.info("Reading allele frequencies for file " +file);
+			PopulationAlleleCount p=new SinglePopulationAlleleCountReader(getBufferedFileReader(file)).getAlleleCount(snpCol);
+			pac.add(p);
+		}
+		
+		this.logger.info("Finished reading allele frequencies");
+		return pac;
+		
+		
+	}
+	
+	
+	private BufferedReader getBufferedFileReader(String file)
+	{
+		try
+		{
+			return new BufferedReader(new FileReader(file));
+		}
+		catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+			System.exit(0);
+		}
+		return null;
+	}
+
+}
