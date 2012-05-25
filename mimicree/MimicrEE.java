@@ -69,12 +69,18 @@ public class MimicrEE {
         {
         	mimicree.analysis.measurefitness.AnalyseFitnessParser.parseArguments(logger, arguments);
         }
+        else if(mode.equals("hap2sync"))
+        {
+        	mimicree.analysis.hap2sync.Hap2SyncParser.parseCommandline(logger, arguments);
+        }
         else
         {
         	throw new IllegalArgumentException("Do not recognise analysis mode "+mode);
         }
         
         MimicreeThreadPool.getExector().shutdown();
+        
+		logger.info("Thank you for using MimicrEE");
 	}
 
 }

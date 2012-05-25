@@ -80,7 +80,7 @@ public class SimulationFramework {
 		}
 		
 		this.logger.info("Finished simulations");
-		this.logger.info("Thank you for using MimicrEE");
+
 		
 		
 	}
