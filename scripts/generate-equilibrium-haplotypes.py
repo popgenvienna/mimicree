@@ -50,8 +50,9 @@ for entry in SyncReader(input):
 	topr.append(majall+"/"+minall)
 	genotypes=[]
 	for i in range(0,popsize):
-		r1=int(random.random()*arsize)
-		r2=int(random.random()*arsize)
+		# error TODO fix this needs to be removed from array
+		#r1=int(random.random()*arsize)
+		#r2=int(random.random()*arsize)
 		genotype=randbasis[r1]+ randbasis[r2]
 		genotypes.append(genotype)
 	topr.append(" ".join(genotypes))
