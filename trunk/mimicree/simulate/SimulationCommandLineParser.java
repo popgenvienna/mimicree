@@ -3,6 +3,8 @@ package mimicree.simulate;
 import java.util.*;
 import java.util.logging.Logger;
 
+import mimicree.MimicrEE;
+
 public class SimulationCommandLineParser {
 	
 	/**
@@ -89,7 +91,16 @@ public class SimulationCommandLineParser {
 	public static void printHelpMessage()
 	{
 		StringBuilder sb=new StringBuilder();
-		
+		sb.append("--haplotypes-g0				the haplotype file\n");
+		sb.append("--inversions-g0				the inversion file\n");
+		sb.append("--recombination-rate			the recombination rate for windows of fixed size\n");
+		sb.append("--additive					the additive fitness effect of SNPs\n");
+		sb.append("--epistasis					the epistatic fitness effect of SNPs\n");	
+		sb.append("--chromosome-definition		which chromosomes parts constitute a chromosome\n");
+		sb.append("--output-generations			a coma separated list of generations to output\n");
+		sb.append("--replicate-runs				how often should the simulation be repeated\n");
+		sb.append("--output-dir					the output directory\n");
+		sb.append(MimicrEE.getGeneralHelpmessage());
 		System.out.print(sb.toString());
 		System.exit(1);
 	}
