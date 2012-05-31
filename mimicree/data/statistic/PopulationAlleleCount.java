@@ -20,6 +20,16 @@ public class PopulationAlleleCount {
 		return this.snpcol;
 	}
 	
+	public int majorCount(int index)
+	{
+		return this.majorCount[index];
+	}
+	
+	public int minorCount(int index)
+	{
+		return this.minorCount[index];
+	}
+	
 	
 	public int getCount(char toCount, int index)
 	{

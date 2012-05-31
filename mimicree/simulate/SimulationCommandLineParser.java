@@ -23,7 +23,6 @@ public class SimulationCommandLineParser {
 		String outputDir="";
 		String outputGenRaw="";
 		String chromosomeDefinition="";
-		int threads=1;
 		int replicateRuns=1;
 
 	
@@ -82,7 +81,7 @@ public class SimulationCommandLineParser {
         ArrayList<Integer> outputGen = parseOutputGenerations(outputGenRaw);
 
         mimicree.simulate.SimulationFramework mimframe= new mimicree.simulate.SimulationFramework(haplotypeFile,inversionFile,recombinationFile,chromosomeDefinition,
-        		additiveFile,epistasisFile,outputDir,outputGen,replicateRuns,threads,logger);
+        		additiveFile,epistasisFile,outputDir,outputGen,replicateRuns,logger);
         
         mimframe.run();
 	}

@@ -60,6 +60,22 @@ public class AdditiveSNP {
 	}
 	
 	
+	public char w11Char()
+	{
+		return this.w11char;
+	}
+	
+	public double s()
+	{
+		return this.s;
+	}
+
+	public double h()
+	{
+		return this.h;
+	}
+	
+	
 	
 	
 }

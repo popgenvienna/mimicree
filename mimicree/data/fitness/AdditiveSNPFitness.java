@@ -9,10 +9,16 @@ import mimicree.data.*;
  */
 public class AdditiveSNPFitness {
 	private final ArrayList<AdditiveSNP> additiveSNPs;
+	private final HashMap<GenomicPosition,AdditiveSNP> pos2add;
 	
 
 	public AdditiveSNPFitness(ArrayList<AdditiveSNP> addSnps)
 	{
+		this.pos2add=new HashMap<GenomicPosition,AdditiveSNP>();
+		for(AdditiveSNP as: addSnps)
+		{
+			pos2add.put(as.getPosition(), as);
+		}
 		this.additiveSNPs=new ArrayList<AdditiveSNP>(addSnps);
 	}
 
@@ -33,6 +39,18 @@ public class AdditiveSNPFitness {
 			toret*=tmpfitness;
 		}
 		return toret;
+	}
+	
+	
+	/**
+	 * Get the additive SNP for a given position
+	 * @param position
+	 * @return
+	 */
+	public AdditiveSNP getAdditiveforPosition(GenomicPosition position)
+	{
+		if(!this.pos2add.containsKey(position)) return null;
+		return this.pos2add.get(position);
 	}
 	
 	

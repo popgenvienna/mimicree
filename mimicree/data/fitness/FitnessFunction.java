@@ -53,5 +53,14 @@ public class FitnessFunction {
 		double fitness=addi*epi;
 		return new Specimen(fitness,addi,epi,genome);
 	}
+	
+	public AdditiveSNPFitness getAdditiveSNPFitness()
+	{
+		return this.addFitness;
+	}
+	public EpistaticSNPFitness getEpistaticSNPFitness()
+	{
+		return this.epiFitness;
+	}
 
 }

@@ -45,7 +45,6 @@ class SinglePop:
 		>>> SinglePop(2,2,0,0,0,0).issnp(1)
 		1
 		"""
-		
 		alcount=self.count_alleles(mincount)
 		if(alcount>1):
 			return 1

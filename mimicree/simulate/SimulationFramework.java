@@ -2,9 +2,6 @@ package mimicree.simulate;
 
 
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.io.File;
 import mimicree.data.*;
 import mimicree.data.fitness.*;
@@ -22,11 +19,11 @@ public class SimulationFramework {
 	private final String outputDir;
 	private final ArrayList<Integer> outputGenerations;
 	private final int replicateRuns;
-	private final int threads;
+
 
 	private final java.util.logging.Logger logger;
 	public SimulationFramework(String haplotypeFile, String inversionFile, String recombinationFile, String chromosomeDefinition, String additiveFile, String epistasisFile,
-			String outputDir, ArrayList<Integer> outputGenerations, int replicateRuns,int threads, java.util.logging.Logger logger)
+			String outputDir, ArrayList<Integer> outputGenerations, int replicateRuns, java.util.logging.Logger logger)
 	{
 		// 'File' represents files and directories
 		// Test if input files exist
@@ -44,8 +41,7 @@ public class SimulationFramework {
 		if(!(tmaxgeneration>0)) throw new IllegalArgumentException("Runtime of the simulations must be >0 simulations; Provided by user "+tmaxgeneration);
 		// te
 		if(!(replicateRuns>0)) throw new IllegalArgumentException("At least one replicate run should be provided; Provided by the user "+replicateRuns);
-		if(!(threads>0)) throw new IllegalArgumentException("Number of threads needs to be larger than zero");
-		
+			
 		this.haplotypeFile=haplotypeFile;
 		this.inversionFile=inversionFile;
 		this.recombinationFile=recombinationFile;
@@ -56,7 +52,7 @@ public class SimulationFramework {
 		this.outputGenerations=new ArrayList<Integer>(outputGenerations);
 		this.replicateRuns=replicateRuns;
 		this.logger=logger;
-		this.threads=threads;
+
 	}
 	
 	
