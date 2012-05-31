@@ -73,6 +73,10 @@ public class MimicrEE {
         {
         	mimicree.analysis.hap2sync.Hap2SyncParser.parseCommandline(logger, arguments);
         }
+        else if(mode.equals("hap2sum"))
+        {
+        	mimicree.analysis.hap2sum.Hap2SumParser.parseCommandline(logger, arguments);
+        }
         else
         {
         	throw new IllegalArgumentException("Do not recognise analysis mode "+mode);
