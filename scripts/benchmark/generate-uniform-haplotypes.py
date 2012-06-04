@@ -61,11 +61,8 @@ for line in open(input):
 	genotypes=[]
 	for i in range(0,popsize):
 		gen=""
-		r1=int(random.random()*len(ar))
-		gen+=ar.pop(r1)
-
-		r2=int(random.random()*len(ar))
-		gen+=ar.pop(r2)
+		gen+=ar.pop()
+		gen+=ar.pop()
 		genotypes.append(gen)
 	topr.append(" ".join(genotypes))
 
