@@ -35,7 +35,7 @@ for s in SumReader(options.sum):
 				if(correct):
 					stat[i]['selcorrect']+=1
 			else:
-				stat[i]['nonselected']
+				stat[i]['nonselected']+=1
 
 
 keys=sorted(list(keyset))
