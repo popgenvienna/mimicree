@@ -1,10 +1,12 @@
 import sys
 import random
 import collections
+import os
 from optparse import OptionParser, OptionGroup
 import re
 from RInterface import *
 from Fitness import FitnessReader
+from Additive import AdditiveEffectUtil
 
 # MimicrEE package
 # Author: Dr. Robert Kofler
@@ -32,7 +34,7 @@ def format_rfile(rFile,outputFile, toprocess, maxFitness):
 	x<-{0}
 	f<-factor({1})
 	pdf("{2}",width=15)
-	boxplot(x~f)
+	boxplot(x~f,log="y")
 	lines({3},type="l",lty=2)
 	dev.off()
 	""".format(x,f,outputFile,mf)
@@ -46,13 +48,19 @@ parser.add_option("--additive", 	dest="additive",help="The additive effect")
 parser.add_option("--output",		dest="output",help="the output file")
 (options, args) = parser.parse_args()
 
-tempr="temp.R"
+outputFile=os.path.abspath(options.output)
+dir=os.path.dirname(outputFile)
+
+tempr=os.path.join(dir,"temp.R")
 
 toprocess=[]
 for file in options.fitnessfile:
 	red=FitnessReader.readFile(file)
 	toprocess.append(red)
+	
+
+maxfit=AdditiveEffectUtil.get_maxfitness(AdditiveEffectUtil.read_effect_file(options.additive))
 
 
-format_rfile(tempr,options.output,toprocess,10000)
+format_rfile(tempr,outputFile,toprocess,maxfit)
 RUtility.run(tempr)

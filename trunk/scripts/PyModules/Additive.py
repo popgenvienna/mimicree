@@ -30,13 +30,20 @@ class AdditiveEffect:
 class AdditiveEffectUtil:
 	
 	@classmethod
-	def get_effects(cls,inputfile):
+	def get_maxfitness(cls,effects):
+		fit=1.0
+		for e in effects:
+			fit*=e.maxfitness
+		return fit
+	
+	@classmethod
+	def read_effect_file(cls,inputfile):
 		toret=[]
 		for line in open(inputfile):
 			line=line.rstrip()
 			a=line.split("\t");
 			ae=AdditiveEffect(a[0],int(a[1]),a[2],float(a[3]),float(a[4]))
-			toret.append(a)
+			toret.append(ae)
 		return toret
 	
 	@classmethod
