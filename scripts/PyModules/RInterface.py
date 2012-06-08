@@ -3,7 +3,7 @@
 import sys
 import collections
 import math
-import subprocess
+import commands
 
 
 class RUtility:
@@ -14,8 +14,10 @@ class RUtility:
 		run the following R file
 		"""
 		
-		command="R --vanilla --slave < "+ rfile
-		subprocess.call(command)
+		command="R --vanilla --slave <"+ rfile
+
+		#print command
+		commands.getstatusoutput(command)
 
 class RFormat:
 	@classmethod
