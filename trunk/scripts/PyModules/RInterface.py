@@ -22,5 +22,6 @@ class RUtility:
 class RFormat:
 	@classmethod
 	def get_vector(cls,values):
-		t="c("+ ",".join(values)+")"
+		conv=[str(i) for i in values]
+		t="c("+ ",".join(conv)+")"
 		return t
