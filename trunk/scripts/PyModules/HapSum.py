@@ -126,17 +126,12 @@ class SumReader:
 	def __iter__(self):
 		return self
 	
-	def next(self):
-		line=""
-		# 3R      13094319        A       A/G     G:-0.1:0.5              250:250 216:284 287:213 407:93  422:78  464:36  469:31  482:18  481:19  492:8   492:8
-		while(1):
-			line=self.__filehandle.readline()
-			if line=="":
-				raise StopIteration
-			line=line.rstrip('\n')
-			if line != "":
-				break
-		
+	@classmethod
+	def parseLines(cls,lines):
+		return [SumReader.parseLine(l) for l in lines]
+
+	@classmethod
+	def parseLine(cls,line):
 		a     = line.split()
 		chr   = a.pop(0)
 		pos   = int(a.pop(0))
@@ -162,6 +157,18 @@ class SumReader:
 			snpshots.append(t)
 		# (self,chromosome, position, refChar, majorAllele,minorAllele, selected,s,h,snpshots):
 		return SNPSuccession(chr,pos,refc,majChar,minChar,selected,s,h,snpshots)
+	
+	def next(self):
+		line=""
+		# 3R      13094319        A       A/G     G:-0.1:0.5              250:250 216:284 287:213 407:93  422:78  464:36  469:31  482:18  481:19  492:8   492:8
+		while(1):
+			line=self.__filehandle.readline()
+			if line=="":
+				raise StopIteration
+			line=line.rstrip('\n')
+			if line != "":
+				break
+		return self.parseLine(line)
 		
 	
 
