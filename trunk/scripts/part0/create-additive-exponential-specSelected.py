@@ -15,16 +15,16 @@ import re
 
 class RandSelGen:
 	def __init__(self,smin,smax):
-		min=1/(-1*smin)
-		max=1/(-1*smax)
-		range=max-min
-		self.__shift=min
-		self.__range=range
+		minv = 1 / (-1*smin)
+		maxv = 1 / (-1*smax)
+		range = maxv - minv
+		self.__shift = minv
+		self.__range = range
 	
 	def getRandSel(self):
-		r=(random.random()*self.__range)+self.__shift
-		ps=1/r
-		return -1*ps
+		r=(random.random() *self.__range )+self.__shift
+		ps = 1/r
+		return -1 *ps
 		
 
 parser = OptionParser()
@@ -58,7 +58,7 @@ for gt in randgentypes:
 	topr.append(gt.chrom)
 	topr.append(str(gt.position))
 	topr.append(w11char)
-	topr.append(str(rand.getRandSel))
+	topr.append(str(rand.getRandSel()))
 	topr.append(str(heteffect))
 	ofh.write("\t".join(topr)+"\n")
 	
