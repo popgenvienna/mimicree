@@ -11,6 +11,7 @@ import mimicree.data.BitArray.*;
 import mimicree.data.recombination.RandomAssortment;
 import mimicree.data.fitness.*;
 
+
 public class SharedDataFactory {
 	
 	// Logger
@@ -213,6 +214,30 @@ public class SharedDataFactory {
 	public static AdditiveSNP getAdditiveSNP_domW11()
 	{
 		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2L"),6),'A',-0.1,0.0);
+	}
+	
+	public static EpistaticSNP getEpistaticSNP_syn1()
+	{
+		ArrayList<EpistaticSubeffectSNP> es=new ArrayList<EpistaticSubeffectSNP>();
+		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'A'));
+		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2R"),1),'C'));
+		return new EpistaticSNP("pff",-0.1,es);
+	}
+	
+	public static EpistaticSNP getEpistaticSNP_syn2()
+	{
+		ArrayList<EpistaticSubeffectSNP> es=new ArrayList<EpistaticSubeffectSNP>();
+		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'T'));
+		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2R"),10),'G'));
+		return new EpistaticSNP("pff",-0.1,es);
+	}
+	
+	public static EpistaticSNP getEpistaticSNP_syn3()
+	{
+		ArrayList<EpistaticSubeffectSNP> es=new ArrayList<EpistaticSubeffectSNP>();
+		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'A'));
+		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2R"),10),'G'));
+		return new EpistaticSNP("pff",-0.1,es);
 	}
 	
 	/**

@@ -18,6 +18,15 @@ public class EpistaticSNP {
 	{
 		this.name=name;
 		this.s=s;
+		
+		// Check if the EpistaticSubeffectSNPs are unique
+		HashSet<GenomicPosition> posset=new HashSet<GenomicPosition>();
+		for(EpistaticSubeffectSNP e:epiSNPs)
+		{
+			if(posset.contains(e.position())) throw new IllegalArgumentException("Every SNP may only be present once for epistatic effects");
+			posset.add(e.position());
+		}
+		
 		this.epiSNPs=new ArrayList<EpistaticSubeffectSNP>(epiSNPs);
 	}
 	
