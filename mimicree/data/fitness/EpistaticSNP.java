@@ -79,7 +79,26 @@ public class EpistaticSNP {
 	{
 		return this.name;
 	}
+	
+	public double s()
+	{
+		return this.s;
+	}
 
+	public ArrayList<EpistaticSubeffectSNP> getEpistaticSubeffectSNPs()
+	{
+		return new ArrayList<EpistaticSubeffectSNP>(this.epiSNPs);
+	}
+	
+	
+	public EpistaticSubeffectSNP getEpistaticSubeffectSNP(GenomicPosition position)
+	{
+		for(EpistaticSubeffectSNP es: this.epiSNPs)
+		{
+			if(position.equals(es.position()))return es;
+		}
+		return null;
+	}
 }
 
 
