@@ -81,15 +81,49 @@ public class SumWriter {
 	{
 		AdditiveSNPFitness af=ff.getAdditiveSNPFitness();
 		AdditiveSNP as=af.getAdditiveforPosition(pos);
+		ArrayList<EpistaticSNP> episnps=ff.getEpistaticSNPFitness().getEpistaticSNP(pos);
+		
+		if(as==null || episnps.size()==0) return ".";
+		
+		ArrayList<String> effects=new ArrayList<String>();
 		if(as!=null)
 		{
 			StringBuilder sb=new StringBuilder();
+			sb.append("A=");
 			sb.append(as.w11Char()); 	sb.append(':');
 			sb.append(as.s()); 			sb.append(':');
 			sb.append(as.h());
-			return sb.toString();
+			effects.add(sb.toString());
 		}
-		return ".";
+		
+		for(EpistaticSNP e: episnps)
+		{
+			effects.add(formatEpistaticEffect(e,pos));
+		}
+		
+		String toret=effects.get(0);
+		if(effects.size()>1)
+		{
+			for(int i=1; i<effects.size(); i++)
+			{
+				toret=toret+";"+effects.get(i);
+			}
+		}
+		return toret;
+		
+	}
+	
+	private String formatEpistaticEffect(EpistaticSNP e, GenomicPosition pos)
+	{
+		EpistaticSubeffectSNP esub=e.getEpistaticSubeffectSNP(pos);
+		if(esub==null) throw new IllegalArgumentException("Invalid state during writing of epistatic effects; no epistatic effect found for valid position");
+		StringBuilder sb=new StringBuilder();
+		sb.append("E=");
+		sb.append(esub.epistaticChar()); sb.append(':');
+		sb.append(e.name()); sb.append(':');
+		sb.append(e.s());
+		
+		return sb.toString();
 	}
 	
 	private String formatSinglePop(PopulationAlleleCount p, int index){
