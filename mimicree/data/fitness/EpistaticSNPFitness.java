@@ -13,8 +13,12 @@ public class EpistaticSNPFitness {
 	
 	public EpistaticSNPFitness(ArrayList<EpistaticSNP> epiSNPs)
 	{
+		// Every epistatic effect has to have at least two SNPs
+		if(epiSNPs.size()<2) throw new IllegalArgumentException("At least two SNPs are required for an epistatic SNP");
+		
 		this.epiSNPs=new ArrayList<EpistaticSNP>(epiSNPs);
 		
+	
 		pos2epi=new HashMap<GenomicPosition,ArrayList<EpistaticSNP>>();
 		for(EpistaticSNP esnp:epiSNPs)
 		{

@@ -83,7 +83,7 @@ public class SumWriter {
 		AdditiveSNP as=af.getAdditiveforPosition(pos);
 		ArrayList<EpistaticSNP> episnps=ff.getEpistaticSNPFitness().getEpistaticSNP(pos);
 		
-		if(as==null || episnps.size()==0) return ".";
+		if(as==null && episnps.size()==0) return ".";
 		
 		ArrayList<String> effects=new ArrayList<String>();
 		if(as!=null)

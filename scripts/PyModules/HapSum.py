@@ -3,6 +3,7 @@
 import sys
 import collections
 import math
+import re
 
 
 class SNPshot:
@@ -38,6 +39,17 @@ class SNPshot:
 	@property
 	def minorFrequency(self):
 		return float(self.__minor)/float(self.__coverage)
+		
+	
+	def selectedFrequency(self,snpsuc):
+		if(not snpsuc.isSelected):
+			return None
+		if(snpsuc.isMajorSelected):
+			return self.majorFrequency
+		else:
+			return self.minorFrequency
+		raise Exception("not implemented")
+		return None
 	
 	@property
 	def isFixed(self):
@@ -58,57 +70,49 @@ class SNPshot:
 		return False
 
 
-
 class SNPSuccession:
+	def __init__(self,snp,snpshots):
+		self.__snp=snp
+		self.__snpshots=snpshots
+	
+	@property
+	def isSelected(self):
+		return self.__snp.isSelected
+	
+	def snp(self):
+		return self.__snp
+	
+	@property
+	def snpshots(self):
+		return self.__snpshots
+	
+	@property
+	def countSnpshots(self):
+		return len(self.__snpshots)
+	
+	def freqOfSelected(self,index):
+		if(not self.__snp.isSelected):
+			return None
+		act=self.__snpshots[index]
+		if(self.__snp.isMajorSelected):
+			return act.majorFrequency
+		else:
+			return act.minorFrequency
+
+
+class SNP:
 	
 	#3R      13094319        A       A/G     G:-0.1:0.5              250:250 216:284 287:213 407:93  422:78  464:36  469:31  482:18  481:19  492:8   492:8
-	def __init__(self,chromosome, position, refChar, majorAllele,minorAllele, w11,s,h,snpshots):
+	def __init__(self,chromosome, position, refChar, majorAllele,minorAllele, isSelected, isMajorSelected,comment):
 		self.chr = chromosome
 		self.pos   = position
 		self.refChar    = refChar
 		self.majorAllele= majorAllele
 		self.minorAllele= minorAllele
-		self.w11   = w11
-		self.s = s
-		self.h = h
-		self.snpshots   = snpshots
-		
-	@property
-	def isSelected(self):
-		if(self.w11 is None):
-			return False
-		return True
-	
+		self.isMajorSelected=isMajorSelected
+		self.isSelected=isSelected
+		self.comment=comment
 
-	@property
-	def posSelectedAllele(self):
-		"""
-		Return the positively selected allele
-		"""
-		if(not self.isSelected or math.fabs(self.s)<0.00000000001):
-			return None
-		if(self.majorAllele==self.w11):
-			if(self.s < 0.0):
-				# A/G   A:-.1 -> A=1.0 G=1.1
-				return self.minorAllele
-			else:
-				# A/G  A:0.1 -> A=1.0 G=0.9
-				return self.majorAllele
-		elif(self.minorAllele==self.w11):
-			if(self.s < 0.0):
-				# A/G G:-.1 -> G=1.0 A=1.1
-				return  self.majorAllele
-			else:
-				return self.minorAllele
-		else:
-			raise ValueError("impossible state")
-	
-	@property
-	def isMajorSelected(self):
-		posAllele=self.posSelectedAllele
-		if(posAllele==self.majorAllele):
-			return True
-		return False
 
 
 class SumReader:
@@ -138,15 +142,13 @@ class SumReader:
 		refc  = a.pop(0)
 		b     = a.pop(0)
 		majChar,minChar=b.split("/")
-		c     = a.pop(0)
-		selected=None
-		s=0.0
-		h=0.0
-		if(c !="."):
-			d=c.split(":")
-			selected = d[0]
-			s        = float(d[1])
-			h        = float(d[2])
+		rawComment     = a.pop(0)
+		comParse=CommentParser(rawComment,majChar)
+		comment=comParse.comment
+		isSel=comParse.isSelected
+		isMajSel=comParse.isMajorSelected
+		# def __init__(self,chromosome, position, refChar, majorAllele,minorAllele, isSelected, isMajorSelected,comment):
+		snp=SNP(chr,pos,refc,majChar,minChar,isSel,isMajSel,comment)
 		
 		snpshots=[]
 		for p in a:
@@ -156,7 +158,7 @@ class SumReader:
 			t=SNPshot(majCount,minCount)
 			snpshots.append(t)
 		# (self,chromosome, position, refChar, majorAllele,minorAllele, selected,s,h,snpshots):
-		return SNPSuccession(chr,pos,refc,majChar,minChar,selected,s,h,snpshots)
+		return SNPSuccession(snp,snpshots)
 	
 	def next(self):
 		line=""
@@ -170,5 +172,83 @@ class SumReader:
 				break
 		return self.parseLine(line)
 		
+
+class CommentParser:
+	def __init__(self,raw,majorAllele):
+		self.__raw=raw
+		self.__majorAllele=majorAllele
 	
+	@property
+	def comment(self):
+		return self.__raw
+	
+	@property
+	def isSelected(self):
+		if(self.__raw=="."):
+			return False
+		else:
+			return True
+	
+	@property
+	def isMajorSelected(self):
+		if(not self.isSelected):
+			return None
+		if(";" in self.__raw):
+			raise Exception("multiple selections acting on a single SNP are not supported")
+		if(self.__raw.startswith("A=")):
+			return self.__parseAdditive()
+		elif(self.__raw.startswith("E=")):
+			return self.__parseEpistasis()
+		else:
+			raise Exception("Effect not supported")
+			
+	
+	def __parseEpistasis(self):
+		"""
+		E=T:name:s
+		"""
+		raw=re.sub(r'E=','',self.__raw)
+		a=raw.split(':')
+		eChar=a[0]
+		s=float(a[2])
+		majChar=self.__majorAllele
+		if(majChar==eChar):
+			if(s<0.0):
+				# A/G A:-0.1 	A=1.1	G=1.0
+				return True
+			else:
+				# A/G A:0.1	A=0.9  G=1.0
+				return False
+		else:
+			if(s<0.0):
+				return False
+			else:
+				return True
+			
+
+	def __parseAdditive(self):
+		"""
+		Is the major allele selected
+		A=T:s:h
+		"""
+		raw=re.sub(r'A=','',self.__raw)
+		a=raw.split(':')
+		w11=a[0]
+		s=float(a[1])
+		majChar=self.__majorAllele
+		
+		if(majChar==w11):
+			if(s < 0.0):
+				# A/G   A:-.1 -> A=1.0 G=1.1
+				return False
+			else:
+				# A/G  A:0.1 -> A=1.0 G=0.9
+				return True
+		else:
+			if(s < 0.0):
+				# A/G G:-.1 -> G=1.0 A=1.1
+				return  True
+			else:
+				return False
+
 
