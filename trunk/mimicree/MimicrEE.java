@@ -18,6 +18,7 @@ public class MimicrEE {
 
 	/**
 	 * @param args
+	 * --mode simulate --haplotypes-g0 /Users/robertkofler/dev/MimicrEE/data/equi-haplotypes.small.hap  --inversions-g0 /Users/robertkofler/dev/MimicrEE/data/equi-inversions.inv --recombination-rate /Users/robertkofler/dev/MimicrEE/data/recombination.txt --additive /Users/robertkofler/dev/MimicrEE/data/additive-uniform.txt --epistasis /Users/robertkofler/dev/MimicrEE/data/epistatic-uniform.txt --output-generations 10,15,20,25 --replicate-runs 2 --output-dir /Users/robertkofler/dev/MimicrEE/data/output --detailed-log --chromosome-definition '2=2L+2R,3=3L+3R' --threads 8
 	 */
 	public static void main(String[] args) 
 	{

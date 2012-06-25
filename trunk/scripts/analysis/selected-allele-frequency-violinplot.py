@@ -60,17 +60,8 @@ stat=collections.defaultdict(lambda:[])
 for hs in SumReader(options.sum):
 	if not hs.isSelected:
 		continue
-	ismaj=hs.isMajorSelected
-	ss=hs.snpshots
-	temp=[]
-	for i in range(0,len(ss)):
-		active=ss[i]
-		freq=0.0
-		if(ismaj):
-			freq=active.majorFrequency
-		else:
-			freq=active.minorFrequency
-		stat[i].append(freq)
+	for i in range(0,hs.countSnpshots):
+		stat[i].append(hs.freqOfSelected(i))
 
 toprocess=[]
 for i in sorted(stat.keys()):
