@@ -53,12 +53,13 @@ public class FitnessWriter {
 		
 		for(int i=0,counter=1; i<specimens.size(); i++,counter++)
 		{
+
 			Specimen s=specimens.get(i);
 			StringBuilder sb=new StringBuilder();
 			sb.append(counter);sb.append('\t');
-			sb.append(s.fitness()); sb.append('\t');
-			sb.append(s.additiveFitness()); sb.append('\t');
-			sb.append(s.epistaticFitness());
+			sb.append(Math.log10(s.fitness())); sb.append('\t');
+			sb.append(Math.log10(s.additiveFitness())); sb.append('\t');
+			sb.append(Math.log10(s.epistaticFitness()));
 			try
 			{
 				bf.write(sb.toString()+"\n");
