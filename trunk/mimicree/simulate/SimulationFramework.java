@@ -17,13 +17,13 @@ public class SimulationFramework {
 	private final String additiveFile;
 	private final String epistasisFile;
 	private final String outputDir;
-	private final ArrayList<Integer> outputGenerations;
+	private final SimulationMode simMode;
 	private final int replicateRuns;
 
 
 	private final java.util.logging.Logger logger;
 	public SimulationFramework(String haplotypeFile, String inversionFile, String recombinationFile, String chromosomeDefinition, String additiveFile, String epistasisFile,
-			String outputDir, ArrayList<Integer> outputGenerations, int replicateRuns, java.util.logging.Logger logger)
+			String outputDir, SimulationMode simMode, int replicateRuns, java.util.logging.Logger logger)
 	{
 		// 'File' represents files and directories
 		// Test if input files exist
@@ -32,14 +32,6 @@ public class SimulationFramework {
 		// Test if output directory exists
 		if(! new File(outputDir).exists()) throw new IllegalArgumentException("Output directory does not exist " + outputDir);
 		
-		// simulations should be done for 'n' generations
-		int tmaxgeneration=0;
-		for(int i: outputGenerations)
-		{
-			if(i>tmaxgeneration) tmaxgeneration=i;
-		}
-		if(!(tmaxgeneration>0)) throw new IllegalArgumentException("Runtime of the simulations must be >0 simulations; Provided by user "+tmaxgeneration);
-		// te
 		if(!(replicateRuns>0)) throw new IllegalArgumentException("At least one replicate run should be provided; Provided by the user "+replicateRuns);
 			
 		this.haplotypeFile=haplotypeFile;
@@ -49,7 +41,7 @@ public class SimulationFramework {
 		this.additiveFile=additiveFile;
 		this.epistasisFile=epistasisFile;
 		this.outputDir=outputDir;
-		this.outputGenerations=new ArrayList<Integer>(outputGenerations);
+		this.simMode=simMode;
 		this.replicateRuns=replicateRuns;
 		this.logger=logger;
 
@@ -69,10 +61,25 @@ public class SimulationFramework {
 		// Create initial population
 		Population population=Population.loadPopulation(dipGenomes, fitnessFunction);
 		
+		ISingleSimulation sim;
+		if(simMode == SimulationMode.Timestamp)
+		{
+			sim=new SingleSimulationTimestamp(population,fitnessFunction,recGenerator,this.outputDir,simMode.getTimestamps(),this.logger);
+		}
+		else if(simMode== SimulationMode.FixSelected)
+		{
+			sim=new SingleSimulationFixSelected(population,fitnessFunction,recGenerator,this.outputDir,simMode.getTimestamps().get(0),this.logger);
+		}
+		else
+		{
+			throw new IllegalArgumentException("Invalid simulation mode");
+		}
+		
+		
 		// Running the replicates
 		for(int i=0; i<this.replicateRuns; i++)
 		{
-			new SingleSimulation(i+1,population,fitnessFunction,recGenerator,this.outputDir,this.outputGenerations,this.logger).run();
+			sim.run(i+1);
 		}
 		
 		this.logger.info("Finished simulations");

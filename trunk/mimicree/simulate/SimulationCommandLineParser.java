@@ -78,10 +78,10 @@ public class SimulationCommandLineParser {
         }
     
         // Parse the string with the generations
-        ArrayList<Integer> outputGen = parseOutputGenerations(outputGenRaw);
+        SimulationMode simMode = parseOutputGenerations(outputGenRaw);
 
         mimicree.simulate.SimulationFramework mimframe= new mimicree.simulate.SimulationFramework(haplotypeFile,inversionFile,recombinationFile,chromosomeDefinition,
-        		additiveFile,epistasisFile,outputDir,outputGen,replicateRuns,logger);
+        		additiveFile,epistasisFile,outputDir,simMode,replicateRuns,logger);
         
         mimframe.run();
 	}
@@ -105,26 +105,45 @@ public class SimulationCommandLineParser {
 	}
 	
 	
-	public static ArrayList<Integer> parseOutputGenerations(String outputGenerationsRaw)
+	public static SimulationMode parseOutputGenerations(String outputGenerationsRaw)
 	{
 		// Parse a String consistent of a comma-separated list of numbers, to a array of integers
-		ArrayList<Integer> toret=new ArrayList<Integer>();
-		String [] tmp;
-		if(outputGenerationsRaw.contains(","))
+		SimulationMode simMode;
+
+		if(outputGenerationsRaw.startsWith("fixselected"))
 		{
-			tmp=outputGenerationsRaw.split(",");
+			String[] tmp=outputGenerationsRaw.split("fixselected");
+			int allTimestamp=Integer.parseInt(tmp[1]);
+			simMode=SimulationMode.FixSelected;
+			ArrayList<Integer> ti=new ArrayList<Integer>();
+			ti.add(allTimestamp);
+			simMode.setTimestamps(ti);
+			
 		}
 		else
 		{
-			tmp=new String[1];
-			tmp[0]=outputGenerationsRaw;
+			String [] tmp;
+			if(outputGenerationsRaw.contains(","))
+			{
+				tmp=outputGenerationsRaw.split(",");
+			}
+			else
+			{
+				tmp=new String[1];
+				tmp[0]=outputGenerationsRaw;
+			}
+			// Convert everything to int
+			ArrayList<Integer> ti=new ArrayList<Integer>();
+			for(String s :tmp)
+			{
+				ti.add(Integer.parseInt(s));
+			}
+			simMode=SimulationMode.Timestamp;
+			simMode.setTimestamps(ti);
 		}
+
 		
-		// Convert everything to int
-		for(String s :tmp)
-		{
-			toret.add(Integer.parseInt(s));
-		}
-		return toret;
+
+		return simMode;
 	}
 }
