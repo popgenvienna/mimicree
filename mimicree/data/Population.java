@@ -9,7 +9,7 @@ import mimicree.data.recombination.*;
 import mimicree.data.fitness.FitnessFunction;
 import mimicree.data.fitness.MatingFunction;
 import mimicree.misc.MimicreeThreadPool;
-import mimicree.simulate.SingleSimulation;
+import mimicree.simulate.SingleSimulationTimestamp;
 
 /**
  * A population
@@ -88,6 +88,10 @@ public class Population {
 		return this.specimen.size();
 	}
 			
+	public boolean areSelectedFixed()
+	{
+		return true;
+	}
 	
 }
 
