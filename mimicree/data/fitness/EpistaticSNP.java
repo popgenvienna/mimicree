@@ -67,7 +67,7 @@ public class EpistaticSNP {
 	{
 		if(this.isPresent(genome))
 		{
-			return (1.0-this.s);
+			return (1.0 + this.s);
 		}
 		else
 		{
