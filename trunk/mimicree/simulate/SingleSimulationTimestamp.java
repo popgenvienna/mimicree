@@ -40,6 +40,9 @@ public class SingleSimulationTimestamp implements ISingleSimulation{
 	
 	public void run(int simulationNumber)
 	{
+		this.logger.info("Starting simulation replicate number " + simulationNumber);
+		this.logger.info("MimicrEE will proceed with forward simulations until generation " + this.maxGeneration);
+		
 		Population nextPopulation =this.population; 
 		// For the number of requested simulations get the next generation, and write it to file if requested
 		for(int i=1; i<=this.maxGeneration; i++)

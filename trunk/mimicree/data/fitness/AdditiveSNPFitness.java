@@ -41,6 +41,20 @@ public class AdditiveSNPFitness {
 		return toret;
 	}
 	
+	/**
+	 * Check if all additive SNPs are fixed
+	 * @param population
+	 * @return
+	 */
+	public boolean areAdditiveFixed(Population population)
+	{
+		for(AdditiveSNP as:this.additiveSNPs)
+		{
+			if(!population.isFixed(as.getPosition())) return false;
+		}
+		return true;
+	}
+	
 	
 	/**
 	 * Get the additive SNP for a given position

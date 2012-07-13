@@ -22,6 +22,11 @@ public class HaploidGenome {
 		return haplotype.getAllele(position);
 	}
 	
+	public boolean hasMajor(GenomicPosition position)
+	{
+		return haplotype.hasMajor(position);
+	}
+	
 	public Inversion getInversionAllele(GenomicPosition position)
 	{
 		return invHaplotype.getGenotype(position);

@@ -24,21 +24,28 @@ public class SingleSimulationFixSelected implements ISingleSimulation{
 		this.snapshot=snapshot;
 		this.logger=logger;
 		this.recGenerator=recGenerator;
-		
 	}
-	
 	
 	public void run(int simulationNumber)
 	{
+		this.logger.info("Starting simulation replicate number "+simulationNumber);
+		this.logger.info("MimicrEE will proceed with forward simulations until all selected SNPs are fixed, ");
+		this.logger.info(" - output files will be reported all "+ this.snapshot + " generations");
 		Population nextPopulation=this.population;
 		int counter=1;
-		while(!nextPopulation.areSelectedFixed())
+		while(!nextPopulation.areSelectedFixed(this.fitness))
 		{
 			this.logger.info("Processing generation "+counter+ " of replicate run "+simulationNumber);
 			nextPopulation=nextPopulation.getNextGeneration(this.fitness,this.recGenerator);
-			if(counter%snapshot==0) new PopulationWriter(nextPopulation,this.outputDir,counter,simulationNumber,this.logger).write();
+			if(counter % snapshot==0) new PopulationWriter(nextPopulation,this.outputDir,counter,simulationNumber,this.logger).write();
 			counter++;
 		}
+		
+		// Write the last one too 
+		counter--;
+		if(counter % snapshot!=0)new PopulationWriter(nextPopulation,this.outputDir,counter,simulationNumber,this.logger).write();
+		
+		
 
 	}
 }

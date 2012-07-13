@@ -18,8 +18,8 @@ public class MimicrEE {
 
 	/**
 	 * @param args
-	 * --mode simulate --haplotypes-g0 /Users/robertkofler/dev/MimicrEE/data/equi-haplotypes.small.hap  --inversions-g0 /Users/robertkofler/dev/MimicrEE/data/equi-inversions.inv --recombination-rate /Users/robertkofler/dev/MimicrEE/data/recombination.txt --additive /Users/robertkofler/dev/MimicrEE/data/additive-uniform.txt --epistasis /Users/robertkofler/dev/MimicrEE/data/epistatic-uniform.txt --output-generations 10,15,20,25 --replicate-runs 2 --output-dir /Users/robertkofler/dev/MimicrEE/data/output --detailed-log --chromosome-definition '2=2L+2R,3=3L+3R' --threads 8
-	 */
+	 * --mode simulate --haplotypes-g0 /Users/robertkofler/dev/MimicrEE/data/small/hap.small.g0 --additive /Users/robertkofler/dev/MimicrEE/data/small/additive-100 --threads 8 --recombination-rate /Users/robertkofler/dev/MimicrEE/data/small/rec4 --chromosome-definition '2=2L+2R,3=3L+3R'  --output-mode fixselected30 --replicate-runs 1 --output-dir /Users/robertkofler/dev/MimicrEE/data/output
+	 * 	 */
 	public static void main(String[] args) 
 	{
 
@@ -77,6 +77,10 @@ public class MimicrEE {
         else if(mode.equals("hap2sum"))
         {
         	mimicree.analysis.hap2sum.Hap2SumParser.parseCommandline(logger, arguments);
+        }
+        else if(mode.equals("rsquared"))
+        {
+        	mimicree.analysis.rsquared.RsquaredParser.parseCommandline(logger, arguments);
         }
         else
         {

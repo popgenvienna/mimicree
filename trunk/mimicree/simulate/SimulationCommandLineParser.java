@@ -55,7 +55,7 @@ public class SimulationCommandLineParser {
             {
             	chromosomeDefinition=args.remove(0);
             }
-            else if(cu.equals("--output-generations"))
+            else if(cu.equals("--output-mode"))
             {
             	outputGenRaw=args.remove(0);
             }
@@ -96,7 +96,9 @@ public class SimulationCommandLineParser {
 		sb.append("--additive					the additive fitness effect of SNPs\n");
 		sb.append("--epistasis					the epistatic fitness effect of SNPs\n");	
 		sb.append("--chromosome-definition		which chromosomes parts constitute a chromosome\n");
-		sb.append("--output-generations			a coma separated list of generations to output\n");
+		sb.append("--output-mod					either 1.) a coma separated list of generations to output\n");
+		sb.append("								or 2.) eg.: fixselected10; simulations will run until all selected loci are fixed\n");
+		sb.append("								(storing output all 10 generations)\n");
 		sb.append("--replicate-runs				how often should the simulation be repeated\n");
 		sb.append("--output-dir					the output directory\n");
 		sb.append(MimicrEE.getGeneralHelpmessage());
@@ -110,9 +112,9 @@ public class SimulationCommandLineParser {
 		// Parse a String consistent of a comma-separated list of numbers, to a array of integers
 		SimulationMode simMode;
 
-		if(outputGenerationsRaw.startsWith("fixselected"))
+		if(outputGenerationsRaw.toLowerCase().startsWith("fixselected"))
 		{
-			String[] tmp=outputGenerationsRaw.split("fixselected");
+			String[] tmp=outputGenerationsRaw.toLowerCase().split("fixselected");
 			int allTimestamp=Integer.parseInt(tmp[1]);
 			simMode=SimulationMode.FixSelected;
 			ArrayList<Integer> ti=new ArrayList<Integer>();
