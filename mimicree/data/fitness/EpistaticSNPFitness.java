@@ -56,6 +56,23 @@ public class EpistaticSNPFitness {
 		
 		// Return the found epistatic effects
 		return new ArrayList<EpistaticSNP>(this.pos2epi.get(position));
+	} 
+	
+	/**
+	 * test if all SNPs involved in epistatic effects are fixed
+	 * @param population
+	 * @return
+	 */
+	public boolean areEpistaticFixed(Population population)
+	{
+		for(EpistaticSNP e: this.epiSNPs)
+		{
+			for(EpistaticSubeffectSNP esub: e.getEpistaticSubeffectSNPs())
+			{
+				if(!population.isFixed(esub.position())) return false;
+			}
+		}
+		return true;
 	}
 	
 	

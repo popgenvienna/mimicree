@@ -25,7 +25,6 @@ public class Hap2SumFramework {
 		
 		try
 		{
-        	
 			new FileWriter(outputFile);
         }
         catch(IOException e)

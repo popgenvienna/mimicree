@@ -53,6 +53,13 @@ public class Haplotype {
 		return haplotype.hasBit(index);
 	}
 	
+	
+	public boolean hasMajor(GenomicPosition position)
+	{
+		int index=snpcollection.getIndexforPosition(position);
+		return haplotype.hasBit(index);
+	}
+	
 	/**
 	 * Get the allele at a given index
 	 * @param index

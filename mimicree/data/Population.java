@@ -87,10 +87,24 @@ public class Population {
 	{
 		return this.specimen.size();
 	}
-			
-	public boolean areSelectedFixed()
+	
+	public boolean isFixed(GenomicPosition position)
 	{
-		return true;
+		int countMajor=0;
+		int hapCount=this.specimen.size()*2;
+		for(Specimen spec: this.specimen)
+		{
+			if(spec.getGenome().getHaplotypeA().hasMajor(position)) countMajor++;
+			if(spec.getGenome().getHaplotypeB().hasMajor(position)) countMajor++;
+		}
+		if(countMajor==0 || countMajor==hapCount) return true;
+		return false;
+	}
+	
+	public boolean areSelectedFixed(FitnessFunction fitness)
+	{
+		if(fitness.getAdditiveSNPFitness().areAdditiveFixed(this) && fitness.getEpistaticSNPFitness().areEpistaticFixed(this)) return true;
+		return false;
 	}
 	
 }
