@@ -24,6 +24,7 @@ public class SimulationCommandLineParser {
 		String outputGenRaw="";
 		String chromosomeDefinition="";
 		int replicateRuns=1;
+		boolean selectedOnly=false;
 
 	
 		
@@ -67,6 +68,10 @@ public class SimulationCommandLineParser {
             {
             	outputDir=args.remove(0);
             }
+            else if(cu.equals("--simulate-selected-only"))
+            {
+            	selectedOnly=true;
+            }
             else if(cu.equals("--help"))
             {
             	printHelpMessage();
@@ -81,7 +86,7 @@ public class SimulationCommandLineParser {
         SimulationMode simMode = parseOutputGenerations(outputGenRaw);
 
         mimicree.simulate.SimulationFramework mimframe= new mimicree.simulate.SimulationFramework(haplotypeFile,inversionFile,recombinationFile,chromosomeDefinition,
-        		additiveFile,epistasisFile,outputDir,simMode,replicateRuns,logger);
+        		additiveFile,epistasisFile,outputDir,simMode,replicateRuns,selectedOnly,logger);
         
         mimframe.run();
 	}

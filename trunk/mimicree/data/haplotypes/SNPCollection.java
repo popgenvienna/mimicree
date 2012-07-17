@@ -7,7 +7,6 @@ import mimicree.data.GenomicPosition;
  * Immutable representation of a collection of SNPs.
  * Provides functionality for fast element access via GenomicPosition
  * @author robertkofler
- *
  */
 public class SNPCollection {
 	private final ArrayList<SNP> mysnps;
@@ -97,7 +96,6 @@ public class SNPCollection {
 			SNP sort=sorted.get(i);
 			SNP usort=unsorted.get(i);
 			if((sort.genomicPosition().position() != usort.genomicPosition().position()) ||  (!sort.genomicPosition().chromosome().equals(usort.genomicPosition().chromosome())) ) return false;
-			
 		}
 		return true;
 	}

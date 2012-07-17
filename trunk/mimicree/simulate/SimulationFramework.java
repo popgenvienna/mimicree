@@ -19,11 +19,12 @@ public class SimulationFramework {
 	private final String outputDir;
 	private final SimulationMode simMode;
 	private final int replicateRuns;
+	private final boolean selectedOnly;
 
 
 	private final java.util.logging.Logger logger;
 	public SimulationFramework(String haplotypeFile, String inversionFile, String recombinationFile, String chromosomeDefinition, String additiveFile, String epistasisFile,
-			String outputDir, SimulationMode simMode, int replicateRuns, java.util.logging.Logger logger)
+			String outputDir, SimulationMode simMode, int replicateRuns, boolean selectedOnly, java.util.logging.Logger logger)
 	{
 		// 'File' represents files and directories
 		// Test if input files exist
@@ -43,8 +44,8 @@ public class SimulationFramework {
 		this.outputDir=outputDir;
 		this.simMode=simMode;
 		this.replicateRuns=replicateRuns;
+		this.selectedOnly=selectedOnly;
 		this.logger=logger;
-
 	}
 	
 	
@@ -54,19 +55,25 @@ public class SimulationFramework {
 
 		// Load the data
 		FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();
-		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readDiploidGenomes();
+		IDiploidGenomeReader reader=new mimicree.io.DiploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger);
+		// Decorator pattern, reading only the selected SNPs if requested
+		if(this.selectedOnly)reader=new mimicree.io.DiploidGenomeReaderSubfilterDecorator(reader, fitnessFunction.getSelectedPositions(), this.logger);
+		ArrayList<DiploidGenome> dipGenomes= reader.readGenomes();
 		RecombinationGenerator recGenerator = new RecombinationGenerator(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),
 				new ChromosomeDefinitionReader(this.chromosomeDefinition).getRandomAssortmentGenerator());
 		
 		// Create initial population
 		Population population=Population.loadPopulation(dipGenomes, fitnessFunction);
+		// Write initial population
+		this.logger.info("Writing base population to file");
+		new PopulationWriter(population,this.outputDir,0,0,this.logger).write();
 		
 		ISingleSimulation sim;
 		if(simMode == SimulationMode.Timestamp)
 		{
 			sim=new SingleSimulationTimestamp(population,fitnessFunction,recGenerator,this.outputDir,simMode.getTimestamps(),this.logger);
 		}
-		else if(simMode== SimulationMode.FixSelected)
+		else if(simMode == SimulationMode.FixSelected)
 		{
 			sim=new SingleSimulationFixSelected(population,fitnessFunction,recGenerator,this.outputDir,simMode.getTimestamps().get(0),this.logger);
 		}

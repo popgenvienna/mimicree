@@ -57,7 +57,6 @@ public class Population {
 		MatingFunction mf=MatingFunction.getMatingFunction(this);
 		SpecimenGenerator specGen=new SpecimenGenerator(mf,fitnessFunction,recGenerator,this.size());
 		return new Population(specGen.getSpecimen());
-		
 	}
 	
 	/**

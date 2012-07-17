@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 import mimicree.data.*;
 import java.util.*;
 
-public class DiploidGenomeReader {
+public class DiploidGenomeReader implements IDiploidGenomeReader {
 	private final String haplotypeFile;
 	private final String inversionFile;
 	private java.util.logging.Logger logger;
@@ -19,7 +19,7 @@ public class DiploidGenomeReader {
 	 * Read the diploid genomes as specified in the haplotypeFile and inversionFile
 	 * @return
 	 */
-	public ArrayList<DiploidGenome> readDiploidGenomes()
+	public ArrayList<DiploidGenome> readGenomes()
 	{
 		ArrayList<HaploidGenome> hapGenomes=new HaploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readHaploidGenomes();
 		ArrayList<DiploidGenome> dipGenomes=new ArrayList<DiploidGenome>();

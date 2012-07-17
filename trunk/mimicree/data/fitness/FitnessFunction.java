@@ -1,6 +1,7 @@
 package mimicree.data.fitness;
 
 import mimicree.data.*;
+import java.util.*;
 
 /**
  * Calculate the fitness 
@@ -61,6 +62,18 @@ public class FitnessFunction {
 	public EpistaticSNPFitness getEpistaticSNPFitness()
 	{
 		return this.epiFitness;
+	}
+	
+	/**
+	 * Get the positions of the selected SNPs
+	 * @return
+	 */
+	public ArrayList<GenomicPosition> getSelectedPositions()
+	{
+		HashSet<GenomicPosition> toret=new HashSet<GenomicPosition>();
+		toret.addAll(this.addFitness.getSelectedPositions());
+		toret.addAll(this.epiFitness.getSelectedPositions());
+		return new ArrayList<GenomicPosition>(toret);
 	}
 
 }

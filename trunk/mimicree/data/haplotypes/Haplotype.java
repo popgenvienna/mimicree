@@ -1,6 +1,10 @@
 package mimicree.data.haplotypes;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import mimicree.data.BitArray.BitArray;
+import mimicree.data.BitArray.BitArrayBuilder;
 import mimicree.data.GenomicPosition;
 
 /**
@@ -94,6 +98,32 @@ public class Haplotype {
 	public int size()
 	{
 		return this.haplotype.size();
+	}
+	
+	/**
+	 * Get a subset of the haplotypes consisting of the provided collection of SNPs
+	 * @param positions
+	 * @return
+	 */
+	public Haplotype getSubHaplotype(ArrayList<GenomicPosition> positions)
+	{
+		HashSet<GenomicPosition> filter =new HashSet<GenomicPosition>(positions);
+		
+		BitArrayBuilder bitBuilder=new BitArrayBuilder(filter.size());
+		ArrayList<SNP> filteredSNPs=new ArrayList<SNP>();
+		int newIndex=0;
+		for(int i=0; i<this.snpcollection.size(); i++)
+		{
+			SNP s=this.snpcollection.getSNPforIndex(i);
+			if(filter.contains(s.genomicPosition()))
+			{
+				filteredSNPs.add(s);
+				if(this.hasMajor(i)) bitBuilder.setBit(newIndex);
+				newIndex++;
+			}
+		}
+		
+		return new Haplotype(bitBuilder.getBitArray(),new SNPCollection(filteredSNPs));
 	}
 	
 }
