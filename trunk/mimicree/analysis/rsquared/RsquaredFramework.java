@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.util.*;
 
 import mimicree.data.DiploidGenome;
-import mimicree.data.statistic.*;
+import mimicree.io.misc.RsquaredWriter;
+import mimicree.data.LD.*;
+
+
 public class RsquaredFramework {
 	private final String inputFile;
 	private final String outputFile;
@@ -20,7 +23,6 @@ public class RsquaredFramework {
 		if(! new File(inputFile).exists()) throw new IllegalArgumentException("Haplotype file does not exist "+inputFile);
 		try
 		{
-        	
 			new FileWriter(outputFile);
         }
         catch(IOException e)
@@ -35,7 +37,8 @@ public class RsquaredFramework {
 	
 	public void run()
 	{
-		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.inputFile,"",this.logger).readDiploidGenomes();
+		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.inputFile,"",this.logger).readGenomes();
+		new RsquaredWriter(this.outputFile,this.logger).write(new RsquaredGenomeIterator(dipGenomes,this.maxDistance));
 		
 		
 	}

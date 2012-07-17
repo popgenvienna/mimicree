@@ -28,7 +28,7 @@ public class SimulationCommandLineParser {
 
 	
 		
-        while(args.size()>0)
+        while(args.size() > 0)
         {
             String cu=args.remove(0);
             
@@ -105,6 +105,7 @@ public class SimulationCommandLineParser {
 		sb.append("								or 2.) eg.: fixselected10; simulations will run until all selected loci are fixed\n");
 		sb.append("								(storing output all 10 generations)\n");
 		sb.append("--replicate-runs				how often should the simulation be repeated\n");
+		sb.append("--simulate-selected-only		perform simulations only for the selected SNPs\n");
 		sb.append("--output-dir					the output directory\n");
 		sb.append(MimicrEE.getGeneralHelpmessage());
 		System.out.print(sb.toString());
