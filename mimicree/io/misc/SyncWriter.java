@@ -29,7 +29,6 @@ public class SyncWriter {
 	
 	public void write(ArrayList<PopulationAlleleCount> pacs)
 	{
-		
 		assert(pacs.size()>0);
 		this.logger.info("Writing haplotypes into synchronized file "+this.outputFile);
 		SNPCollection snpcol=pacs.get(0).getSNPCollection();

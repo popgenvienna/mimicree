@@ -67,5 +67,10 @@ public class AdditiveSNPFitness {
 		return this.pos2add.get(position);
 	}
 	
+	public ArrayList<GenomicPosition> getSelectedPositions()
+	{
+		return new ArrayList<GenomicPosition>(new HashSet<GenomicPosition>(this.pos2add.keySet()));
+	}
+	
 	
 }

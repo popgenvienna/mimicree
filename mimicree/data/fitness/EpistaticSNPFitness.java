@@ -75,6 +75,15 @@ public class EpistaticSNPFitness {
 		return true;
 	}
 	
+	/**
+	 * Get the positions of the selected SNPs
+	 * @return
+	 */
+	public ArrayList<GenomicPosition> getSelectedPositions()
+	{
+		return new ArrayList<GenomicPosition>(new HashSet<GenomicPosition>(this.pos2epi.keySet()));
+	}
+	
 	
 	
 
