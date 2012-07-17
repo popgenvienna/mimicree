@@ -41,7 +41,7 @@ public class AnalyseFitnessFramework {
 	{
 		this.logger.info("Starting measuring of fitness of population from file "+this.haplotypeFile);
 		FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();
-		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.haplotypeFile,"",this.logger).readDiploidGenomes();
+		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.haplotypeFile,"",this.logger).readGenomes();
 		Population population=Population.loadPopulation(dipGenomes, fitnessFunction);
 		new FitnessWriter(this.outputFile,this.logger).write(population.getSpecimen());
 		this.logger.info("Finished measuring fitness");
