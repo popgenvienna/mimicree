@@ -21,7 +21,7 @@ public class DiploidGenomeReader implements IDiploidGenomeReader {
 	 */
 	public ArrayList<DiploidGenome> readGenomes()
 	{
-		ArrayList<HaploidGenome> hapGenomes=new HaploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readHaploidGenomes();
+		ArrayList<HaploidGenome> hapGenomes=new HaploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readGenomes();
 		ArrayList<DiploidGenome> dipGenomes=new ArrayList<DiploidGenome>();
 		for(int i=0; i<hapGenomes.size(); i+=2)
 		{
