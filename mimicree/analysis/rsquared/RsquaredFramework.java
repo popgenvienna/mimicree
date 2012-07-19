@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-import mimicree.data.DiploidGenome;
+import mimicree.data.HaploidGenome;
 import mimicree.io.misc.RsquaredWriter;
 import mimicree.data.LD.*;
 
@@ -29,6 +29,7 @@ public class RsquaredFramework {
         {
         	throw new IllegalArgumentException("Can not create output file:" +outputFile);
         }
+		if(maxDistance <1 ) throw new IllegalArgumentException("Invalid max-distance between two SNPs; must be larger than 1 (eg 10.000)");
 		this.maxDistance=maxDistance;
 		this.inputFile=inputFile;
 		this.outputFile=outputFile;
@@ -37,8 +38,8 @@ public class RsquaredFramework {
 	
 	public void run()
 	{
-		ArrayList<DiploidGenome> dipGenomes= new mimicree.io.DiploidGenomeReader(this.inputFile,"",this.logger).readGenomes();
-		new RsquaredWriter(this.outputFile,this.logger).write(new RsquaredGenomeIterator(dipGenomes,this.maxDistance));
+		ArrayList<HaploidGenome> genomes= new mimicree.io.HaploidGenomeReader(this.inputFile,"",this.logger).readGenomes();
+		new RsquaredWriter(this.outputFile,this.logger).write(new RsquaredGenomeIterator(genomes,this.maxDistance));
 		
 		
 	}

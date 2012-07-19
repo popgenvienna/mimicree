@@ -22,7 +22,7 @@ public class HaploidGenomeReader {
 	}
 	
 	
-	public ArrayList<HaploidGenome> readHaploidGenomes()
+	public ArrayList<HaploidGenome> readGenomes()
 	{
 		ArrayList<Haplotype> haps= new HaplotypeReader(this.haplotypeFile,this.logger).getHaplotypes();
 		ArrayList<InversionHaplotype> invs;

@@ -277,5 +277,116 @@ public class SharedDataFactory {
 		Specimen s=new Specimen(fitness,additiveFitness,1.0,genome);
 		return s;
 	}
+	
+	public static ArrayList<HaploidGenome> getHaploidGenomes_linked()
+	{
+		// public static SNP c1=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'A','A','T');
+		// public static SNP c2=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),2),'A','A','T');
+		// public static SNP c3=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),3),'A','A','T');
+		ArrayList<SNP> snps=new ArrayList<SNP>();
+		snps.add(c1); snps.add(c2); snps.add(c3);
+		SNPCollection sc=new SNPCollection(snps);
+		
+		ArrayList<HaploidGenome> genomes=new ArrayList<HaploidGenome>();
+		BitArrayBuilder b=new BitArrayBuilder(3);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		b=new BitArrayBuilder(3);
+		b.setBit(0); b.setBit(1);b.setBit(2);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		return genomes;
+	}
+	
+	public static ArrayList<HaploidGenome> getHaploidGenomes_allfixed()
+	{
+		// public static SNP c1=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'A','A','T');
+		// public static SNP c2=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),2),'A','A','T');
+		// public static SNP c3=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),3),'A','A','T');
+		ArrayList<SNP> snps=new ArrayList<SNP>();
+		snps.add(c1); snps.add(c2); snps.add(c3);
+		SNPCollection sc=new SNPCollection(snps);
+		
+		ArrayList<HaploidGenome> genomes=new ArrayList<HaploidGenome>();
+		BitArrayBuilder b=new BitArrayBuilder(3);
+		b.setBit(0); b.setBit(1);b.setBit(2);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		b=new BitArrayBuilder(3);
+		b.setBit(0);b.setBit(1);b.setBit(2);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		return genomes;
+	}
+	
+	
+	public static ArrayList<HaploidGenome> getHaploidGenomes_unlinked()
+	{
+		// public static SNP c1=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'A','A','T');
+		// public static SNP c2=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),2),'A','A','T');
+		// public static SNP c3=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),3),'A','A','T');
+		ArrayList<SNP> snps=new ArrayList<SNP>();
+		snps.add(c1); snps.add(c2); snps.add(c3);
+		SNPCollection sc=new SNPCollection(snps);
+		
+		// 0
+		ArrayList<HaploidGenome> genomes=new ArrayList<HaploidGenome>();
+		BitArrayBuilder b=new BitArrayBuilder(3);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		// 1
+		b=new BitArrayBuilder(3);
+		b.setBit(0);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		b=new BitArrayBuilder(3);
+		b.setBit(1);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		b=new BitArrayBuilder(3);
+		b.setBit(2);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		//2
+		b=new BitArrayBuilder(3);
+		b.setBit(0); b.setBit(1);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		b=new BitArrayBuilder(3);
+		b.setBit(0); b.setBit(2);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		b=new BitArrayBuilder(3);
+		b.setBit(1); b.setBit(2);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		//3
+		b=new BitArrayBuilder(3);
+		b.setBit(0); b.setBit(1);b.setBit(2);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		return genomes;
+	}
+	
+	public static ArrayList<HaploidGenome> getHaploidGenomes_chrBound()
+	{
+		// public static SNP c1=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'A','A','T');
+		// public static SNP c2=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),2),'A','A','T');
+		// public static SNP c3=new SNP(new GenomicPosition(Chromosome.getChromosome("2L"),3),'A','A','T');
+		ArrayList<SNP> snps=new ArrayList<SNP>();
+		snps.add(c1); snps.add(c2); snps.add(c11); snps.add(c12);
+		SNPCollection sc=new SNPCollection(snps);
+		
+		ArrayList<HaploidGenome> genomes=new ArrayList<HaploidGenome>();
+		BitArrayBuilder b=new BitArrayBuilder(4);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		b=new BitArrayBuilder(4);
+		b.setBit(0); b.setBit(1);b.setBit(2);b.setBit(3);
+		genomes.add(new HaploidGenome(new Haplotype(b.getBitArray(),sc),new InversionHaplotype(new ArrayList<Inversion>())));
+		
+		return genomes;
+	}
+	
 
 }
