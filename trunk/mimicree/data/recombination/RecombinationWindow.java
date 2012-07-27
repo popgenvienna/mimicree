@@ -1,6 +1,7 @@
 package mimicree.data.recombination;
 
 import mimicree.data.*;
+import java.math.*;
 
 public class RecombinationWindow {
 	private final Chromosome chromosome;
@@ -14,6 +15,7 @@ public class RecombinationWindow {
 		this.chromosome=chromosome;
 		this.startPosition=startPosition;
 		this.endPosition=endPosition;
+		if(recRate>45.0)throw new IllegalArgumentException("Can not handle recombination rates larger than 45cM/Mb (Kosambi function fails)");
 		this.recRate=recRate;
 		int windowsize=endPosition-startPosition+1;
 		if(recRate>50.0) throw new IllegalArgumentException("Recombination rate must not exceed 50");
@@ -25,32 +27,39 @@ public class RecombinationWindow {
 	
 	private double calculateP(double recRate,int windowsize)
 	{
-		// first adjust by windowsize 
-		// recRate cM/Mb 		d-> cM (for the window)
-	
-		double d=recRate*(((double)(windowsize))/1000000.0);
-		double p=d/100.0;
 		
-		assert(p>=0.0 && p<=1.0);
-		return p;
+		// Recombination rate is in cM
+		double recFraction=recRate/100;
+		
+		// return 0 for small recombination rates
+		if(Math.abs(recFraction)<0.000001) return 0.0;
+		double cWin=1000000.0/windowsize;
+		double dMb=inverseKosambiFunction(recFraction); // tested correct
+		double dWin=dMb/cWin;
+		double rWin=kosambiFunction(dWin);
+		return rWin;
 	}
 	
-	/*
-	private double calculatePold(double recRate,int windowsize)
+	
+	private double kosambiFunction(double mapDistance)
 	{
-		// first adjust by windowsize 
-		// recRate cM/Mb 		d-> cM (for the window)
-		if(windowsize > 1000000.0) throw new IllegalArgumentException("Window size for recombination needs to be smaller than 1Mbp");
-		double d=recRate*(((double)(windowsize))/1000000.0);
-		double exponent = (-2.0 * d)/100.0;
-		double eexponent=Math.pow(Math.E, exponent);
-		double p= (1.0 - eexponent) / 2.0;
-		
-		assert(p>=0.0 && p<=1.0);
-		return p;
+		double po=Math.pow(Math.E, (4.0*mapDistance));
+		double above= (po - 1.0);
+		double below = (po + 1.0);
+		double below2=2.0*below;
+		double toRet=above/below2;
+		return toRet;
 	}
 	
-	*/
+	private double inverseKosambiFunction(double recRate)
+	{
+		double div=(1.0 + 2.0 * recRate)/(1.0 - 2.0 * recRate);
+		double toRet=0.25 * Math.log( div );
+		return toRet;
+		
+	}
+	
+
 	
 	
 	
