@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import math
 
 
 # 2L      1574961 A       -0.1    0.5
@@ -15,8 +15,8 @@ class AdditiveEffect:
 	@property
 	def maxfitness(self):
 		fit=[]
-		fit.append(1-self.s)
-		fit.append(1-self.h*self.s)
+		fit.append(1+self.s)
+		fit.append(1+self.h*self.s)
 		max=1
 		for f in fit:
 			if f>max:
@@ -31,9 +31,9 @@ class AdditiveEffectUtil:
 	
 	@classmethod
 	def get_maxfitness(cls,effects):
-		fit=1.0
+		fit=0.0
 		for e in effects:
-			fit*=e.maxfitness
+			fit+=math.log10(e.maxfitness)
 		return fit
 	
 	@classmethod

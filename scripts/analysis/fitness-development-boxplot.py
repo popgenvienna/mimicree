@@ -40,7 +40,7 @@ def format_rfile(rFile,outputFile, toprocess, maxFitness):
 	x<-{0}
 	f<-factor({1})
 	pdf("{2}",width=15)
-	boxplot(x~f,log="y",ylim=c({3},{4}))
+	boxplot(x~f,ylim=c({3},{4}))
 	lines({5},type="l",lty=2)
 	dev.off()
 	""".format(x,f,outputFile,ymin,ymax,mf)

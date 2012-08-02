@@ -215,15 +215,15 @@ class CommentParser:
 		if(majChar==eChar):
 			if(s<0.0):
 				# A/G A:-0.1 	A=1.1	G=1.0
-				return True
+				return False
 			else:
 				# A/G A:0.1	A=0.9  G=1.0
-				return False
+				return True
 		else:
 			if(s<0.0):
-				return False
-			else:
 				return True
+			else:
+				return False
 			
 
 	def __parseAdditive(self):
@@ -239,16 +239,16 @@ class CommentParser:
 		
 		if(majChar==w11):
 			if(s < 0.0):
-				# A/G   A:-.1 -> A=1.0 G=1.1
-				return False
-			else:
-				# A/G  A:0.1 -> A=1.0 G=0.9
+				# A/G   A:-.1 -> A=1.0 G=0.9
 				return True
+			else:
+				# A/G  A:0.1 -> A=1.0 G=1.1
+				return False
 		else:
 			if(s < 0.0):
-				# A/G G:-.1 -> G=1.0 A=1.1
-				return  True
-			else:
+				# A/G G:-.1 -> G=1.0 A=0.9
 				return False
+			else:
+				return True
 
 
