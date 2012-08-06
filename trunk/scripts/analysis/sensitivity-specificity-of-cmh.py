@@ -43,10 +43,8 @@ cPositives=len(posset)
 snpCount=get_snpcount(options.cmhfile)
 cNegatives=snpCount-cPositives
 
-
 cTested=0
 cTruePositives=0
-
 
 
 for line in open(options.cmhfile):

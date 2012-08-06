@@ -97,10 +97,10 @@ public class MimicrEE {
 	{
 		
 		StringBuilder sb=new StringBuilder();
-		sb.append("--mode						the analysis mode of operation; see manual for supported modes\n");
-		sb.append("--detailed-log					print detailed log messages\n");
-		sb.append("--threads					the number of threads to use\n");
-		sb.append("--help						print the help\n"); 
+		sb.append("--mode					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--detailed-log				print detailed log messages\n");
+		sb.append("--threads				the number of threads to use\n");
+		sb.append("--help					print the help\n"); 
 		return sb.toString();
 
 	}
