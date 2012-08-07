@@ -115,7 +115,8 @@ class SNP:
 
 
 
-class SumReader:
+
+class SumReader:	
 	"""
 	Iterator for reading a haplotype-summary file line-by-line.
 	Every line of a sync file is represented as  
@@ -129,7 +130,7 @@ class SumReader:
 
 	def __iter__(self):
 		return self
-	
+
 	@classmethod
 	def parseLines(cls,lines):
 		return [SumReader.parseLine(l) for l in lines]
@@ -171,7 +172,7 @@ class SumReader:
 			if line != "":
 				break
 		return self.parseLine(line)
-		
+	
 
 class CommentParser:
 	def __init__(self,raw,majorAllele):

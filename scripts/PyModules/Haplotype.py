@@ -12,9 +12,36 @@ class PopulationGenotype:
 		self.major=major
 		self.minor=minor
 		self.__genotypes=genotypes
+	
+	@property
+	def genotypes(self):
+		return self.__genotypes
+	
+	@property
+	def genotypeCount(self):
+		return len(self.genotypes)
 
 
 class HaplotypeIO:
+	
+	@classmethod
+	def genotypeCount(cls,inputFile):
+		fh=open(inputFile)
+		line=fh.next()
+		pa=HaplotypeIO.parseLine(line)
+		return pa.genotypeCount
+	
+	@classmethod
+	def formatEntry(cls,entry):
+		gt=entry.genotypes
+		tof=[]
+		tof.append(entry.chrom)
+		tof.append(str(entry.position))
+		tof.append(entry.refchar)
+		tof.append(entry.major+"/"+entry.minor)
+		tof.append(" ".join(gt))
+		form="\t".join(tof)
+		return form
 	
 	@classmethod
 	def parseLine(cls,line):
