@@ -9,20 +9,20 @@ import org.junit.BeforeClass;
 
 public class TestRsquaredIterator {
 	
-	private static RsquaredGenomeIterator iter_linked_2;
-	private static RsquaredGenomeIterator iter_linked_1;
-	private static RsquaredGenomeIterator iter_unlinked_2;
-	private static RsquaredGenomeIterator iter_allfixed;
-	private static RsquaredGenomeIterator iter_chrbound;
+	private static RsquaredGenomeSlider iter_linked_2;
+	private static RsquaredGenomeSlider iter_linked_1;
+	private static RsquaredGenomeSlider iter_unlinked_2;
+	private static RsquaredGenomeSlider iter_allfixed;
+	private static RsquaredGenomeSlider iter_chrbound;
 	
 	@BeforeClass
 	public static void setUp()
 	{
-		 iter_linked_2	=new RsquaredGenomeIterator(SharedDataFactory.getHaploidGenomes_linked(),2);
-		 iter_linked_1	=new RsquaredGenomeIterator(SharedDataFactory.getHaploidGenomes_linked(),1);
-		 iter_unlinked_2=new RsquaredGenomeIterator(SharedDataFactory.getHaploidGenomes_unlinked(),2);
-		 iter_allfixed	=new RsquaredGenomeIterator(SharedDataFactory.getHaploidGenomes_allfixed(),1);
-		 iter_chrbound 	=new RsquaredGenomeIterator(SharedDataFactory.getHaploidGenomes_chrBound(),2);
+		 iter_linked_2	=new RsquaredGenomeSlider(SharedDataFactory.getHaploidGenomes_linked(),2);
+		 iter_linked_1	=new RsquaredGenomeSlider(SharedDataFactory.getHaploidGenomes_linked(),1);
+		 iter_unlinked_2=new RsquaredGenomeSlider(SharedDataFactory.getHaploidGenomes_unlinked(),2);
+		 iter_allfixed	=new RsquaredGenomeSlider(SharedDataFactory.getHaploidGenomes_allfixed(),1);
+		 iter_chrbound 	=new RsquaredGenomeSlider(SharedDataFactory.getHaploidGenomes_chrBound(),2);
 	}
 	
 

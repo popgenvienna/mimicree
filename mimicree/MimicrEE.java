@@ -78,9 +78,13 @@ public class MimicrEE {
         {
         	mimicree.analysis.hap2sum.Hap2SumParser.parseCommandline(logger, arguments);
         }
-        else if(mode.equals("rsquared"))
+        else if(mode.equals("rsquaredslide"))
         {
         	mimicree.analysis.rsquared.RsquaredParser.parseCommandline(logger, arguments);
+        }
+        else if(mode.equals("rsquaredrandom"))
+        {
+        	
         }
         else
         {

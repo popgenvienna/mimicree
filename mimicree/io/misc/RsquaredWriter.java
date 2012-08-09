@@ -27,7 +27,7 @@ public class RsquaredWriter {
 	 * Write the content of the iterator to a file
 	 * @param genomeIterator
 	 */
-	public void write(RsquaredGenomeIterator genomeIterator)
+	public void write(IRsquaredIterator genomeIterator)
 	{
 		this.logger.info("Start writing pairwise r^2 into file "+this.outputFile);
 		PairwiseRsquared  entry=null;

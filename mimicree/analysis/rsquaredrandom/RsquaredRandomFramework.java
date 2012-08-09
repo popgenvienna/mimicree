@@ -1,4 +1,4 @@
-package mimicree.analysis.rsquared;
+package mimicree.analysis.rsquaredrandom;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,13 +10,14 @@ import mimicree.io.misc.RsquaredWriter;
 import mimicree.data.LD.*;
 
 
-public class RsquaredFramework {
+public class RsquaredRandomFramework {
 	private final String inputFile;
 	private final String outputFile;
-	private final int maxDistance;
+	private final int randomSamples;
+	private final boolean intraChromosomal;
 	private java.util.logging.Logger logger;
 	
-	public RsquaredFramework(String inputFile, String outputFile, int maxDistance, java.util.logging.Logger logger)
+	public RsquaredRandomFramework(String inputFile, String outputFile, int randomSamples,boolean intraChromosomal, java.util.logging.Logger logger)
 	{
 	
 
@@ -29,8 +30,9 @@ public class RsquaredFramework {
         {
         	throw new IllegalArgumentException("Can not create output file:" +outputFile);
         }
-		if(maxDistance <1 ) throw new IllegalArgumentException("Invalid max-distance between two SNPs; must be larger than 1 (eg 10.000)");
-		this.maxDistance=maxDistance;
+		if(randomSamples<1) throw new IllegalArgumentException("Number of samples needs to be larger than zero");
+		this.randomSamples=randomSamples;
+		this.intraChromosomal=intraChromosomal;
 		this.inputFile=inputFile;
 		this.outputFile=outputFile;
 		this.logger=logger;
@@ -39,7 +41,7 @@ public class RsquaredFramework {
 	public void run()
 	{
 		ArrayList<HaploidGenome> genomes= new mimicree.io.HaploidGenomeReader(this.inputFile,"",this.logger).readGenomes();
-		new RsquaredWriter(this.outputFile,this.logger).write(new RsquaredGenomeSlider(genomes,this.maxDistance));
+		new RsquaredWriter(this.outputFile,this.logger).write(new RsquaredRandomGenomeIterator(genomes,this.randomSamples,this.intraChromosomal));
 		
 		
 	}
