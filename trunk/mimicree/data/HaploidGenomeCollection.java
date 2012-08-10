@@ -10,7 +10,8 @@ public class HaploidGenomeCollection {
 	private final ArrayList<HaploidGenome> haploidGenomes;
 	private final SNPCollection snpCollection;
 	private final HashMap<GenomicPosition,Double> pos2freq;
-	private final double accuracy=0.00000000001;
+	private final double accuracyFixed=0.000001;
+	private final double accuracyRsquared=1000000.0;
 	
 	public HaploidGenomeCollection(ArrayList<HaploidGenome> haploidGenomes)
 	{
@@ -90,6 +91,8 @@ public class HaploidGenomeCollection {
 		double DAB=pAB-pA*pB;
 		double divisor=pA*(1.0-pA)*pB*(1.0-pB);
 		double res=Math.pow(DAB, 2)/divisor;
+		res=Math.round(res*this.accuracyRsquared);
+		res=res/this.accuracyRsquared;
 		return res;
 	}
 	
@@ -101,8 +104,8 @@ public class HaploidGenomeCollection {
 			SNP s=this.snpCollection.getSNPforIndex(i);
 			double pf=this.pX(s.genomicPosition());
 			// Discard fixed; major allele frequency either 0.0 or 1.0
-			if(pf < this.accuracy) continue;
-			if(1.0-pf < this.accuracy)continue;
+			if(pf < this.accuracyFixed) continue;
+			if(1.0-pf < this.accuracyFixed)continue;
 			
 			notFixed.add(s);
 		}

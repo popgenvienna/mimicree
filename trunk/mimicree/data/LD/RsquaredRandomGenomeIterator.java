@@ -60,7 +60,8 @@ public class RsquaredRandomGenomeIterator implements IRsquaredIterator{
 		// Calculate relevant info
 		int distance=pair.distance;
 		double rsquared= this.genomes.calculateRsquared(pair.locusA,pair.locusB);
-		assert(rsquared>=0.0 && rsquared <=1.0);
+		if(rsquared <0.0 || rsquared >1.0)throw new IllegalArgumentException("Invalid rsquared "+rsquared);
+
 		
 		this.counter++;
 		PairwiseRsquared toret=new PairwiseRsquared(pair.locusA,pair.locusB,distance,rsquared);

@@ -84,7 +84,7 @@ public class MimicrEE {
         }
         else if(mode.equals("rsquaredrandom"))
         {
-        	
+        	mimicree.analysis.rsquaredrandom.RsquaredRandomParser.parseCommandline(logger,arguments);
         }
         else
         {
