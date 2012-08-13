@@ -19,20 +19,13 @@ stat=collections.defaultdict(lambda : {'selected':0,'selcorrect':0, 'nonselected
 for s in SumReader(options.sum):
 	snpshots=s.snpshots
 	selected=s.isSelected
-	isMajorSelected=s.isMajorSelected
+
 	for i,ss in enumerate(snpshots):
 		keyset.add(i)
 		if(ss.isFixed):
 			if(selected):
 				stat[i]['selected']+=1
-				correct=False
-				if(isMajorSelected):
-					if(ss.isMajorFixed):
-						correct=True
-				else:
-					if(ss.isMinorFixed):
-						correct=True
-				if(correct):
+				if(ss.isSelectedFixedCorrectly(s)):
 					stat[i]['selcorrect']+=1
 			else:
 				stat[i]['nonselected']+=1
