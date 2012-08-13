@@ -44,18 +44,29 @@ class SNPshot:
 	def selectedFrequency(self,snpsuc):
 		if(not snpsuc.isSelected):
 			return None
-		if(snpsuc.isMajorSelected):
+		if(snpsuc.snp().isMajorSelected):
 			return self.majorFrequency
 		else:
 			return self.minorFrequency
 		raise Exception("not implemented")
 		return None
 	
+	def isSelectedFixedCorrectly(self,snpsuc):
+		if(not snpsuc.isSelected):
+			raise Error("SNP is not selected")
+		if(not self.isFixed):
+			raise Error("SNP is not fixed")
+		if(snpsuc.snp().isMajorSelected):
+			return self.isMajorFixed
+		else:
+			return self.isMinorFixed
+			
+
 	@property
 	def isFixed(self):
 		if(self.__major == 0 or self.__minor==0):
 			return True
-		return False
+		return False	
 	
 	@property
 	def isMajorFixed(self):
@@ -74,6 +85,8 @@ class SNPSuccession:
 	def __init__(self,snp,snpshots):
 		self.__snp=snp
 		self.__snpshots=snpshots
+		
+
 	
 	@property
 	def isSelected(self):
@@ -98,6 +111,9 @@ class SNPSuccession:
 			return act.majorFrequency
 		else:
 			return act.minorFrequency
+	
+	
+	
 
 
 class SNP:
