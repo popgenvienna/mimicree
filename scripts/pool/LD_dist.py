@@ -106,9 +106,11 @@ for line in open(options.snps):
 		binindex=int(relativeposition/binsize)
 		stat[binindex].append(pval)
 
+pos=int(binsize/2)
 for i in sorted(stat.keys()):
 	ar=stat[i]
 	med=median(ar)
-	print "{0}\t{1}".format(i,med)
+	print "{0}\t{1}\t{2}".format(i,pos-distance,med)
+	pos+=binsize
 
 
