@@ -86,6 +86,10 @@ public class MimicrEE {
         {
         	mimicree.analysis.rsquaredrandom.RsquaredRandomParser.parseCommandline(logger,arguments);
         }
+        else if(mode.equals("fsc2hap"))
+        {
+            mimicree.analysis.fcs2hap.Fcs2HapParser.parseCommandline(logger,arguments);
+        }
         else
         {
         	throw new IllegalArgumentException("Do not recognise analysis mode "+mode);
