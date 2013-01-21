@@ -27,24 +27,38 @@ public class FscReader {
         this.chromosomeName=chromosomeName;
         this.inputFile=inputFile;
 
-        br=new BufferedReader(new StringReader(this.inputFile));
+		try
+		{
+       		 br=new BufferedReader(new FileReader(this.inputFile));
+		}
+		catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+			System.exit(1);
+		}
         this.logger = logger;
     }
 
 
-    public ArrayList<Haplotype> readHaplotypes()
+	/**
+	 * Read Haplotypes from a fastsimcoal file
+	 * @return a collection of haplotypes read from a fastsimcoalfile
+	 */
+    public ArrayList<Haplotype> getHaplotypes()
     {
 
         SNPCollection snpCol;
         ArrayList<Integer> snpPositions =new ArrayList<Integer>();
         ArrayList<BitArray> haplotypes=new ArrayList<BitArray>();
         String line="";
+		this.logger.info("Start reading haplotypes for chromosome" + this.chromosomeName + "from fastsimcoal outputfile " + this.inputFile);
         boolean foundSegsites=false;
-        boolean readHaplotypes=true;
+        boolean readHaplotypes=false;
         try
         {
             while((line=br.readLine())!=null)
             {
+
                 if(readHaplotypes)
                 {
                     // Obtain the haplotypes
@@ -52,8 +66,10 @@ public class FscReader {
                 }
                 else if(foundSegsites)
                 {
+					this.logger.info("Reading SNP positions");
                     snpPositions=parseSNPPositions(line);
                     readHaplotypes=true;
+					this.logger.info("Reading haplotypes");
                 }
                 else if(line.startsWith("segsites")) foundSegsites = true;
 
@@ -65,7 +81,11 @@ public class FscReader {
             System.exit(0);
         }
 
-        return processHaplotypes(snpPositions, haplotypes, Chromosome.getChromosome(this.chromosomeName));
+		this.logger.info("Formatting haplotypes");
+        ArrayList<Haplotype> toret= processHaplotypes(snpPositions, haplotypes, Chromosome.getChromosome(this.chromosomeName));
+
+		this.logger.info("Finished reading Haplotypes");
+		return toret;
     }
 
 
@@ -78,6 +98,7 @@ public class FscReader {
 	 */
     private ArrayList<Haplotype> processHaplotypes(ArrayList<Integer> positions,ArrayList<BitArray> haplotypes, Chromosome chromosome)
     {
+
         ArrayList<SNP> snps=new ArrayList<SNP>();
 
         // Detect minor and major allele
@@ -108,6 +129,7 @@ public class FscReader {
 		for(BitArray ba: haplotypes)
 		{
 			Haplotype h= new Haplotype(ba,snpCollection);
+			haps.add(h);
 		}
 		return haps;
     }
@@ -119,8 +141,10 @@ public class FscReader {
         String[] rawPositions=line.split("\\s+");
 
         ArrayList<Integer> positions=new ArrayList<Integer>();
-        for(String s: rawPositions)
-        {
+		for(int i=1; i<rawPositions.length; i++)
+		{
+			// Starting with 1 as the first entry has to be ignored (="Positions:")
+			String s=rawPositions[i];
             positions.add(Integer.parseInt(s));
         }
         return positions;
@@ -129,20 +153,22 @@ public class FscReader {
 
     private BitArray parseHaplotypes(String line)
     {
-        String[] t=line.split("");
+        char[] t=line.toCharArray();
         BitArrayBuilder builder=new BitArrayBuilder(t.length);
         for(int i=0; i<t.length; i++)
         {
-            String s=t[i];
-            if(s.equals("1"))
+           	char s=t[i];
+            if(s == '0')
             {
+				// MimicrEE stores the major allele as 1; Question can be asked in a boolean fashion: does the haplotype have the major allele
                  builder.setBit(i);
             }
-            else if(s.equals("0"))
+            else if(s=='1')
             {
+				// with 1 it actually has the minor allele thus a zero should be stored
 
             }
-            else throw new IllegalArgumentException("Can not parse character"+s.toString());
+            else throw new IllegalArgumentException("Can not parse character"+s);
         }
         return builder.getBitArray();
     }
