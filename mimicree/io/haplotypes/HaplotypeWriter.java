@@ -29,7 +29,7 @@ public class HaplotypeWriter {
 	public void write(ArrayList<Haplotype> haplotypes)
 	{
 		this.logger.info("Writing haplotypes to file " + this.outputFile);
-		if(!(haplotypes.size()>0)) throw new IllegalArgumentException("Invalid number of haplotypes for output");
+		if(!(haplotypes.size()>0)) throw new IllegalArgumentException("Invalid number of haplotypes for output, must be larger than zero");
 	
 		SNPCollection scol=haplotypes.get(0).getSNPCollection();
 		for(int i=0; i<scol.size(); i++)

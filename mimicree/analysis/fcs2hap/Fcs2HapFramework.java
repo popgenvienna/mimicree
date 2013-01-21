@@ -31,7 +31,8 @@ public class Fcs2HapFramework {
 
     public void run()
     {
-        ArrayList<Haplotype>  haplotypes=new FscReader(this.inputFile,this.chromosomeName,this.logger).readHaplotypes();
+        ArrayList<Haplotype>  haplotypes=new FscReader(this.inputFile,this.chromosomeName,this.logger).getHaplotypes();
+		if(!(haplotypes.size()>0)) throw new IllegalArgumentException("Failed to read haplotypes, zero haplotypes red");
         new HaplotypeWriter(this.outputFile,this.logger).write(haplotypes);
     }
 
