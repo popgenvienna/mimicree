@@ -2,6 +2,7 @@ package mimicree.analysis.fcs2hap;
 
 import mimicree.data.haplotypes.Haplotype;
 import mimicree.io.haplotypes.HaplotypeWriter;
+import mimicree.io.misc.FscReader;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -17,21 +18,20 @@ public class Fcs2HapFramework {
     private final String inputFile;
     private final String outputFile;
     private final String chromosomeName;
-    private final int haplotypeCount;
+
     private Logger logger;
 
-    public Fcs2HapFramework(String inputFile, String outputFile,String chromosomeName, int haplotypeCount,Logger logger)
+    public Fcs2HapFramework(String inputFile, String outputFile,String chromosomeName,Logger logger)
     {
         this.inputFile = inputFile;
         this.outputFile = outputFile;
         this.chromosomeName=chromosomeName;
-        this.haplotypeCount=haplotypeCount;
         this.logger = logger;
     }
 
     public void run()
     {
-        ArrayList<Haplotype>  haplotypes=new ArrayList<Haplotype>();
+        ArrayList<Haplotype>  haplotypes=new FscReader(this.inputFile,this.chromosomeName,this.logger).readHaplotypes();
         new HaplotypeWriter(this.outputFile,this.logger).write(haplotypes);
     }
 
