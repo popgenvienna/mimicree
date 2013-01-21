@@ -103,21 +103,12 @@ public class FscReader {
 
         // Detect minor and major allele
         // 0 is ancestral (refchar) 1 is derived most are zero and a few are 1 (according to popgen expectation)
-        for(int i=0; i <positions.size();i++)
+        for(int i=0; i < positions.size();i++)
         {
-            char minorAllele=this.derivedChar;
-            char majorAllele=this.refChar;
-            int counter=0;
-            for(BitArray ba : haplotypes)
-            {
-                if(ba.hasBit(i)) counter++;
-            }
-            if(counter > haplotypes.size()/2)
-            {
-                minorAllele=this.refChar;
-                majorAllele=this.derivedChar;
-            }
 
+            char majorAllele=this.refChar;  //A
+			char minorAllele=this.derivedChar; //C
+            int counter=0;
             SNP s = new SNP(new GenomicPosition(chromosome,positions.get(i)),this.refChar,majorAllele,minorAllele);
             snps.add(s);
         }
@@ -160,12 +151,12 @@ public class FscReader {
            	char s=t[i];
             if(s == '0')
             {
-				// MimicrEE stores the major allele as 1; Question can be asked in a boolean fashion: does the haplotype have the major allele
+				// 1 in MimicrEE means that the SNP has the major allele; Switch between fastsimcoal
                  builder.setBit(i);
             }
             else if(s=='1')
             {
-				// with 1 it actually has the minor allele thus a zero should be stored
+			    // 0 in MimicrEE means does not have the major allele, thus the minor allele
 
             }
             else throw new IllegalArgumentException("Can not parse character"+s);
