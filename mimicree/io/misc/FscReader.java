@@ -153,23 +153,6 @@ public class FscReader {
 }
 
 
-class FscSNPReader{
-    private BufferedReader br;
-    private String chromosomeName;
-    public FscSNPReader(String inputFile, String chromosomeName)
-    {
-        this.chromosomeName=chromosomeName;
-        this.br=new BufferedReader(new StringReader(inputFile));
-    }
-
-    public SNPCollection read()
-    {
-
-        ArrayList<Integer> snpPositions =getSNPPositions();
-        SNP s= new SNP();
-        SNPCollection sc=new SNPCollection();
-
-    }
 
 
 
@@ -177,5 +160,4 @@ class FscSNPReader{
 
 
 
-}
 

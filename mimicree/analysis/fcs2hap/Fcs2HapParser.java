@@ -36,10 +36,6 @@ public class Fcs2HapParser {
             {
                 chromosome=args.remove(0);
             }
-            else if(cu.equals("--hap-count"))
-            {
-                 haplotypeCount = Integer.parseInt(args.remove(0));
-            }
             else if(cu.equals("--help"))
             {
                 printHelp();
@@ -51,7 +47,7 @@ public class Fcs2HapParser {
         }
 
 
-        Fcs2HapFramework fc2h=new Fcs2HapFramework(inputFile,outputFile,chromosome,haplotypeCount,logger);
+        Fcs2HapFramework fc2h=new Fcs2HapFramework(inputFile,outputFile,chromosome,logger);
         fc2h.run();
     }
 
@@ -61,7 +57,6 @@ public class Fcs2HapParser {
         sb.append("mode fcs2hap: convert fastcoalsim outpout to MimicrEE haplotypes\n");
         sb.append("--input					    the fastsimcoal file\n");
         sb.append("--chromosome                 the chromosome\n");
-        sb.append("--hap-count					the number of haplotypes\n");
         sb.append("--output					the output file (sync)\n");
         sb.append(MimicrEE.getGeneralHelpmessage());
         System.out.print(sb.toString());
