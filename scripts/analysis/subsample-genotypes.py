@@ -14,7 +14,7 @@ def createRandomIndices(fullSize,subSize):
 
 
 
-#Author: Robert Kofler
+#Author: Dr. Robert Kofler
 parser = OptionParser()
 parser.add_option("--haplotypes", dest="haplotypes", help="the haplotype file")
 parser.add_option("--sample-size", dest="samplesize",help="the size of the subsample in diploid individuals")
