@@ -9,38 +9,38 @@ import re
 class SNPshot:
 	"""
 	Short for SNP snapshot :)
-	Represents the major and minor counts of a SNP at a single time point;
+	Represents the ancestral and derived counts of a SNP at a single time point;
 	Immutable container type
 	"""
-	def __init__(self,major,minor):
-		coverage=major+minor
+	def __init__(self,ancestral,derived):
+		coverage=ancestral+derived
 		if(coverage==0):
 			raise ValueError("Coverage must be larger than zero")
-		self.__major=major
-		self.__minor=minor
+		self.__ancestral=ancestral
+		self.__derived=derived
 		self.__coverage=coverage
 	
 	@property
-	def major(self):
-		return self.__major
+	def ancestral(self):
+		return self.__ancestral
 	
 	@property
-	def minor(self):
-		return self.__minor
+	def derived(self):
+		return self.__derived
 	
 	@property
 	def coverage(self):
 		return self.__coverage
 	
 	@property
-	def majorFrequency(self):
-		return float(self.__major)/float(self.__coverage)
+	def ancestralFrequency(self):
+		return float(self.__ancestral)/float(self.__coverage)
 	
 	@property
-	def minorFrequency(self):
-		return float(self.__minor)/float(self.__coverage)
+	def derivedFrequency(self):
+		return float(self.__derived)/float(self.__coverage)
 		
-	
+	"""
 	def selectedFrequency(self,snpsuc):
 		if(not snpsuc.isSelected):
 			return None
@@ -60,7 +60,7 @@ class SNPshot:
 			return self.isMajorFixed
 		else:
 			return self.isMinorFixed
-			
+	"""		
 
 	@property
 	def isFixed(self):
@@ -69,14 +69,14 @@ class SNPshot:
 		return False	
 	
 	@property
-	def isMajorFixed(self):
-		if(self.__major==self.__coverage):
+	def isAncestralFixed(self):
+		if(self.__ancestral==self.__coverage):
 			return True
 		return False
 	
 	@property
-	def isMinorFixed(self):
-		if(self.__minor==self.__coverage):
+	def isDerivedFixed(self):
+		if(self.__ancestral==self.__coverage):
 			return True
 		return False
 
@@ -107,10 +107,10 @@ class SNPSuccession:
 		if(not self.__snp.isSelected):
 			return None
 		act=self.__snpshots[index]
-		if(self.__snp.isMajorSelected):
-			return act.majorFrequency
+		if(self.__snp.isAncestralSelected):
+			return act.ancestralFrequency
 		else:
-			return act.minorFrequency
+			return act.derivedFrequency
 	
 	
 	
@@ -158,21 +158,21 @@ class SumReader:
 		pos   = int(a.pop(0))
 		refc  = a.pop(0)
 		b     = a.pop(0)
-		majChar,minChar=b.split("/")
+		ancestralChar,derivedChar=b.split("/")
 		rawComment     = a.pop(0)
 		comParse=CommentParser(rawComment,majChar)
 		comment=comParse.comment
 		isSel=comParse.isSelected
-		isMajSel=comParse.isMajorSelected
+		isAncestralSel=comParse.isAncestralSelected
 		# def __init__(self,chromosome, position, refChar, majorAllele,minorAllele, isSelected, isMajorSelected,comment):
-		snp=SNP(chr,pos,refc,majChar,minChar,isSel,isMajSel,comment)
+		snp=SNP(chr,pos,refc,ancestralChar,derivedChar,isSel,isAncestralSel,comment)
 		
 		snpshots=[]
 		for p in a:
 			e = p.split(":")
-			majCount=int(e[0])
-			minCount=int(e[1])
-			t=SNPshot(majCount,minCount)
+			ancCount=int(e[0])
+			derCount=int(e[1])
+			t=SNPshot(ancCount,derCount)
 			snpshots.append(t)
 		# (self,chromosome, position, refChar, majorAllele,minorAllele, selected,s,h,snpshots):
 		return SNPSuccession(snp,snpshots)
@@ -191,9 +191,9 @@ class SumReader:
 	
 
 class CommentParser:
-	def __init__(self,raw,majorAllele):
+	def __init__(self,raw,ancestralAllele):
 		self.__raw=raw
-		self.__majorAllele=majorAllele
+		self.__ancestralAllele=ancestralAllele
 	
 	@property
 	def comment(self):
@@ -207,7 +207,7 @@ class CommentParser:
 			return True
 	
 	@property
-	def isMajorSelected(self):
+	def isAncestralSelected(self):
 		if(not self.isSelected):
 			return None
 		if(";" in self.__raw):
@@ -228,8 +228,8 @@ class CommentParser:
 		a=raw.split(':')
 		eChar=a[0]
 		s=float(a[2])
-		majChar=self.__majorAllele
-		if(majChar==eChar):
+		ancChar=self.__ancestralAllele
+		if(ancChar==eChar):
 			if(s<0.0):
 				# A/G A:-0.1 	A=1.1	G=1.0
 				return False
@@ -245,14 +245,14 @@ class CommentParser:
 
 	def __parseAdditive(self):
 		"""
-		Is the major allele selected
+		Is the ancestral allele selected
 		A=T:s:h
 		"""
 		raw=re.sub(r'A=','',self.__raw)
 		a=raw.split(':')
 		w11=a[0]
 		s=float(a[1])
-		majChar=self.__majorAllele
+		ancChar=self.__ancestralAllele
 		
 		if(majChar==w11):
 			if(s < 0.0):

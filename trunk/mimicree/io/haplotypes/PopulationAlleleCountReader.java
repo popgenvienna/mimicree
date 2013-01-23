@@ -5,6 +5,7 @@ import mimicree.data.haplotypes.*;
 import java.util.*;
 import java.io.*;
 import java.util.logging.Logger;
+import java.util.zip.GZIPInputStream;
 
 public class PopulationAlleleCountReader {
 	
@@ -23,14 +24,14 @@ public class PopulationAlleleCountReader {
 		assert(this.haplotypeFiles.size()>0);
 		String firstFile=this.haplotypeFiles.get(0);
 		this.logger.info("Reading SNP information from file "+firstFile);
-		SNPCollection snpCol= new HaplotypeSNPReader(getBufferedFileReader(firstFile)).getSNPcollection();
+		SNPCollection snpCol= new HaplotypeSNPReader(getBufferedReader(firstFile)).getSNPcollection();
 		
 		
 		ArrayList<PopulationAlleleCount> pac=new ArrayList<PopulationAlleleCount>();
 		for(String file: this.haplotypeFiles)
 		{
 			this.logger.info("Reading allele frequencies for file " +file);
-			PopulationAlleleCount p=new SinglePopulationAlleleCountReader(getBufferedFileReader(file)).getAlleleCount(snpCol);
+			PopulationAlleleCount p=new SinglePopulationAlleleCountReader(getBufferedReader(file)).getAlleleCount(snpCol);
 			pac.add(p);
 		}
 		
@@ -39,20 +40,36 @@ public class PopulationAlleleCountReader {
 		
 		
 	}
-	
-	
-	private BufferedReader getBufferedFileReader(String file)
+
+
+	private static BufferedReader getBufferedReader(String file)
 	{
-		try
+		BufferedReader br=null;
+		if(file.endsWith(".gz"))
 		{
-			return new BufferedReader(new FileReader(file));
+			try{
+				br=new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(file))));
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.exit(1);
+			}
 		}
-		catch(FileNotFoundException e)
-		{
-			e.printStackTrace();
-			System.exit(0);
+		else{
+
+			try{
+				br= new BufferedReader(new FileReader(file));
+			}
+			catch(FileNotFoundException e)
+			{
+				e.printStackTrace();
+				System.exit(1);
+			}
+
 		}
-		return null;
+		return br;
 	}
+
 
 }
