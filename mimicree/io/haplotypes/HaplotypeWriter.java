@@ -4,6 +4,7 @@ import mimicree.data.haplotypes.*;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.zip.GZIPOutputStream;
 
 public class HaplotypeWriter {
 	private BufferedWriter bf; 
@@ -11,17 +12,20 @@ public class HaplotypeWriter {
 	private Logger logger;
 	public HaplotypeWriter(String outputFile, Logger logger)
 	{
+		// The extension will be decided at the level which output encoding should be used.
+		// Output encoding will be decided at this level, thus extension also here.
+		String gzipOutput=outputFile+".gz";
 		this.logger=logger;
 		try
 		{
-			bf=new BufferedWriter(new FileWriter(outputFile));
+			bf=new BufferedWriter(new OutputStreamWriter(new GZIPOutputStream(new FileOutputStream(gzipOutput))));
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 			System.exit(0);
 		}
-		this.outputFile=outputFile;
+		this.outputFile=gzipOutput;
 	}
 	
 	

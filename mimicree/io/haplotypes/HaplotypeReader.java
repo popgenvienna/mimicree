@@ -5,6 +5,7 @@ import java.util.*;
 import mimicree.data.BitArray.BitArray;
 import mimicree.data.haplotypes.*;
 import java.io.*;
+import java.util.zip.GZIPInputStream;
 
 /**
  * Read the haplotypes.
@@ -58,26 +59,54 @@ public class HaplotypeReader {
 	 */
 	private BufferedReader getBufferedReader()
 	{
-		// Peace of shit, need a default
-		BufferedReader bf=new BufferedReader(new StringReader(""));
+		BufferedReader bf;
 		if(this.inputIsStringStream)
 		{
 			bf=new BufferedReader(new StringReader(this.input));
 		}
 		else
 		{
-			try
-			{
-				bf= new BufferedReader(new FileReader(this.input));
-			}
-			catch(FileNotFoundException e)
-			{
-				e.printStackTrace();
-				System.exit(0);
-			}
+			bf=getBufferedFileReader(this.input);
 		}
 		return bf;
 		
 	}
+
+
+	/**
+	 * Get a BufferedReader for a input file;
+	 * Decides from the file extension whether the file is zipped ".gz"
+	 * @param inputFile
+	 * @return
+	 */
+	private BufferedReader getBufferedFileReader(String inputFile)
+	{
+		BufferedReader br=null;
+		if(inputFile.endsWith(".gz"))
+		{
+			try{
+				br=new BufferedReader(new InputStreamReader(new GZIPInputStream(new FileInputStream(inputFile))));
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.exit(1);
+			}
+		}
+		else{
+
+			try{
+				br= new BufferedReader(new FileReader(inputFile));
+			}
+			catch(FileNotFoundException e)
+			{
+				e.printStackTrace();
+				System.exit(1);
+			}
+
+		}
+		return br;
+	}
+
 
 }

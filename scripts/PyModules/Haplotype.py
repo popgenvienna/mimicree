@@ -73,7 +73,13 @@ class HaplotypeIO:
 		(major,minor)=a[3].split("/")
 		genotypes=a[4].split(" ")
 		haplotypes=[]
-		[haplotypes.extend(list(h)) for h in genotypes]
+		for g in genotypes:
+			haplotypes.append(g[0])
+			haplotypes.append(g[1])
+		#(lengen,lenhap)=len(genotypes),len(haplotypes)
+		#test=genotypes[-1]
+		#test2=haplotypes[-1]
+		#test3=haplotypes[-2]
 		return PopulationHaplotype(a[0],a[1],a[2],major,minor,haplotypes)
 	
 	@classmethod
