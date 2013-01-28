@@ -13,15 +13,18 @@ public class SingleSimulationTimestamp implements ISingleSimulation{
 	private final RecombinationGenerator recGenerator;
 	private final String outputDir;
 	private final HashSet<Integer> outputGenerations;
+	private final boolean abortWhenSelectedFix;
 	private final int maxGeneration;
 	private Logger logger;
 
-	public SingleSimulationTimestamp(Population population, FitnessFunction fitness, RecombinationGenerator recGenerator, String outputDir,ArrayList<Integer> outputGenerations, Logger logger)
+	public SingleSimulationTimestamp(Population population, FitnessFunction fitness, RecombinationGenerator recGenerator,
+									 String outputDir,ArrayList<Integer> outputGenerations, boolean abortWhenSelectedFix,Logger logger)
 	{
 
 		this.population=population;
 		this.fitness=fitness;
 		this.outputDir=outputDir;
+		this.abortWhenSelectedFix=abortWhenSelectedFix;
 		
 		int max=0;
 		HashSet<Integer> toOutput=new HashSet<Integer>();
@@ -49,8 +52,15 @@ public class SingleSimulationTimestamp implements ISingleSimulation{
 		{
 			this.logger.info("Processing generation "+i+ " of replicate run "+simulationNumber);
 			nextPopulation=nextPopulation.getNextGeneration(this.fitness,this.recGenerator);
+
+			// abort when the selected ones are fixed and the user demanded this step;
+			if(this.abortWhenSelectedFix && nextPopulation.areSelectedFixed(this.fitness))
+			{
+				new PopulationWriter(nextPopulation,this.outputDir,i,simulationNumber,this.logger).write();
+				break;
+			}
+
 			if(outputGenerations.contains(i)) new PopulationWriter(nextPopulation,this.outputDir,i,simulationNumber,this.logger).write();
-			
 		}
 	}
 }
