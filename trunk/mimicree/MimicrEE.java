@@ -9,6 +9,7 @@ import mimicree.misc.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.logging.Level;
+import java.util.Date;
 
 /**
  * @author robertkofler
@@ -18,36 +19,44 @@ public class MimicrEE {
 
 	/**
 	 * @param args
-	 * --mode simulate --haplotypes-g0 /Users/robertkofler/dev/MimicrEE/data/small/hap.small.g0 --additive /Users/robertkofler/dev/MimicrEE/data/small/additive-100 --threads 8 --recombination-rate /Users/robertkofler/dev/MimicrEE/data/small/rec4 --chromosome-definition '2=2L+2R,3=3L+3R'  --output-mode fixselected30 --replicate-runs 1 --output-dir /Users/robertkofler/dev/MimicrEE/data/output
 	 * 	 */
 	public static void main(String[] args) 
 	{
 
 		// Parse command lines to determine the analysis mode and the LOG
-		LinkedList<String> arguments=new LinkedList<String>(Arrays.asList(args));
+		LinkedList<String> rawarguments=new LinkedList<String>(Arrays.asList(args));
 		boolean detailedLog=false;
-		String mode="";	
-		
-		for(int i=0; i<arguments.size(); i++)
+		String mode="";
+		LinkedList<String> arguments=new LinkedList<String>();
+
+
+		while(rawarguments.size()>0)
 		{
-			String cu=arguments.get(i);
+
+			String cu=rawarguments.removeFirst();
             if(cu.equals("--detailed-log"))
             {
-            	arguments.remove(i);
             	detailedLog=true;
             }
             else if(cu.equals("--mode"))
             {
-            	arguments.remove(i);
-                mode = arguments.remove(i);
+
+                mode = rawarguments.removeFirst();
             }
+			else if(cu.equals("--version"))
+			{
+				printVersion();
+			}
             else if(cu.equals("--threads"))
             {		
-            	arguments.remove(i);
-            	int threadCount=Integer.parseInt(arguments.remove(i));
+
+            	int threadCount=Integer.parseInt(rawarguments.removeFirst());
             	MimicreeThreadPool.setThreads(threadCount);
             }
-            
+			else
+			{
+				       arguments.addLast(cu);
+			}
 		}
 		
         // Create a logger to System.err
@@ -99,6 +108,14 @@ public class MimicrEE {
         
 		logger.info("Thank you for using MimicrEE");
 	}
+
+	public static void printVersion()
+	{
+		String version="MimicrEE version 1.11; build "+String.format("%tc",new Date(System.currentTimeMillis()));
+		System.out.println(version);
+		System.exit(0);
+	}
+
 	
 	
 	public static String getGeneralHelpmessage()
