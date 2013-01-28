@@ -102,7 +102,8 @@ public class SimulationCommandLineParser {
 		sb.append("--epistasis				the epistatic fitness effect of SNPs\n");	
 		sb.append("--chromosome-definition			which chromosomes parts constitute a chromosome\n");
 		sb.append("--output-mode				either 1.) a coma separated list of generations to output\n");
-		sb.append("					or 2.) eg.: fixselected10; simulations will run until all selected loci are fixed\n");
+		sb.append("					or 2.) eg.: abortfixsel:10,20,30,40,50,60\n");
+		sb.append("					or 3.) eg.: fixselected10; simulations will run until all selected loci are fixed\n");
 		sb.append("					(storing output all 10 generations)\n");
 		sb.append("--replicate-runs			how often should the simulation be repeated\n");
 		sb.append("--simulate-selected-only		perform simulations only for the selected SNPs\n");
@@ -129,7 +130,7 @@ public class SimulationCommandLineParser {
 			simMode.setAbortWhenSelectedFixed(true);
 			
 		}
-		if(outputGenerationsRaw.toLowerCase().startsWith("abortselfix:"))
+		else if(outputGenerationsRaw.toLowerCase().startsWith("abortselfix:"))
 		{
 			String[] tmp2=outputGenerationsRaw.toLowerCase().split("abortselfix:");
 			String timestamps=tmp2[1];

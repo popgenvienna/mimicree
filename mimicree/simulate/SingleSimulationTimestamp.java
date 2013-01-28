@@ -53,7 +53,7 @@ public class SingleSimulationTimestamp implements ISingleSimulation{
 			this.logger.info("Processing generation "+i+ " of replicate run "+simulationNumber);
 			nextPopulation=nextPopulation.getNextGeneration(this.fitness,this.recGenerator);
 
-			// abort when the selected ones are fixed and the user demanded this step;
+			// abort when the selected ones are fixed
 			if(this.abortWhenSelectedFix && nextPopulation.areSelectedFixed(this.fitness))
 			{
 				new PopulationWriter(nextPopulation,this.outputDir,i,simulationNumber,this.logger).write();
