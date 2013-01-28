@@ -92,6 +92,7 @@ class SNPSuccession:
 	def isSelected(self):
 		return self.__snp.isSelected
 	
+	@property
 	def snp(self):
 		return self.__snp
 	
@@ -160,7 +161,7 @@ class SumReader:
 		b     = a.pop(0)
 		ancestralChar,derivedChar=b.split("/")
 		rawComment     = a.pop(0)
-		comParse=CommentParser(rawComment,majChar)
+		comParse=CommentParser(rawComment,ancestralChar)
 		comment=comParse.comment
 		isSel=comParse.isSelected
 		isAncestralSel=comParse.isAncestralSelected
@@ -254,7 +255,7 @@ class CommentParser:
 		s=float(a[1])
 		ancChar=self.__ancestralAllele
 		
-		if(majChar==w11):
+		if(ancChar==w11):
 			if(s < 0.0):
 				# A/G   A:-.1 -> A=1.0 G=0.9
 				return True

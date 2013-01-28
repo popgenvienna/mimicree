@@ -27,7 +27,6 @@ public class Population {
 	/**
 	 * Initialize a new population using a collection of diploid genomes, the recombination rate and a fitness function
 	 * @param genomes a collection of diploid genomes which will constitute the final population
-	 * @param recRate the recombination rate every specimen will have the same recombination rate
 	 * @param fitnessFunction the fitness function will decided the fitness of a specimen
 	 * @return
 	 */
@@ -49,7 +48,7 @@ public class Population {
 	 * Obtain the next generation of the population;
 	 * The next generation will depend on the environment as the environment determines
 	 * the fitness of any specimen and thus it's mating success
-	 * @param environment 
+
 	 * @return
 	 */
 	public Population getNextGeneration(FitnessFunction fitnessFunction, RecombinationGenerator recGenerator)

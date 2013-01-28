@@ -71,7 +71,7 @@ public class SimulationFramework {
 		ISingleSimulation sim;
 		if(simMode == SimulationMode.Timestamp)
 		{
-			sim=new SingleSimulationTimestamp(population,fitnessFunction,recGenerator,this.outputDir,simMode.getTimestamps(),this.logger);
+			sim=new SingleSimulationTimestamp(population,fitnessFunction,recGenerator,this.outputDir,simMode.getTimestamps(),simMode.abortWhenSelectedFixed(),this.logger);
 		}
 		else if(simMode == SimulationMode.FixSelected)
 		{

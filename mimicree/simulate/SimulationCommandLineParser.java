@@ -126,7 +126,33 @@ public class SimulationCommandLineParser {
 			ArrayList<Integer> ti=new ArrayList<Integer>();
 			ti.add(allTimestamp);
 			simMode.setTimestamps(ti);
+			simMode.setAbortWhenSelectedFixed(true);
 			
+		}
+		if(outputGenerationsRaw.toLowerCase().startsWith("abortselfix:"))
+		{
+			String[] tmp2=outputGenerationsRaw.toLowerCase().split("abortselfix:");
+			String timestamps=tmp2[1];
+
+			String [] tmp;
+			if(timestamps.contains(","))
+			{
+				tmp=timestamps.split(",");
+			}
+			else
+			{
+				tmp=new String[1];
+				tmp[0]=timestamps;
+			}
+			// Convert everything to int
+			ArrayList<Integer> ti=new ArrayList<Integer>();
+			for(String s :tmp)
+			{
+				ti.add(Integer.parseInt(s));
+			}
+			simMode=SimulationMode.Timestamp;
+			simMode.setTimestamps(ti);
+			simMode.setAbortWhenSelectedFixed(true);
 		}
 		else
 		{
@@ -148,6 +174,7 @@ public class SimulationCommandLineParser {
 			}
 			simMode=SimulationMode.Timestamp;
 			simMode.setTimestamps(ti);
+			simMode.setAbortWhenSelectedFixed(false);
 		}
 
 		
