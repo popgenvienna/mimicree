@@ -3,9 +3,9 @@ package io.haplotypes;
 import java.io.*;
 import java.util.*;
 
-import mimicree.data.Chromosome;
-import mimicree.data.GenomicPosition;
-import mimicree.data.haplotypes.*;
+import data.Chromosome;
+import data.GenomicPosition;
+import data.haplotypes.*;
 
 /**
  * Read only the SNPs from a haplotype file.

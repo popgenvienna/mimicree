@@ -3,7 +3,7 @@ package test.data;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import mimicree.data.fitness.AdditiveSNP;
+import data.fitness.AdditiveSNP;
 
 public class TestAdditiveSNP {
 

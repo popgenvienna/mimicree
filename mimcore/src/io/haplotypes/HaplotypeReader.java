@@ -2,8 +2,8 @@ package io.haplotypes;
 
 import java.util.*;
 
-import mimicree.data.BitArray.BitArray;
-import mimicree.data.haplotypes.*;
+import data.BitArray.BitArray;
+import data.haplotypes.*;
 import java.io.*;
 import java.util.zip.GZIPInputStream;
 

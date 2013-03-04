@@ -4,9 +4,9 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
-import mimicree.data.Chromosome;
-import mimicree.data.fitness.*;
-import mimicree.data.GenomicPosition;
+import data.Chromosome;
+import data.fitness.*;
+import data.GenomicPosition;
 
 public class EpistaticSNPReader {
 	private BufferedReader bf;

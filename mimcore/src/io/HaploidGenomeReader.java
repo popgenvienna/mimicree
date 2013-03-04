@@ -29,7 +29,7 @@ public class HaploidGenomeReader {
 		if(new File(inversionFile).exists())
 		{
 			this.logger.info("Detected an existing inversion file");
-			invs=new mimicree.io.inversion.InversionReader(inversionFile, haps.size(), logger).getInversions();
+			invs=new io.inversion.InversionReader(inversionFile, haps.size(), logger).getInversions();
 		}
 		else
 		{

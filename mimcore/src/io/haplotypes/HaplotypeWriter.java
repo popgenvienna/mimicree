@@ -1,6 +1,6 @@
 package io.haplotypes;
 
-import mimicree.data.haplotypes.*;
+import data.haplotypes.*;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;

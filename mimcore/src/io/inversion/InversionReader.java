@@ -4,7 +4,7 @@ package io.inversion;
 import java.util.*;
 import java.util.logging.Logger;
 
-import mimicree.data.*;
+import data.*;
 
 public class InversionReader {
 	private final int  haplotpyeCount;

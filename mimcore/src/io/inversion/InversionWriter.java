@@ -1,6 +1,6 @@
 package io.inversion;
 
-import mimicree.data.*;
+import data.*;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
