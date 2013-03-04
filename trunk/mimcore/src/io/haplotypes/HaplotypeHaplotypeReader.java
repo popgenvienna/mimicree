@@ -4,10 +4,10 @@ import java.util.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import mimicree.data.BitArray.*;
-import mimicree.data.haplotypes.*;
-import mimicree.data.Chromosome;
-import mimicree.data.GenomicPosition;
+import data.BitArray.*;
+import data.haplotypes.*;
+import data.Chromosome;
+import data.GenomicPosition;
 
 /*
  * Helper class of HaplotypeReader; Reads the haplotypes and stores them

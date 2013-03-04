@@ -2,7 +2,7 @@ package io.inversion;
 
 import java.io.*;
 import java.util.*;
-import mimicree.data.*;
+import data.*;
 
 
 public class InversionHaplotypeReader {

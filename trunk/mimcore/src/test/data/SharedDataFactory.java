@@ -1,15 +1,15 @@
 package test.data;
 
-import mimicree.data.*;
-import mimicree.data.GenomicPosition;
-import mimicree.data.haplotypes.SNP;
+import data.*;
+import data.GenomicPosition;
+import data.haplotypes.SNP;
 import java.util.*;
 import java.util.logging.Logger;
-import mimicree.data.haplotypes.SNPCollection;
-import mimicree.data.haplotypes.Haplotype;
-import mimicree.data.BitArray.*;
-import mimicree.data.recombination.RandomAssortment;
-import mimicree.data.fitness.*;
+import data.haplotypes.SNPCollection;
+import data.haplotypes.Haplotype;
+import data.BitArray.*;
+import data.recombination.RandomAssortment;
+import data.fitness.*;
 
 
 public class SharedDataFactory {

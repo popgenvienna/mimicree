@@ -1,10 +1,10 @@
 package io.haplotypes;
 
-import mimicree.data.Chromosome;
-import mimicree.data.GenomicPosition;
-import mimicree.data.statistic.*;
-import mimicree.data.haplotypes.SNPCollection;
-import mimicree.data.haplotypes.SNP;
+import data.Chromosome;
+import data.GenomicPosition;
+import data.statistic.*;
+import data.haplotypes.SNPCollection;
+import data.haplotypes.SNP;
 
 
 import java.util.*;

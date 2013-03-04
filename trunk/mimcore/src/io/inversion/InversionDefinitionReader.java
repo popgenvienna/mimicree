@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import mimicree.data.Chromosome;
-import mimicree.data.Inversion;
+import data.Chromosome;
+import data.Inversion;
 
 class InversionDefinitionReader {
 	private BufferedReader bf;
