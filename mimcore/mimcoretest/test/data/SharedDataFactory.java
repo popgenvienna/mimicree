@@ -192,7 +192,7 @@ public class SharedDataFactory {
 	 */
 	public static AdditiveSNP getAdditiveSNP_int1()
 	{
-		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2L"),5),'A',-0.1,0.5);
+		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2L"),5),'A',0.1,0.5);
 
 	}
 	
@@ -213,7 +213,7 @@ public class SharedDataFactory {
 	 */
 	public static AdditiveSNP getAdditiveSNP_domW11()
 	{
-		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2L"),6),'A',-0.1,0.0);
+		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2L"),6),'A',0.1,0.0);
 	}
 	
 	public static EpistaticSNP getEpistaticSNP_syn1()
@@ -221,7 +221,7 @@ public class SharedDataFactory {
 		ArrayList<EpistaticSubeffectSNP> es=new ArrayList<EpistaticSubeffectSNP>();
 		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'A'));
 		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2R"),1),'C'));
-		return new EpistaticSNP("pff",-0.1,es);
+		return new EpistaticSNP("pff",0.1,es);
 	}
 	
 	public static EpistaticSNP getEpistaticSNP_syn2()
@@ -229,7 +229,7 @@ public class SharedDataFactory {
 		ArrayList<EpistaticSubeffectSNP> es=new ArrayList<EpistaticSubeffectSNP>();
 		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'T'));
 		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2R"),10),'G'));
-		return new EpistaticSNP("pff",-0.1,es);
+		return new EpistaticSNP("pff",0.1,es);
 	}
 	
 	public static EpistaticSNP getEpistaticSNP_syn3()
@@ -237,7 +237,7 @@ public class SharedDataFactory {
 		ArrayList<EpistaticSubeffectSNP> es=new ArrayList<EpistaticSubeffectSNP>();
 		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2L"),1),'A'));
 		es.add(new EpistaticSubeffectSNP(new GenomicPosition(Chromosome.getChromosome("2R"),10),'G'));
-		return new EpistaticSNP("pff",-0.1,es);
+		return new EpistaticSNP("pff",0.1,es);
 	}
 	
 	/**
@@ -247,7 +247,7 @@ public class SharedDataFactory {
 	 */
 	public static AdditiveSNP getAdditiveSNP_domW22()
 	{
-		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2L"),7),'A',-0.1,1.0);
+		return new AdditiveSNP(new GenomicPosition(Chromosome.getChromosome("2L"),7),'A',0.1,1.0);
 	}
 	
 	public static DiploidGenome getDiploidGenome_11()

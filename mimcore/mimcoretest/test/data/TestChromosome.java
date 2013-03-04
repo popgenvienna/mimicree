@@ -12,19 +12,22 @@ public class TestChromosome {
 
 	@Test
 	public void test_chr1() {
+		Chromosome.resetChromosomes();
 		Chromosome c=Chromosome.getChromosome("2L");
 		assertEquals(c.toString(),"2L");
 	}
 	
 	@Test
 	public void test_chr2() {
-		Chromosome c=Chromosome.getChromosome("2L");
-		c=Chromosome.getChromosome("2R");
-		assertEquals(c.toString(),"2R");
+		Chromosome.resetChromosomes();
+		Chromosome c1=Chromosome.getChromosome("2L");
+		Chromosome c2=Chromosome.getChromosome("2R");
+		assertEquals(c2.toString(),"2R");
 	}
 	
 	@Test
 	public void test_chrcollection() {
+		Chromosome.resetChromosomes();
 		Chromosome.getChromosome("2L");
 		Chromosome.getChromosome("2R");
 		Chromosome.getChromosome("3L");
@@ -39,6 +42,7 @@ public class TestChromosome {
 	
 	@Test
 	public void test_influenceOfDefault() {
+		Chromosome.resetChromosomes();
 		Chromosome.getChromosome("2L");
 		Chromosome.getChromosome("2R");
 		Chromosome.getChromosome("3L");

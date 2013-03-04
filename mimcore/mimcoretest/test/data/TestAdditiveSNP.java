@@ -23,9 +23,9 @@ public class TestAdditiveSNP {
 	{
 		AdditiveSNP a=SharedDataFactory.getAdditiveSNP_int2();
 		assertEquals(a.getFitnessForGenotype(new char[]{'C','C'}), 1.0, 0.00000000001);
-		assertEquals(a.getFitnessForGenotype(new char[]{'G','G'}), 0.5, 0.00000000001);
-		assertEquals(a.getFitnessForGenotype(new char[]{'C','G'}), 0.75,0.00000000001);
-		assertEquals(a.getFitnessForGenotype(new char[]{'G','C'}), 0.75,0.00000000001);
+		assertEquals(a.getFitnessForGenotype(new char[]{'G','G'}), 1.5, 0.00000000001);
+		assertEquals(a.getFitnessForGenotype(new char[]{'C','G'}), 1.25,0.00000000001);
+		assertEquals(a.getFitnessForGenotype(new char[]{'G','C'}), 1.25,0.00000000001);
 	}
 	
 	@Test
