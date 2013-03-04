@@ -108,18 +108,19 @@ class Population:
                         
         
 parser = OptionParser()
-parser.add_option("--2Ne", dest="twone", help="the number of haplotypes")
-parser.add_option("--start-count",dest="startcount", help="the starting allele count")
+parser.add_option("--Ne", dest="ne", help="the number of diploid individuals")
 parser.add_option("-e",dest="h",help="the heterozygosity")
 parser.add_option("-s",dest="s",help="the selection coefficient")
+parser.add_option("-p",dest="p", help="start allele frquency")
 parser.add_option("--repeat-simulations",dest="repsim")
 
 (options, args) = parser.parse_args()
 repsim = int(options.repsim)
-twone  = int(options.twone)
+twone  = int(options.ne)*2
 s      = float(options.s)
 h      = float(options.h)
-startc = int(options.startcount)
+p      = float(options.p)
+startc = int(twone*p)
 
 
 genfix=[]

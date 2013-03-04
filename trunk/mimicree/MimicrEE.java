@@ -111,7 +111,7 @@ public class MimicrEE {
 
 	public static void printVersion()
 	{
-		String version="MimicrEE version 1.11; build "+String.format("%tc",new Date(System.currentTimeMillis()));
+		String version="MimicrEE version 1.12; build "+String.format("%tc",new Date(System.currentTimeMillis()));
 		System.out.println(version);
 		System.exit(0);
 	}

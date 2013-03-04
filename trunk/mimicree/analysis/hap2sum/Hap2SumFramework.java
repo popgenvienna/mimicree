@@ -41,8 +41,8 @@ public class Hap2SumFramework {
 	
 	public void run()
 	{
-		ArrayList<PopulationAlleleCount> pac = new mimicree.io.haplotypes.PopulationAlleleCountReader(inputFiles, logger).readPopulations();
 		FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistaticFile,this.logger).loadFitnessFunction();
+		ArrayList<PopulationAlleleCount> pac = new mimicree.io.haplotypes.PopulationAlleleCountReader(inputFiles, logger).readPopulations();
 		new mimicree.io.misc.SumWriter(this.outputFile, this.logger).write(pac, fitnessFunction);
 	}
 

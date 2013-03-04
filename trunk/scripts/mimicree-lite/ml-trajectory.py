@@ -4,9 +4,78 @@ import random
 from optparse import OptionParser, OptionGroup
 import collections
 
+
+
+class SelectionFecundity:
+        def __init__(self,s,h):
+                self.s=s
+                self.h=h
+                self.geno2fit={0:1 , 1:1+h*s , 2:1+s}
+        
+        def nextGeneration(self,twone,population):
+                totfitsum=0
+                diploids=population.getIndividuals()
+                cumsum=[]
+                for dipl in diploids:
+                        genot=dipl.get_genotype()
+                        totfitsum+=self.geno2fit[genot]
+                        cumsum.append(totfitsum)
+                ne=int(twone/2.0)
+                novelpop=[]
+                for i in range(0,ne):
+                        r1,r2=(random.random()*totfitsum,random.random()*totfitsum)
+                        i1,i2=(self.__get_index(cumsum,r1),self.__get_index(cumsum,r2))
+                        while(i1==i2):
+                                # exclude selfing
+                                r2=random.random()*totfitsum
+                                i2=self.__get_index(cumsum,r2)
+                        d1,d2=diploids[i1],diploids[i2]
+                        genotype=d1.get_gamete()+d2.get_gamete()
+                        novelpop.append(Diploid(genotype))
+                return Population(novelpop)
+
+        def __get_index(self,cumsum,randnum):
+                for i, cs in enumerate(cumsum):
+                        if randnum< cs:
+                                return i
+                raise ValueError("fitness out of range; max possible "+str(cumsum[-1])+" found " + str(randnum) )
+
+
+
+
+class SelectionViability:
+        def __init__(self,s,h):
+                self.s=s
+                self.h=h
+                maxfit=max(1.0, 1+h*s, 1+s)
+                self.survivalprob={0: (1.0/maxfit) , 1: (1+h*s)/maxfit , 2: (1+s)/maxfit}
+        
+        def nextGeneration(self,twone,population):
+                diploids=population.getIndividuals()
+                survivors=[]
+                for dipl in diploids:
+                        genot=dipl.get_genotype()
+                        survivalprob = self.survivalprob[genot]
+                        if random.random()< survivalprob:
+                                survivors.append(dipl)
+                ne=int(twone/2.0)
+                novelpop=[]
+                survivorcount=len(survivors)
+                for i in range(0,ne):
+                        i1,i2=(int(random.random()*survivorcount) , int(random.random()*survivorcount))
+                        while(i1==i2):
+                                i2=int(random.random()*survivorcount)
+ 
+                        d1,d2=survivors[i1],survivors[i2]
+                        genotype=d1.get_gamete()+d2.get_gamete()
+                        novelpop.append(Diploid(genotype))
+                return Population(novelpop)
+                
+
 class Diploid:
         def __init__(self,genotype):
                 self.__genotype=genotype
+                
                 
                 
         def get_genotype(self):
@@ -44,6 +113,9 @@ class Population:
                         genosum+=d.get_genotype()
                 self.__genosum=genosum
                 
+        def getIndividuals(self):
+                return self.__diploids
+                
 
         @classmethod
         def initialize_population(cls,twone,ns):
@@ -77,36 +149,12 @@ class Population:
                 twone=self.__twone
                 gensum=float(self.__genosum)
                 return gensum/twone
-                        
         
-        def getNextGeneration(self,twone,s,h):
-                geno2fit={0:1 , 1:1+h*s , 2:1+s}
-                totfitsum=0
-                diploids=self.__diploids
-                cumsum=[]
-                for dipl in diploids:
-                        genot=dipl.get_genotype()
-                        totfitsum+=geno2fit[genot]
-                        cumsum.append(totfitsum)
-                ne=int(twone/2.0)
-                novelpop=[]
-                for i in range(0,ne):
-                        r1,r2=(random.random()*totfitsum,random.random()*totfitsum)
-                        i1,i2=(self.__get_index(cumsum,r1),self.__get_index(cumsum,r2))
-                        while(i1==i2):
-                                # exclude selfing
-                                r2=random.random()*totfitsum
-                                i2=self.__get_index(cumsum,r2)
-                        d1,d2=diploids[i1],diploids[i2]
-                        genotype=d1.get_gamete()+d2.get_gamete()
-                        novelpop.append(Diploid(genotype))
-                return Population(novelpop)
+        def getNextGeneration(self,selectionregime,twone):
+                nextGen=selectionregime.nextGeneration(twone,self)
+                return nextGen
+        
 
-        def __get_index(self,cumsum,randnum):
-                for i, cs in enumerate(cumsum):
-                        if randnum< cs:
-                                return i
-                raise ValueError("fitness out of range; max possible "+str(cumsum[-1])+" found " + str(randnum) )
                         
                 
                         
@@ -127,29 +175,44 @@ def pad_trajectories(trajectories):
 
 
 parser = OptionParser()
-parser.add_option("--2Ne", dest="twone", help="the number of haplotypes")
-parser.add_option("--start-count",dest="startcount", help="the starting allele count")
+parser.add_option("--Ne", dest="ne", help="the number of diploid individuals")
 parser.add_option("-e",dest="h",help="the heterozygosity")
 parser.add_option("-s",dest="s",help="the selection coefficient")
+parser.add_option("-p",dest="p", help="start allele frquency")
+parser.add_option("--viability", action="store_true",dest="viability",help="Flag switch on viability selection")
 parser.add_option("--repeat-simulations",dest="repsim")
-
+parser.add_option("--max-generations",dest="maxgen")
 (options, args) = parser.parse_args()
 repsim = int(options.repsim)
-twone  = int(options.twone)
+twone  = int(options.ne)*2
 s      = float(options.s)
 h      = float(options.h)
-startc = int(options.startcount)
+p      = float(options.p)
+maxgen = float(options.maxgen)
+startc = int(twone*p)
+viability=bool(options.viability)
+
+selfunc=None
+if(viability):
+        selfunc=SelectionViability(s,h)
+else:
+        selfunc=SelectionFecundity(s,h)
+
 
 
 trajectories=[]
-
 for i in range(0,repsim):
         pop=Population.initialize_population(twone,startc)
         freqs=[]
         freqs.append(pop.get_frequency())
+        counter=0
         while(not pop.isfixed()):
-                pop=pop.getNextGeneration(twone,s,h)
+                pop=pop.getNextGeneration(selfunc,twone)
                 freqs.append(pop.get_frequency())
+                if counter>=maxgen:
+                        break        
+                counter+=1
+                
         trajectories.append(freqs)
 
 pad_trajectories(trajectories)
@@ -160,6 +223,6 @@ for i in range(0,maxgen):
         for k in range(0,repsim):
                 topr.append(trajectories[k][i])
         toprstr="\t".join(map(str,topr))
-        print topr
+        print toprstr
 
 
