@@ -1,7 +1,7 @@
 package test.data;
 
-import mimicree.data.*;
-import mimicree.data.LD.*;
+import data.*;
+import data.LD.*;
 import java.util.*;
 import static org.junit.Assert.*;
 import org.junit.Test;

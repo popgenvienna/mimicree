@@ -2,9 +2,9 @@ package test.data;
 
 import java.util.ArrayList;
 import org.junit.Test;
-import mimicree.data.recombination.*;
-import mimicree.data.*;
-import mimicree.data.haplotypes.*;
+import data.recombination.*;
+import data.*;
+import data.haplotypes.*;
 import static org.junit.Assert.*;
 
 

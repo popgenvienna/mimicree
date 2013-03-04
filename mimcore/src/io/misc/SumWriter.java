@@ -4,11 +4,11 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
-import mimicree.data.haplotypes.SNPCollection;
-import mimicree.data.haplotypes.SNP;
-import mimicree.data.statistic.*;
-import mimicree.data.fitness.*;
-import mimicree.data.GenomicPosition;
+import data.haplotypes.SNPCollection;
+import data.haplotypes.SNP;
+import data.statistic.*;
+import data.fitness.*;
+import data.GenomicPosition;
 
 public class SumWriter {
 	public final String outputFile;

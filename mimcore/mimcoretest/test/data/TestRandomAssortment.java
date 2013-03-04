@@ -3,8 +3,8 @@ package test.data;
 import java.util.ArrayList;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import mimicree.data.recombination.*;
-import mimicree.data.*;
+import data.recombination.*;
+import data.*;
 import static org.junit.Assert.*;
 
 

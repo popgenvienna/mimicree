@@ -2,8 +2,8 @@ package test.data;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import mimicree.data.*;
-import mimicree.data.fitness.EpistaticSNP;
+import data.*;
+import data.fitness.EpistaticSNP;
 
 public class TestEpistaticSNP {
 

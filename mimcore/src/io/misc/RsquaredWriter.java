@@ -1,7 +1,7 @@
 package io.misc;
 
 import java.io.*;
-import mimicree.data.LD.*;
+import data.LD.*;
 
 public class RsquaredWriter {
 	

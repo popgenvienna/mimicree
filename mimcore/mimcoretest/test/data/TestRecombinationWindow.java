@@ -1,9 +1,9 @@
 package test.data;
 
 import static org.junit.Assert.*;
-import mimicree.data.Chromosome;
-import  mimicree.data.recombination.RecombinationWindow;
-import mimicree.data.GenomicPosition;
+import data.Chromosome;
+import data.recombination.RecombinationWindow;
+import data.GenomicPosition;
 
 import org.junit.Test;
 

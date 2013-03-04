@@ -1,10 +1,10 @@
 package test.data;
 
 import java.util.*;
-import mimicree.data.fitness.MatingFunction;
+import data.fitness.MatingFunction;
 import static org.junit.Assert.*;
 import org.junit.Test;
-import mimicree.data.*;
+import data.*;
 
 
 public class TestMatingFunction {
