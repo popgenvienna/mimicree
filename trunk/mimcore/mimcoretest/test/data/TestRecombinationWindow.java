@@ -39,7 +39,7 @@ public class TestRecombinationWindow {
 	
 	@Test
 	public void test_randomPosition() {
-		RecombinationWindow rw=new RecombinationWindow(Chromosome.getChromosome("2L"),10,15,50);
+		RecombinationWindow rw=new RecombinationWindow(Chromosome.getChromosome("2L"),10,15,30);
 		
 		for(int i=0; i<100; i++)
 		{

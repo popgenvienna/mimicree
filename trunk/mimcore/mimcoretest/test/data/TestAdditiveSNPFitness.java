@@ -40,8 +40,8 @@ public class TestAdditiveSNPFitness {
 		
 		
 		assertEquals(fit.getAdditiveFitness(SharedDataFactory.getDiploidGenome_11()), 1.0, 0.000000000001);
-		assertEquals(fit.getAdditiveFitness(SharedDataFactory.getDiploidGenome_00()), 0.55, 0.000000000001);
-		assertEquals(fit.getAdditiveFitness(SharedDataFactory.getDiploidGenome_10()), 0.7875, 0.000000000001);
+		assertEquals(fit.getAdditiveFitness(SharedDataFactory.getDiploidGenome_00()), 1.65, 0.000000000001);
+		assertEquals(fit.getAdditiveFitness(SharedDataFactory.getDiploidGenome_10()), 1.3125, 0.000000000001);
 	}
 	
 	@Test
@@ -55,8 +55,8 @@ public class TestAdditiveSNPFitness {
 		
 		
 		assertEquals(fit.getAdditiveFitness(SharedDataFactory.getDiploidGenome_11()), 1.0, 0.000000000001);
-		assertEquals(fit.getAdditiveFitness(SharedDataFactory.getDiploidGenome_00()), 0.605, 0.000000000001);
-		assertEquals(fit.getAdditiveFitness(SharedDataFactory.getDiploidGenome_10()), 0.7875, 0.000000000001);
+		assertEquals(fit.getAdditiveFitness(SharedDataFactory.getDiploidGenome_00()), 1.815, 0.000000000001);
+		assertEquals(fit.getAdditiveFitness(SharedDataFactory.getDiploidGenome_10()), 1.3125, 0.000000000001);
 	}
 
 }

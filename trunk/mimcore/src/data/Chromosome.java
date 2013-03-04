@@ -77,4 +77,10 @@ public class Chromosome implements Comparable<Chromosome> {
 	{
 		return new ArrayList<Chromosome>(buffer.values());
 	}
+
+	public static void resetChromosomes()
+	{
+		buffer=new HashMap<String,Chromosome>();
+	}
+
 }
