@@ -1,10 +1,10 @@
 package io.misc;
 
 
-import mimicree.data.Chromosome;
-import mimicree.data.GenomicPosition;
-import mimicree.data.haplotypes.*;
-import mimicree.data.BitArray.*;
+import data.Chromosome;
+import data.GenomicPosition;
+import data.haplotypes.*;
+import data.BitArray.*;
 
 import java.io.*;
 import java.util.ArrayList;

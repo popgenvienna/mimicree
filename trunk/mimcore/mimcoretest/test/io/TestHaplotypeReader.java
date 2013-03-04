@@ -3,9 +3,9 @@ package test.io;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import mimicree.data.haplotypes.Haplotype;
-import mimicree.io.haplotypes.HaplotypeReader;
-import mimicree.data.haplotypes.SNPCollection;
+import data.haplotypes.Haplotype;
+import io.haplotypes.HaplotypeReader;
+import data.haplotypes.SNPCollection;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -26,7 +26,7 @@ public class TestHaplotypeReader {
 				"X\t50\tT\tT/C\tCC TC CC TT CT\n";
 
 		;
-		h=new HaplotypeReader(input,mimicree.test.data.SharedDataFactory.getNullLogger(),true).getHaplotypes();
+		h=new HaplotypeReader(input,  test.data.SharedDataFactory.getNullLogger(),true).getHaplotypes();
 	}
 	
 	@Test

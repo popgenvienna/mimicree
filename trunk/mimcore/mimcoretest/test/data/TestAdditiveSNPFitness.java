@@ -2,7 +2,7 @@ package test.data;
 
 import static org.junit.Assert.*;
 import java.util.*;
-import mimicree.data.fitness.*;
+import data.fitness.*;
 import org.junit.Test;
 
 public class TestAdditiveSNPFitness {

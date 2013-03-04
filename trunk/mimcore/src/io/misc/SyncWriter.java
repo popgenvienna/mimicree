@@ -4,9 +4,9 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
-import mimicree.data.haplotypes.SNPCollection;
-import mimicree.data.haplotypes.SNP;
-import mimicree.data.statistic.*;
+import data.haplotypes.SNPCollection;
+import data.haplotypes.SNP;
+import data.statistic.*;
 
 public class SyncWriter {
 	public final String outputFile;
