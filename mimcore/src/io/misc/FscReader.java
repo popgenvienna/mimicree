@@ -101,15 +101,15 @@ public class FscReader {
 
         ArrayList<SNP> snps=new ArrayList<SNP>();
 
-        // Detect minor and major allele
+        // Detect ancestral and derived allele
         // 0 is ancestral (refchar) 1 is derived most are zero and a few are 1 (according to popgen expectation)
         for(int i=0; i < positions.size();i++)
         {
 
-            char majorAllele=this.refChar;  //A
-			char minorAllele=this.derivedChar; //C
+            char ancestralAllele=this.refChar;  //A
+			char derivedAllele=this.derivedChar; //C
             int counter=0;
-            SNP s = new SNP(new GenomicPosition(chromosome,positions.get(i)),this.refChar,majorAllele,minorAllele);
+            SNP s = new SNP(new GenomicPosition(chromosome,positions.get(i)),this.refChar,ancestralAllele,derivedAllele);
             snps.add(s);
         }
 

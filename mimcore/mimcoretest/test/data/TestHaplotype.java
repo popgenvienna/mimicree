@@ -88,25 +88,25 @@ public class TestHaplotype {
 	
 	
 	@Test
-	public void test_hasMajor()
+	public void test_hasAncestral()
 	{
 		SNPCollection s=SharedDataFactory.getSortedSNPCollection();
 		BitArrayBuilder b=new BitArrayBuilder(12);
 		b.setBit(0); b.setBit(10); b.setBit(11); 
 		Haplotype h=new Haplotype(b.getBitArray(),s);
 		
-		assertTrue(h.hasMajor(0));
-		assertFalse(h.hasMajor(1));
-		assertFalse(h.hasMajor(2));
-		assertFalse(h.hasMajor(3));
-		assertFalse(h.hasMajor(4));
-		assertFalse(h.hasMajor(5));
-		assertFalse(h.hasMajor(6));
-		assertFalse(h.hasMajor(7));
-		assertFalse(h.hasMajor(8));
-		assertFalse(h.hasMajor(9));
-		assertTrue(h.hasMajor(10));
-		assertTrue(h.hasMajor(11));
+		assertTrue(h.hasAncestral(0));
+		assertFalse(h.hasAncestral(1));
+		assertFalse(h.hasAncestral(2));
+		assertFalse(h.hasAncestral(3));
+		assertFalse(h.hasAncestral(4));
+		assertFalse(h.hasAncestral(5));
+		assertFalse(h.hasAncestral(6));
+		assertFalse(h.hasAncestral(7));
+		assertFalse(h.hasAncestral(8));
+		assertFalse(h.hasAncestral(9));
+		assertTrue(h.hasAncestral(10));
+		assertTrue(h.hasAncestral(11));
 	}
 	
 	

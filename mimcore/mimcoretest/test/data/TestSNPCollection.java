@@ -83,8 +83,8 @@ public class TestSNPCollection {
 		assertEquals(s.genomicPosition().position(), 2);
 		assertEquals(s.genomicPosition().chromosome().toString(),"2L");
 		assertEquals(s.referenceCharacter(),'G');
-		assertEquals(s.majorAllele(),'G');
-		assertEquals(s.minorAllele(),'C');
+		assertEquals(s.ancestralAllele(),'G');
+		assertEquals(s.derivedAllele(),'C');
 		
 		
 		//public static SNP s11=new SNP(new GenomicPosition(Chromosome.getChromosome("3R"),1112),'C','G','C');
@@ -92,8 +92,8 @@ public class TestSNPCollection {
 		assertEquals(s.genomicPosition().position(), 1112);
 		assertEquals(s.genomicPosition().chromosome().toString(),"3R");
 		assertEquals(s.referenceCharacter(),'C');
-		assertEquals(s.majorAllele(),'G');
-		assertEquals(s.minorAllele(),'C');
+		assertEquals(s.ancestralAllele(),'G');
+		assertEquals(s.derivedAllele(),'C');
 	}
 	
 	@Test

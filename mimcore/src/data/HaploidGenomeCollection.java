@@ -41,7 +41,7 @@ public class HaploidGenomeCollection {
 		double total = ((double)genomes.size());
 		for(HaploidGenome g: genomes)
 		{
-			if(g.getSNPHaplotype().hasMajor(index)) countMaj++;
+			if(g.getSNPHaplotype().hasAncestral(index)) countMaj++;
 		}
 		return ((double)countMaj)/total;
 	}
@@ -58,23 +58,23 @@ public class HaploidGenomeCollection {
 	}
 	
 	/**
-	 * Calculate the joint population frequency of the two major alleles of the given SNPs
+	 * Calculate the joint population frequency of the two ancestral alleles of the given SNPs
 	 * @param positionA
 	 * @param positionB
 	 * @return
 	 */
 	public double pAB(GenomicPosition positionA, GenomicPosition positionB)
 	{
-		int countMaj=0;
+		int countAnc=0;
 		double total = ((double)this.haploidGenomes.size());
 		int indexA=this.snpCollection.getIndexforPosition(positionA);
 		int indexB=this.snpCollection.getIndexforPosition(positionB);
 		
 		for(HaploidGenome g: this.haploidGenomes)
 		{
-			if(g.getSNPHaplotype().hasMajor(indexA) && g.getSNPHaplotype().hasMajor(indexB)) countMaj++;
+			if(g.getSNPHaplotype().hasAncestral(indexA) && g.getSNPHaplotype().hasAncestral(indexB)) countAnc++;
 		}
-		return ((double)countMaj)/total;
+		return ((double)countAnc)/total;
 	}
 	
 	/**

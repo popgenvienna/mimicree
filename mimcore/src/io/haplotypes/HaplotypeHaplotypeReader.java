@@ -46,7 +46,7 @@ class HaplotypeHaplotypeReader {
 			// Get the index of the SNP in the haplotype collection
 			int index=snpcol.getIndexforPosition(hc.pos);
 			// SNP only stores characters in uppercase as well as the haplotype collection
-			char maj=snpcol.getSNPforPosition(hc.pos).majorAllele();
+			char maj=snpcol.getSNPforPosition(hc.pos).ancestralAllele();
 			
 			// Check for every haplotype SNP state whether it agrees with the major allele, if so set the bit to 1 else (minor allele) leave the default (0)
 			for(int i=0; i<hc.hapList.size(); i++)

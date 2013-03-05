@@ -40,7 +40,7 @@ public class AdditiveSNP {
 			// heterozygous  
 			return (1.0 + h*s);
 		}
-		else if((allele1==allele2) && (allele1 != w11char || allele2 != w11char))
+		else if((allele1==allele2) && (allele1 != w11char|| allele2 != w11char))
 		{
 			// homozygous for the other allele w22
 			return (1.0 + s);

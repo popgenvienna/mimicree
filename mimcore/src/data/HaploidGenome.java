@@ -22,9 +22,9 @@ public class HaploidGenome {
 		return haplotype.getAllele(position);
 	}
 	
-	public boolean hasMajor(GenomicPosition position)
+	public boolean hasAncestral(GenomicPosition position)
 	{
-		return haplotype.hasMajor(position);
+		return haplotype.hasAncestral(position);
 	}
 	
 	public Inversion getInversionAllele(GenomicPosition position)

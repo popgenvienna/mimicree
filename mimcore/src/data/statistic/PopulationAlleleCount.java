@@ -5,13 +5,13 @@ import data.haplotypes.SNP;
 
 public class PopulationAlleleCount {
 	private final SNPCollection snpcol;
-	private final int[] majorCount;
-	private final int[] minorCount;
-	public PopulationAlleleCount(SNPCollection snpcol, int[] majorCount, int[] minorCount)
+	private final int[] ancestralCount;
+	private final int[] derivedCount;
+	public PopulationAlleleCount(SNPCollection snpcol, int[] ancestralCount, int[] derivedCount)
 	{
 		this.snpcol=snpcol;
-		this.majorCount=majorCount;
-		this.minorCount=minorCount;
+		this.ancestralCount=ancestralCount;
+		this.derivedCount=derivedCount;
 	}
 
 	
@@ -20,14 +20,14 @@ public class PopulationAlleleCount {
 		return this.snpcol;
 	}
 	
-	public int majorCount(int index)
+	public int ancestralCount(int index)
 	{
-		return this.majorCount[index];
+		return this.ancestralCount[index];
 	}
 	
-	public int minorCount(int index)
+	public int derivedCount(int index)
 	{
-		return this.minorCount[index];
+		return this.derivedCount[index];
 	}
 	
 	
@@ -35,13 +35,13 @@ public class PopulationAlleleCount {
 	{
 		int toret=0;
 		SNP s=snpcol.getSNPforIndex(index);
-		if(s.majorAllele()==toCount)
+		if(s.ancestralAllele()==toCount)
 		{
-			toret=majorCount[index];
+			toret=ancestralCount[index];
 		}
-		else if(s.minorAllele()==toCount)
+		else if(s.derivedAllele()==toCount)
 		{
-			toret=minorCount[index];
+			toret=derivedCount[index];
 		}
 		return toret;
 	}
