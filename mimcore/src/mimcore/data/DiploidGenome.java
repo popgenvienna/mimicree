@@ -1,4 +1,4 @@
-package mimcore.data;
+package data;
 
 import data.HaploidGenome;
 
