@@ -43,8 +43,8 @@ class SinglePopulationAlleleCountReader {
 		{
 			int index=snpcol.getIndexforPosition(hc.pos);
 			SNP s=snpcol.getSNPforIndex(index);
-			int mac=getCount(hc.hapList,s.majorAllele());
-			int mic=getCount(hc.hapList,s.minorAllele());
+			int mac=getCount(hc.hapList,s.ancestralAllele());
+			int mic=getCount(hc.hapList,s.derivedAllele());
 			majorCount[index]=mac;
 			minorCount[index]=mic;
 		}

@@ -15,15 +15,15 @@ import data.GenomicPosition;
 public class SNP implements Comparable<SNP>{
 	private final GenomicPosition genpos;
 	private final char referenceCharacter;
-	private final char majorAllele;
-	private final char minorAllele;
+	private final char ancestralAllele;
+	private final char derivedAllele;
 	
-	public SNP(GenomicPosition genpos, char referenceCharacter, char majorAllele,char minorAllele)
+	public SNP(GenomicPosition genpos, char referenceCharacter, char ancestralAllele,char derivedAllele)
 	{
 		this.genpos=genpos;
 		this.referenceCharacter=Character.toUpperCase(referenceCharacter);
-		this.majorAllele=Character.toUpperCase(majorAllele);
-		this.minorAllele=Character.toUpperCase(minorAllele);
+		this.ancestralAllele=Character.toUpperCase(ancestralAllele);
+		this.derivedAllele=Character.toUpperCase(derivedAllele);
 	}
 
 	/**
@@ -45,21 +45,21 @@ public class SNP implements Comparable<SNP>{
 	}
 	
 	/**
-	 * return the major allele of the SNP
+	 * return the ancestral allele of the SNP
 	 * @return
 	 */
-	public char majorAllele()
+	public char ancestralAllele()
 	{
-		return this.majorAllele;
+		return this.ancestralAllele;
 	}
 	
 	/**
-	 * return the minor allele of the SNP
+	 * return the derived allele of the SNP
 	 * @return
 	 */
-	public char minorAllele()
+	public char derivedAllele()
 	{
-		return this.minorAllele;
+		return this.derivedAllele;
 	}
 	
 	@Override 
@@ -70,7 +70,7 @@ public class SNP implements Comparable<SNP>{
 	@Override
 	public String toString()
 	{
-		return this.genpos.toString()+" "+this.majorAllele+"/"+this.minorAllele;
+		return this.genpos.toString()+" "+this.ancestralAllele+"/"+this.derivedAllele;
 	}
 	
 	

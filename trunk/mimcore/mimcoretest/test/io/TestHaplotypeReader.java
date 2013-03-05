@@ -68,21 +68,21 @@ public class TestHaplotypeReader {
 	@Test
 	public void test_snpcol_majorallele() {
 		SNPCollection sc=h.get(0).getSNPCollection();
-		assertEquals(sc.getSNPforIndex(0).majorAllele(),'A');
-		assertEquals(sc.getSNPforIndex(1).majorAllele(),'C');
-		assertEquals(sc.getSNPforIndex(2).majorAllele(),'T');
-		assertEquals(sc.getSNPforIndex(3).majorAllele(),'G');
-		assertEquals(sc.getSNPforIndex(4).majorAllele(),'T');
+		assertEquals(sc.getSNPforIndex(0).ancestralAllele(),'A');
+		assertEquals(sc.getSNPforIndex(1).ancestralAllele(),'C');
+		assertEquals(sc.getSNPforIndex(2).ancestralAllele(),'T');
+		assertEquals(sc.getSNPforIndex(3).ancestralAllele(),'G');
+		assertEquals(sc.getSNPforIndex(4).ancestralAllele(),'T');
 	}
 
 	@Test
 	public void test_snpcol_minorallele() {
 		SNPCollection sc=h.get(0).getSNPCollection();
-		assertEquals(sc.getSNPforIndex(0).minorAllele(),'G');
-		assertEquals(sc.getSNPforIndex(1).minorAllele(),'G');
-		assertEquals(sc.getSNPforIndex(2).minorAllele(),'A');
-		assertEquals(sc.getSNPforIndex(3).minorAllele(),'T');
-		assertEquals(sc.getSNPforIndex(4).minorAllele(),'C');
+		assertEquals(sc.getSNPforIndex(0).derivedAllele(),'G');
+		assertEquals(sc.getSNPforIndex(1).derivedAllele(),'G');
+		assertEquals(sc.getSNPforIndex(2).derivedAllele(),'A');
+		assertEquals(sc.getSNPforIndex(3).derivedAllele(),'T');
+		assertEquals(sc.getSNPforIndex(4).derivedAllele(),'C');
 	}
 	
 	@Test

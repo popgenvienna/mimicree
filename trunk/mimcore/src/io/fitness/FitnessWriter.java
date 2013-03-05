@@ -43,10 +43,7 @@ public class FitnessWriter {
 	
 
 	
-	/**
-	 * Write the inversion-haplotypes of an inversion file
-	 * @param inversions
-	 */
+
 	private void writeFitness(ArrayList<Specimen> specimens)
 	{
 

@@ -37,13 +37,7 @@ public class RecombinationEvent {
 		return new HaploidGenome(hapSNP,hapInv);
 	}
 	
-	/**
-	 * Compute a recombined SNP haplotype
-	 * @param crossovers
-	 * @param randas
-	 * @param genome
-	 * @return
-	 */
+
 	public Haplotype getCrossoverHaplotype(Haplotype haplotypeA, Haplotype haplotypeB)
 	{
 
@@ -78,18 +72,18 @@ public class RecombinationEvent {
 				isHaplotypeA= !isHaplotypeA;
 			}
 			
-			boolean majorHaplotype=false;
+			boolean ancestralHaplotype=false;
 			if(isHaplotypeA)
 			{
-				majorHaplotype=haplotypeA.hasMajor(i);
+				ancestralHaplotype=haplotypeA.hasAncestral(i);
 			}
 			else
 			{
-				majorHaplotype=haplotypeB.hasMajor(i);
+				ancestralHaplotype=haplotypeB.hasAncestral(i);
 			}
 			
 			// Set the major haplotype bit if positive
-			if(majorHaplotype) newHap.setBit(i);
+			if(ancestralHaplotype) newHap.setBit(i);
 			// else leave the default => no haplotype
 		}
 		return new Haplotype(newHap.getBitArray(),scol);

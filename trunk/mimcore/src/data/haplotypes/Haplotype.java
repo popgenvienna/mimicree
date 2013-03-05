@@ -33,32 +33,32 @@ public class Haplotype {
 	public char getAllele(GenomicPosition position)
 	{
 		int index=snpcollection.getIndexforPosition(position);
-		boolean isMajorAllele=haplotype.hasBit(index);
+		boolean isAncestralAllele=haplotype.hasBit(index);
 		SNP snp=snpcollection.getSNPforIndex(index);
 		
 		// Retrieve the major allele at the given position if the bit is set.
-		if(isMajorAllele)
+		if(isAncestralAllele)
 		{
-			return snp.majorAllele();
+			return snp.ancestralAllele();
 		}
 		else
 		{
-			return snp.minorAllele();
+			return snp.derivedAllele();
 		}
 	}
 	
 	/**
-	 * Is the major allele set at the given index
+	 * Is the Ancestral allele set at the given index
 	 * @param index
 	 * @return
 	 */
-	public boolean hasMajor(int index)
+	public boolean hasAncestral(int index)
 	{
 		return haplotype.hasBit(index);
 	}
 	
 	
-	public boolean hasMajor(GenomicPosition position)
+	public boolean hasAncestral(GenomicPosition position)
 	{
 		int index=snpcollection.getIndexforPosition(position);
 		return haplotype.hasBit(index);
@@ -72,13 +72,13 @@ public class Haplotype {
 	public char getAllele(int index)
 	{
 		SNP snp=this.snpcollection.getSNPforIndex(index);
-		if(hasMajor(index))
+		if(hasAncestral(index))
 		{
-			return snp.majorAllele();
+			return snp.ancestralAllele();
 		}
 		else
 		{
-			return snp.minorAllele();
+			return snp.derivedAllele();
 		}
 	}
 	
@@ -118,7 +118,7 @@ public class Haplotype {
 			if(filter.contains(s.genomicPosition()))
 			{
 				filteredSNPs.add(s);
-				if(this.hasMajor(i)) bitBuilder.setBit(newIndex);
+				if(this.hasAncestral(i)) bitBuilder.setBit(newIndex);
 				newIndex++;
 			}
 		}

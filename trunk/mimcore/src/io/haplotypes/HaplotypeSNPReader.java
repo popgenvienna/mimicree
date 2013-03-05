@@ -97,10 +97,10 @@ class HaplotypeSNPReader {
 		//3L	13283707	T	G/T	GT GG GG GG
 		String[] a =line.split("\t");
 		char ref=a[2].charAt(0);
-		char maj=a[3].charAt(0);
-		char min=a[3].charAt(2);
+		char anc=a[3].charAt(0);    // ancestral allele
+		char der=a[3].charAt(2);    // derived allele
 		GenomicPosition genpos=new GenomicPosition(Chromosome.getChromosome(a[0]),Integer.parseInt(a[1]));
-		return new SNP(genpos,ref,maj,min);
+		return new SNP(genpos,ref,anc,der);
 	}
 	
 	

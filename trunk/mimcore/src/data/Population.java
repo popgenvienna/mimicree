@@ -92,8 +92,8 @@ public class Population {
 		int hapCount=this.specimen.size()*2;
 		for(Specimen spec: this.specimen)
 		{
-			if(spec.getGenome().getHaplotypeA().hasMajor(position)) countMajor++;
-			if(spec.getGenome().getHaplotypeB().hasMajor(position)) countMajor++;
+			if(spec.getGenome().getHaplotypeA().hasAncestral(position)) countMajor++;
+			if(spec.getGenome().getHaplotypeB().hasAncestral(position)) countMajor++;
 		}
 		if(countMajor==0 || countMajor==hapCount) return true;
 		return false;

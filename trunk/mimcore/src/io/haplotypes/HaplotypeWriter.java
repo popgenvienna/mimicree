@@ -43,14 +43,14 @@ public class HaplotypeWriter {
 			for(int k=0; k < haplotypes.size(); k++)
 			{
 				Haplotype activeHap=haplotypes.get(k);
-				boolean hasMajor=activeHap.hasMajor(i);
+				boolean hasMajor=activeHap.hasAncestral(i);
 				if(hasMajor)
 				{
-					chars.add(activeSNP.majorAllele());
+					chars.add(activeSNP.ancestralAllele());
 				}
 				else
 				{
-					chars.add(activeSNP.minorAllele());
+					chars.add(activeSNP.derivedAllele());
 				}
 			}
 			
@@ -89,9 +89,9 @@ public class HaplotypeWriter {
 		sb.append("\t");
 		sb.append(snp.referenceCharacter());
 		sb.append("\t");
-		sb.append(snp.majorAllele());
+		sb.append(snp.ancestralAllele());
 		sb.append("/");
-		sb.append(snp.minorAllele());
+		sb.append(snp.derivedAllele());
 		sb.append("\t");
 		sb.append(formatHaplotypes(chars));
 		return sb.toString();

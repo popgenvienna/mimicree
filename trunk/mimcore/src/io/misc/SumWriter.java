@@ -45,7 +45,7 @@ public class SumWriter {
 			sb.append(s.genomicPosition().position());
 			sb.append("\t");
 			sb.append(s.referenceCharacter()); sb.append("\t");
-			sb.append(s.majorAllele()); sb.append('/'); sb.append(s.minorAllele()); sb.append("\t");
+			sb.append(s.ancestralAllele()); sb.append('/'); sb.append(s.derivedAllele()); sb.append("\t");
 			sb.append(this.getComment(ff, s.genomicPosition()));
 
 			for(PopulationAlleleCount p : pacs)
@@ -128,9 +128,9 @@ public class SumWriter {
 	
 	private String formatSinglePop(PopulationAlleleCount p, int index){
 		StringBuilder sb=new StringBuilder();
-		sb.append(p.majorCount(index));
+		sb.append(p.ancestralCount(index));
 		sb.append(":");
-		sb.append(p.minorCount(index));
+		sb.append(p.derivedCount(index));
 		return sb.toString();
 	}
 	
