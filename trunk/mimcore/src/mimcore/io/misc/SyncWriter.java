@@ -1,12 +1,12 @@
-package io.misc;
+package mimcore.io.misc;
 
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
-import data.haplotypes.SNPCollection;
-import data.haplotypes.SNP;
-import data.statistic.*;
+import mimcore.data.haplotypes.SNPCollection;
+import mimcore.data.haplotypes.SNP;
+import mimcore.data.statistic.*;
 
 public class SyncWriter {
 	public final String outputFile;

@@ -1,10 +1,10 @@
-package io.fitness;
+package mimcore.io.fitness;
 
 import java.io.File;
 import java.util.logging.Logger;
 import java.util.*;
 
-import data.fitness.*;
+import mimcore.data.fitness.*;
 
 public class FitnessFunctionLoader {
 	private String epistaticFile;

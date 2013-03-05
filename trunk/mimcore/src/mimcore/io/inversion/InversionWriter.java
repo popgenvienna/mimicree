@@ -1,6 +1,6 @@
-package io.inversion;
+package mimcore.io.inversion;
 
-import data.*;
+import mimcore.data.*;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;

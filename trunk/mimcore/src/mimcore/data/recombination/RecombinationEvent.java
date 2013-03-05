@@ -1,18 +1,14 @@
-package data.recombination;
+package mimcore.data.recombination;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import data.Chromosome;
-import data.DiploidGenome;
-import data.GenomicPosition;
-import data.HaploidGenome;
-import data.Inversion;
-import data.InversionHaplotype;
-import data.BitArray.BitArrayBuilder;
-import data.haplotypes.Haplotype;
-import data.haplotypes.SNP;
-import data.haplotypes.SNPCollection;
+import mimcore.data.*;
+
+import mimcore.data.BitArray.BitArrayBuilder;
+import mimcore.data.haplotypes.Haplotype;
+import mimcore.data.haplotypes.SNP;
+import mimcore.data.haplotypes.SNPCollection;
 
 public class RecombinationEvent {
 	private final CrossoverEvents crossovers;

@@ -1,8 +1,8 @@
-package io;
+package mimcore.io;
 
-import data.recombination.*;
+import mimcore.data.recombination.*;
 import java.util.*;
-import data.*;
+import mimcore.data.*;
 
 /** 
  * Reads a given chromosome definition and creates a RandomAssortmentGenerator

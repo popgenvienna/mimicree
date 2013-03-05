@@ -3,9 +3,9 @@ package test.io;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import data.haplotypes.Haplotype;
-import io.haplotypes.HaplotypeReader;
-import data.haplotypes.SNPCollection;
+import mimcore.data.haplotypes.*;
+import mimcore.io.haplotypes.HaplotypeReader;
+import mimcore.data.haplotypes.SNPCollection;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

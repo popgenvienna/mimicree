@@ -1,6 +1,6 @@
-package data.recombination;
+package mimcore.data.recombination;
 
-import data.*;
+import mimcore.data.*;
 import java.math.*;
 
 public class RecombinationWindow {

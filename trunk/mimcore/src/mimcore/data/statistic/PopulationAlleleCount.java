@@ -1,7 +1,7 @@
-package data.statistic;
+package mimcore.data.statistic;
 
-import data.haplotypes.SNPCollection;
-import data.haplotypes.SNP;
+import mimcore.data.haplotypes.SNPCollection;
+import mimcore.data.haplotypes.SNP;
 
 public class PopulationAlleleCount {
 	private final SNPCollection snpcol;

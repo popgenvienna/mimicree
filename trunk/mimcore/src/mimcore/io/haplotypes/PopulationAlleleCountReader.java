@@ -1,7 +1,7 @@
-package io.haplotypes;
+package mimcore.io.haplotypes;
 
-import data.statistic.*;
-import data.haplotypes.*;
+import mimcore.data.statistic.*;
+import mimcore.data.haplotypes.*;
 import java.util.*;
 import java.io.*;
 import java.util.logging.Logger;

@@ -1,14 +1,14 @@
-package io.misc;
+package mimcore.io.misc;
 
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
-import data.haplotypes.SNPCollection;
-import data.haplotypes.SNP;
-import data.statistic.*;
-import data.fitness.*;
-import data.GenomicPosition;
+import mimcore.data.haplotypes.SNPCollection;
+import mimcore.data.haplotypes.SNP;
+import mimcore.data.statistic.*;
+import mimcore.data.fitness.*;
+import mimcore.data.GenomicPosition;
 
 public class SumWriter {
 	public final String outputFile;

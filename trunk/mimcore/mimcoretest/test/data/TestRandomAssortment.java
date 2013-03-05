@@ -3,8 +3,8 @@ package test.data;
 import java.util.ArrayList;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import data.recombination.*;
-import data.*;
+import mimcore.data.recombination.*;
+import mimcore.data.*;
 import static org.junit.Assert.*;
 
 

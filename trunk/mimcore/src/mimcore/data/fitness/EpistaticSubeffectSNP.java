@@ -1,6 +1,6 @@
-package data.fitness;
+package mimcore.data.fitness;
 
-import data.GenomicPosition;
+import mimcore.data.GenomicPosition;
 
 /**
  * Represents a single SNP of an epistatic effect

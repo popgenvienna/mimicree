@@ -1,4 +1,4 @@
-package data.LD;
+package mimcore.data.LD;
 
 public interface IRsquaredIterator {
 

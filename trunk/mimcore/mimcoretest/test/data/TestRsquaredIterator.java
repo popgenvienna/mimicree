@@ -1,7 +1,7 @@
 package test.data;
 
-import data.*;
-import data.LD.*;
+import mimcore.data.*;
+import mimcore.data.LD.*;
 import java.util.*;
 import static org.junit.Assert.*;
 import org.junit.Test;

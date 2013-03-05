@@ -1,7 +1,7 @@
-package io;
+package mimcore.io;
 
 import java.util.logging.Logger;
-import data.*;
+import mimcore.data.*;
 import java.util.*;
 
 public class DiploidGenomeReader implements IDiploidGenomeReader {

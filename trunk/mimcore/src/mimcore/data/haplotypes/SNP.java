@@ -1,6 +1,6 @@
-package data.haplotypes;
+package mimcore.data.haplotypes;
 
-import data.GenomicPosition;
+import mimcore.data.GenomicPosition;
 
 
 /**

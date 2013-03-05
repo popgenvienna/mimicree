@@ -1,8 +1,8 @@
-package io.inversion;
+package mimcore.io.inversion;
 
 import java.io.*;
 import java.util.*;
-import data.*;
+import mimcore.data.*;
 
 
 public class InversionHaplotypeReader {

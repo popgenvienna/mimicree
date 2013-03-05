@@ -1,12 +1,14 @@
 package test.data;
 
-import mimcore.data.data.GenomicPosition;
-import data.haplotypes.SNP;
+import mimcore.data.BitArray.*;
+import mimcore.data.haplotypes.SNP;
+import mimcore.data.fitness.*;
+import mimcore.data.*;
 import java.util.*;
 import java.util.logging.Logger;
-import data.haplotypes.SNPCollection;
-import data.haplotypes.Haplotype;
-import data.recombination.RandomAssortment;
+import mimcore.data.haplotypes.SNPCollection;
+import mimcore.data.haplotypes.Haplotype;
+import mimcore.data.recombination.RandomAssortment;
 
 
 public class SharedDataFactory {

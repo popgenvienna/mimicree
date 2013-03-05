@@ -1,8 +1,10 @@
 package test.data;
 
 import static org.junit.Assert.*;
-import mimcore.data.data.Chromosome;
-import mimcore.data.data.GenomicPosition;
+import mimcore.data.Chromosome;
+import mimcore.data.GenomicPosition;
+import mimcore.data.haplotypes.*;
+import mimcore.data.BitArray.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

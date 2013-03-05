@@ -1,10 +1,10 @@
-package io.inversion;
+package mimcore.io.inversion;
 
 
 import java.util.*;
 import java.util.logging.Logger;
 
-import data.*;
+import mimcore.data.*;
 
 public class InversionReader {
 	private final int  haplotpyeCount;

@@ -1,6 +1,6 @@
-package data;
+package mimcore.data;
 
-import data.haplotypes.Haplotype;
+import mimcore.data.haplotypes.Haplotype;
 
 /**
  * Represents a haploid genome.

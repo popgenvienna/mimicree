@@ -1,13 +1,13 @@
-package io;
+package mimcore.io;
 
-import data.*;
+import mimcore.data.*;
 import java.util.logging.Logger;
 import java.util.*;
-import data.haplotypes.Haplotype;
+import mimcore.data.haplotypes.Haplotype;
 import java.io.*;
-import io.haplotypes.HaplotypeWriter;
-import io.inversion.InversionWriter;
-import io.fitness.FitnessWriter;
+import mimcore.io.haplotypes.HaplotypeWriter;
+import mimcore.io.inversion.InversionWriter;
+import mimcore.io.fitness.FitnessWriter;
 
 public class PopulationWriter {
 	private final Population population;

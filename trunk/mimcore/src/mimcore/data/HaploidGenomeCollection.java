@@ -1,8 +1,8 @@
-package data;
+package mimcore.data;
 
 import java.util.*;
 
-import data.haplotypes.*;
+import mimcore.data.haplotypes.*;
 
 
 

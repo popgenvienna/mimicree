@@ -1,9 +1,9 @@
-package data.LD;
+package mimcore.data.LD;
 import java.util.*;
 
 
-import data.*;
-import data.haplotypes.*;
+import mimcore.data.*;
+import mimcore.data.haplotypes.*;
 
 public class RsquaredRandomGenomeIterator implements IRsquaredIterator{
 	private final HaploidGenomeCollection genomes;

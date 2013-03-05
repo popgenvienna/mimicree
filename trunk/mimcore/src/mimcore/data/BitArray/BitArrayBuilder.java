@@ -1,4 +1,4 @@
-package data.BitArray;
+package mimcore.data.BitArray;
 
 public class BitArrayBuilder {
 

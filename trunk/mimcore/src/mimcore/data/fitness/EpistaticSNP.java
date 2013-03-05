@@ -1,6 +1,6 @@
-package data.fitness;
+package mimcore.data.fitness;
 
-import data.*;
+import mimcore.data.*;
 import java.util.*;
 
 

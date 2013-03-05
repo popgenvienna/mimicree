@@ -1,7 +1,7 @@
-package data.recombination;
+package mimcore.data.recombination;
 
 import java.util.*;
-import data.*;
+import mimcore.data.*;
 
 
 /**

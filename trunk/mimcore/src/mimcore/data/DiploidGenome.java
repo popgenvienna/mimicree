@@ -1,6 +1,6 @@
-package data;
+package mimcore.data;
 
-import data.HaploidGenome;
+import mimcore.data.HaploidGenome;
 
 
 /**

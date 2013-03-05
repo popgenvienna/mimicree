@@ -1,7 +1,7 @@
 package test.data;
 
 import static org.junit.Assert.*;
-import data.BitArray.*;
+import mimcore.data.BitArray.*;
 import org.junit.Test;
 
 public class TestBitArrayBuilder {

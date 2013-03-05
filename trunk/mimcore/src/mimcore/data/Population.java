@@ -1,14 +1,14 @@
-package data;
+package mimcore.data;
 
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import data.recombination.*;
-import data.fitness.FitnessFunction;
-import data.fitness.MatingFunction;
-import misc.MimicreeThreadPool;
+import mimcore.data.recombination.*;
+import mimcore.data.fitness.FitnessFunction;
+import mimcore.data.fitness.MatingFunction;
+import mimcore.misc.MimicreeThreadPool;
 
 
 /**
