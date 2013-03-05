@@ -1,4 +1,4 @@
-package mimcore.data.misc;
+package misc;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
