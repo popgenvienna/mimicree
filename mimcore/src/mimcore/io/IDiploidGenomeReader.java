@@ -1,8 +1,8 @@
-package io;
+package mimcore.io;
 
 import java.util.ArrayList;
 
-import data.DiploidGenome;
+import mimcore.data.DiploidGenome;
 
 public interface IDiploidGenomeReader {
 	

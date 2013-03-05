@@ -1,5 +1,5 @@
-package data.LD;
-import data.*;
+package mimcore.data.LD;
+import mimcore.data.*;
 
 public class PairwiseRsquared {
 	private final GenomicPosition positionA;

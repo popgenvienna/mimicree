@@ -1,7 +1,7 @@
-package data.haplotypes;
+package mimcore.data.haplotypes;
 
 import java.util.*;
-import data.GenomicPosition;
+import mimcore.data.GenomicPosition;
 
 /**
  * Immutable representation of a collection of SNPs.

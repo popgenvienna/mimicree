@@ -1,7 +1,7 @@
 package test.data;
 
 import static org.junit.Assert.*;
-import mimcore.data.data.Chromosome;
+import mimcore.data.Chromosome;
 import java.util.*;
 
 import org.junit.Test;

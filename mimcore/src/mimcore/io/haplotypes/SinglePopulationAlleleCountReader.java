@@ -1,10 +1,10 @@
-package io.haplotypes;
+package mimcore.io.haplotypes;
 
-import data.Chromosome;
-import data.GenomicPosition;
-import data.statistic.*;
-import data.haplotypes.SNPCollection;
-import data.haplotypes.SNP;
+import mimcore.data.Chromosome;
+import mimcore.data.GenomicPosition;
+import mimcore.data.statistic.*;
+import mimcore.data.haplotypes.SNPCollection;
+import mimcore.data.haplotypes.SNP;
 
 
 import java.util.*;

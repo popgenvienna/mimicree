@@ -3,9 +3,9 @@ package test.data;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.util.*;
-import data.*;
-import data.fitness.EpistaticSNP;
-import data.fitness.EpistaticSNPFitness;
+import mimcore.data.*;
+import mimcore.data.fitness.EpistaticSNP;
+import mimcore.data.fitness.EpistaticSNPFitness;
 
 public class TestEpistaticSNPFitness {
 

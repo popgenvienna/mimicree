@@ -1,9 +1,9 @@
-package io;
+package mimcore.io;
 
 import java.io.*;
 import java.util.logging.Logger;
-import data.recombination.*;
-import data.Chromosome;
+import mimcore.data.recombination.*;
+import mimcore.data.Chromosome;
 import java.util.*;
 
 /**

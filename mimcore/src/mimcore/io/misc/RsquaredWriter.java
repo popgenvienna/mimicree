@@ -1,7 +1,7 @@
-package io.misc;
+package mimcore.io.misc;
 
 import java.io.*;
-import data.LD.*;
+import mimcore.data.LD.*;
 
 public class RsquaredWriter {
 	

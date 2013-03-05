@@ -1,11 +1,11 @@
-package data.recombination;
+package mimcore.data.recombination;
 
 import java.util.*;
 
-import data.Chromosome;
-import data.GenomicPosition;
-import data.Inversion;
-import data.DiploidGenome;
+import mimcore.data.Chromosome;
+import mimcore.data.GenomicPosition;
+import mimcore.data.Inversion;
+import mimcore.data.DiploidGenome;
 
 /**
  * Represents a set of crossover events

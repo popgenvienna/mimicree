@@ -1,4 +1,4 @@
-package io.inversion;
+package mimcore.io.inversion;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import data.Chromosome;
-import data.Inversion;
+import mimcore.data.Chromosome;
+import mimcore.data.Inversion;
 
 class InversionDefinitionReader {
 	private BufferedReader bf;

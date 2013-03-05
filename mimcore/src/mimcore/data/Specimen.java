@@ -1,7 +1,7 @@
-package data;
+package mimcore.data;
 
 
-import data.recombination.*;
+import mimcore.data.recombination.*;
 /**
  * Represent a single specimen which can be imagined as a phenotype.
  * A specimen has a diplod genome, a fitness and a recombination rate

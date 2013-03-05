@@ -1,7 +1,7 @@
-package data.fitness;
+package mimcore.data.fitness;
 
 import java.util.*; 
-import data.*;
+import mimcore.data.*;
 
 /**
  * Represents a summary of the additive fitness effects of SNPs

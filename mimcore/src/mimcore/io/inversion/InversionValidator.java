@@ -1,8 +1,8 @@
-package io.inversion;
+package mimcore.io.inversion;
 
 import java.util.*;
-import data.*;
-import data.BitArray.*;
+import mimcore.data.*;
+import mimcore.data.BitArray.*;
 class InversionValidator {
 
 	private HashMap<Chromosome,ArrayList<Inversion>> chrInversions = new HashMap<Chromosome,ArrayList<Inversion>>();

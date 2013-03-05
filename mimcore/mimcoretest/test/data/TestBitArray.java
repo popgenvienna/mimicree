@@ -2,8 +2,8 @@ package test.data;
 
 import static org.junit.Assert.*;
 
-import data.BitArray.BitArrayBuilder;
-import data.BitArray.BitArray;
+import mimcore.data.BitArray.BitArrayBuilder;
+import mimcore.data.BitArray.BitArray;
 
 import org.junit.Test;
 

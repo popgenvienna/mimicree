@@ -1,13 +1,13 @@
-package io.haplotypes;
+package mimcore.io.haplotypes;
 
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import data.BitArray.*;
-import data.haplotypes.*;
-import data.Chromosome;
-import data.GenomicPosition;
+import mimcore.data.BitArray.*;
+import mimcore.data.haplotypes.*;
+import mimcore.data.Chromosome;
+import mimcore.data.GenomicPosition;
 
 /*
  * Helper class of HaplotypeReader; Reads the haplotypes and stores them

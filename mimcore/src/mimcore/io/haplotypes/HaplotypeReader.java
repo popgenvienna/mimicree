@@ -1,9 +1,9 @@
-package io.haplotypes;
+package mimcore.io.haplotypes;
 
 import java.util.*;
 
-import data.BitArray.BitArray;
-import data.haplotypes.*;
+import mimcore.data.BitArray.BitArray;
+import mimcore.data.haplotypes.*;
 import java.io.*;
 import java.util.zip.GZIPInputStream;
 

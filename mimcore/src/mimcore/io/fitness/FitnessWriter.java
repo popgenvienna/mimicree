@@ -1,6 +1,6 @@
-package io.fitness;
+package mimcore.io.fitness;
 
-import data.*;
+import mimcore.data.*;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;

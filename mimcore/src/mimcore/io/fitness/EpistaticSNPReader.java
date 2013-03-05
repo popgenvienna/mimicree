@@ -1,12 +1,12 @@
-package io.fitness;
+package mimcore.io.fitness;
 
 import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
-import data.Chromosome;
-import data.fitness.*;
-import data.GenomicPosition;
+import mimcore.data.Chromosome;
+import mimcore.data.fitness.*;
+import mimcore.data.GenomicPosition;
 
 public class EpistaticSNPReader {
 	private BufferedReader bf;

@@ -1,11 +1,11 @@
-package io.haplotypes;
+package mimcore.io.haplotypes;
 
 import java.io.*;
 import java.util.*;
 
-import data.Chromosome;
-import data.GenomicPosition;
-import data.haplotypes.*;
+import mimcore.data.Chromosome;
+import mimcore.data.GenomicPosition;
+import mimcore.data.haplotypes.*;
 
 /**
  * Read only the SNPs from a haplotype file.

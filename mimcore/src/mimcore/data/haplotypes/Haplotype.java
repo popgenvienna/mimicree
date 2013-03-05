@@ -1,11 +1,11 @@
-package data.haplotypes;
+package mimcore.data.haplotypes;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import data.BitArray.BitArray;
-import data.BitArray.BitArrayBuilder;
-import data.GenomicPosition;
+import mimcore.data.BitArray.BitArray;
+import mimcore.data.BitArray.BitArrayBuilder;
+import mimcore.data.GenomicPosition;
 
 /**
  * Represents the haplotype of the SNPs

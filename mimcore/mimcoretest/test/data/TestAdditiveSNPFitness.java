@@ -2,7 +2,7 @@ package test.data;
 
 import static org.junit.Assert.*;
 import java.util.*;
-import data.fitness.*;
+import mimcore.data.fitness.*;
 import org.junit.Test;
 
 public class TestAdditiveSNPFitness {

@@ -1,12 +1,12 @@
-package io;
+package mimcore.io;
 
 import java.io.File;
 import java.util.*;
 
-import data.*;
-import data.haplotypes.*;
-import io.haplotypes.HaplotypeReader;
-import io.inversion.InversionReader;
+import mimcore.data.*;
+import mimcore.data.haplotypes.*;
+import mimcore.io.haplotypes.HaplotypeReader;
+import mimcore.io.inversion.InversionReader;
 
 public class HaploidGenomeReader {
 	
@@ -29,7 +29,7 @@ public class HaploidGenomeReader {
 		if(new File(inversionFile).exists())
 		{
 			this.logger.info("Detected an existing inversion file");
-			invs=new io.inversion.InversionReader(inversionFile, haps.size(), logger).getInversions();
+			invs=new mimcore.io.inversion.InversionReader(inversionFile, haps.size(), logger).getInversions();
 		}
 		else
 		{

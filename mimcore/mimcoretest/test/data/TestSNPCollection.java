@@ -1,7 +1,7 @@
 package test.data;
 
-import data.haplotypes.*;
-import data.*;
+import mimcore.data.haplotypes.*;
+import mimcore.data.*;
 
 import java.util.*;
 

@@ -1,10 +1,10 @@
-package io.fitness;
+package mimcore.io.fitness;
 
 import java.io.*;
 import java.util.*;
-import data.GenomicPosition;
-import data.Chromosome;
-import data.fitness.*;
+import mimcore.data.GenomicPosition;
+import mimcore.data.Chromosome;
+import mimcore.data.fitness.*;
 import java.util.logging.Logger;
 
 public class AdditiveSNPReader {

@@ -1,10 +1,10 @@
-package io.misc;
+package mimcore.io.misc;
 
 
-import data.Chromosome;
-import data.GenomicPosition;
-import data.haplotypes.*;
-import data.BitArray.*;
+import mimcore.data.Chromosome;
+import mimcore.data.GenomicPosition;
+import mimcore.data.haplotypes.*;
+import mimcore.data.BitArray.*;
 
 import java.io.*;
 import java.util.ArrayList;
