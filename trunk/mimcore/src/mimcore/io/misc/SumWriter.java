@@ -10,7 +10,7 @@ import mimcore.data.statistic.*;
 import mimcore.data.fitness.*;
 import mimcore.data.GenomicPosition;
 
-public class SumWriter {
+public class SumWriter implements ISummaryWriter{
 	public final String outputFile;
 	public BufferedWriter bf;
 	public Logger logger;
@@ -29,7 +29,7 @@ public class SumWriter {
 		}
 	}
 	
-	public void write(ArrayList<PopulationAlleleCount> pacs,FitnessFunction ff)
+	public void write(ArrayList<PopulationAlleleCount> pacs)
 	{
 		
 		assert(pacs.size()>0);
@@ -42,11 +42,9 @@ public class SumWriter {
 			SNP s=snpcol.getSNPforIndex(i);
 			
 			sb.append(s.genomicPosition().chromosome().toString()+"\t");
-			sb.append(s.genomicPosition().position());
-			sb.append("\t");
+			sb.append(s.genomicPosition().position()); sb.append("\t");
 			sb.append(s.referenceCharacter()); sb.append("\t");
-			sb.append(s.ancestralAllele()); sb.append('/'); sb.append(s.derivedAllele()); sb.append("\t");
-			sb.append(this.getComment(ff, s.genomicPosition()));
+			sb.append(s.ancestralAllele()); sb.append('/'); sb.append(s.derivedAllele());
 
 			for(PopulationAlleleCount p : pacs)
 			{
@@ -76,7 +74,8 @@ public class SumWriter {
 		this.logger.info("Finished writing summary file");
 	}
 	
-	
+
+	/*
 	private String getComment(FitnessFunction ff, GenomicPosition pos)
 	{
 		AdditiveSNPFitness af=ff.getAdditiveSNPFitness();
@@ -112,7 +111,10 @@ public class SumWriter {
 		return toret;
 		
 	}
-	
+
+	*/
+
+	/*
 	private String formatEpistaticEffect(EpistaticSNP e, GenomicPosition pos)
 	{
 		EpistaticSubeffectSNP esub=e.getEpistaticSubeffectSNP(pos);
@@ -125,6 +127,7 @@ public class SumWriter {
 		
 		return sb.toString();
 	}
+	*/
 	
 	private String formatSinglePop(PopulationAlleleCount p, int index){
 		StringBuilder sb=new StringBuilder();

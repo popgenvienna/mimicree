@@ -8,7 +8,7 @@ import mimcore.data.haplotypes.SNPCollection;
 import mimcore.data.haplotypes.SNP;
 import mimcore.data.statistic.*;
 
-public class SyncWriter {
+public class SyncWriter implements ISummaryWriter{
 	public final String outputFile;
 	public BufferedWriter bf;
 	public Logger logger;

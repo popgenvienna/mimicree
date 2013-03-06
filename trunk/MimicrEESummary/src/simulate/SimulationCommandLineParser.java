@@ -1,9 +1,12 @@
 package simulate;
 
-import java.util.*;
-import java.util.logging.Level;
-
 import mimcore.misc.MimicreeThreadPool;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class SimulationCommandLineParser {
@@ -17,11 +20,11 @@ public class SimulationCommandLineParser {
 	{
 
 		String haplotypeFile="";
-		String inversionFile="";
 		String recombinationFile="";
 		String additiveFile="";
 		String epistasisFile="";
-		String outputDir="";
+		String outputFile="";
+		OutputFileType outputFileType=OutputFileType.Sum;
 		String outputGenRaw="";
 		String chromosomeDefinition="";
 		int replicateRuns=1;
@@ -52,14 +55,14 @@ public class SimulationCommandLineParser {
             {
                 haplotypeFile = args.remove(0);
             }
-            else if(cu.equals("--inversions-g0"))
-            {
-                inversionFile = args.remove(0);
-            }
             else if(cu.equals("--recombination-rate"))
             {
             	recombinationFile=args.remove(0);
             }
+			else if(cu.equals("--output-format"))
+			{
+				outputFileType=getOutputFileType(args.remove(0));
+			}
             else if(cu.equals("--additive"))
             {
             	additiveFile=args.remove(0);
@@ -80,9 +83,9 @@ public class SimulationCommandLineParser {
             {
             	replicateRuns=Integer.parseInt(args.remove(0));
             }
-            else if(cu.equals("--output-dir"))
+            else if(cu.equals("--output-file"))
             {
-            	outputDir=args.remove(0);
+            	outputFile=args.remove(0);
             }
             else if(cu.equals("--help"))
             {
@@ -97,7 +100,7 @@ public class SimulationCommandLineParser {
 		MimicreeThreadPool.setThreads(threadCount);
 
 		// Create a logger to System.err
-		java.util.logging.Logger logger=java.util.logging.Logger.getLogger("Mimicree Logger");
+		Logger logger= Logger.getLogger("Mimicree Logger");
 		java.util.logging.ConsoleHandler mimhandler =new java.util.logging.ConsoleHandler();
 		mimhandler.setLevel(Level.INFO);
 		if(detailedLog)mimhandler.setLevel(Level.FINEST);
@@ -110,13 +113,13 @@ public class SimulationCommandLineParser {
         // Parse the string with the generations
         SimulationMode simMode = parseOutputGenerations(outputGenRaw);
 
-        SimulationFrameworkHaplotype mimframe= new SimulationFrameworkHaplotype(haplotypeFile,inversionFile,recombinationFile,chromosomeDefinition,
-        		additiveFile,epistasisFile,outputDir,simMode,replicateRuns,logger);
+        SimulationFrameworkSummary mimframe= new SimulationFrameworkSummary(haplotypeFile,recombinationFile,chromosomeDefinition,
+        		additiveFile,epistasisFile,outputFile,outputFileType,simMode,replicateRuns,logger);
         
         mimframe.run();
 
 		MimicreeThreadPool.getExector().shutdown();
-		logger.info("Thank you for using MimicrEEHaplotype");
+		logger.info("Thank you for using MimicrEESummary");
 	}
 	
 	
@@ -124,14 +127,14 @@ public class SimulationCommandLineParser {
 	{
 		StringBuilder sb=new StringBuilder();
 		sb.append("--haplotypes-g0				the haplotype file\n");
-		sb.append("--inversions-g0				the inversion file\n");
 		sb.append("--recombination-rate			the recombination rate for windows of fixed size\n");
 		sb.append("--additive				the additive fitness effect of SNPs\n");
 		sb.append("--epistasis				the epistatic fitness effect of SNPs\n");	
 		sb.append("--chromosome-definition			which chromosomes parts constitute a chromosome\n");
 		sb.append("--output-mode				a coma separated list of generations to output\n");
 		sb.append("--replicate-runs			how often should the simulation be repeated\n");
-		sb.append("--output-dir				the output directory\n");
+		sb.append("--output-file				the output file\n");
+		sb.append("--output-format				the output format, either sync or sum (default=sum)\n");
 		sb.append("--detailed-log				print detailed log messages\n");
 		sb.append("--threads				the number of threads to use\n");
 		sb.append("--help					print the help\n");
@@ -141,11 +144,28 @@ public class SimulationCommandLineParser {
 
 	public static void printVersion()
 	{
-		String version="MimicrEEHaplotype version 1.02; build "+String.format("%tc",new Date(System.currentTimeMillis()));
+		String version="MimicrEESummary version 1.01; build "+String.format("%tc",new Date(System.currentTimeMillis()));
 		System.out.println(version);
 		System.exit(1);
 	}
-	
+
+	public static OutputFileType getOutputFileType(String arg)
+	{
+		arg=arg.toLowerCase();
+		if(arg.equals("sum"))
+		{
+			  return OutputFileType.Sum;
+		}
+		else if(arg.equals("sync"))
+		{
+			return OutputFileType.Sync;
+		}
+		else
+		{
+			throw new IllegalArgumentException("File type must be either sync or sum; Found "+arg);
+		}
+	}
+
 	
 	public static SimulationMode parseOutputGenerations(String outputGenerationsRaw)
 	{

@@ -9,7 +9,7 @@ import mimcore.io.fitness.*;
 import mimcore.data.recombination.*;
 import mimcore.io.*;
 
-public class SimulationFramework {
+public class SimulationFrameworkHaplotype {
 	private final String haplotypeFile;
 	private final String inversionFile;
 	private final String recombinationFile;
@@ -23,8 +23,8 @@ public class SimulationFramework {
 
 
 	private final java.util.logging.Logger logger;
-	public SimulationFramework(String haplotypeFile, String inversionFile, String recombinationFile, String chromosomeDefinition, String additiveFile, String epistasisFile,
-			String outputDir, SimulationMode simMode, int replicateRuns,  java.util.logging.Logger logger)
+	public SimulationFrameworkHaplotype(String haplotypeFile, String inversionFile, String recombinationFile, String chromosomeDefinition, String additiveFile, String epistasisFile,
+										String outputDir, SimulationMode simMode, int replicateRuns, java.util.logging.Logger logger)
 	{
 		// 'File' represents files and directories
 		// Test if input files exist
