@@ -6,6 +6,7 @@ import mimcore.data.statistic.PopulationAlleleCount;
 import mimcore.io.fitness.*;
 import mimcore.data.recombination.*;
 import mimcore.io.*;
+import mimcore.io.misc.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -75,18 +76,21 @@ public class SimulationFrameworkSummary {
 		// Write initial population
 		this.logger.info("Writing base population to file");
 		new PopulationWriter(population,this.outputDir,0,0,this.logger).write();
-		
-		ISingleSimulation sim;
 
+		ArrayList<PopulationAlleleCount> pacs=new MultiSimulationTimestamp(population,fitnessFunction,recGenerator,simMode.getTimestamps(),this.replicateRuns,this.logger).run();
 
-		ArrayList<PopulationAlleleCount> pacs=new MultiSimulationTimestamp(population,fitnessFunction,recGenerator,simMode.getTimestamps(),this.logger);
-
-		
-
-		// Running the replicates
-		for(int i=0; i<this.replicateRuns; i++)
+		ISummaryWriter sw;
+		if(this.outputFileType == OutputFileType.Sum)
 		{
-			sim.run(i+1);
+			sw= new SumWriter(this.outputFile,this.logger);
+		}
+		else if(this.outputFileType == OutputFileType.Sync)
+		{
+			 sw = new SyncWriter(this.outputFile,this.logger);
+		}
+		else
+		{
+			throw new IllegalArgumentException("Unknow output file:"+this.outputFile.toString());
 		}
 		
 		this.logger.info("Finished simulations");
