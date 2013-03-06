@@ -3,6 +3,9 @@ package mimcore.data.statistic;
 import mimcore.data.haplotypes.SNPCollection;
 import mimcore.data.haplotypes.SNP;
 
+/**
+ * Represents summary statistics for a single populatio
+ */
 public class PopulationAlleleCount {
 	private final SNPCollection snpcol;
 	private final int[] ancestralCount;
