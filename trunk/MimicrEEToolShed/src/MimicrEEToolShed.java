@@ -1,7 +1,6 @@
 /**
  * 
  */
-package analysis;
 
 import mimicree.misc.*;
 
@@ -15,7 +14,7 @@ import java.util.Date;
  * @author robertkofler
  *
  */
-public class MimicrEE {
+public class MimicrEEToolShed {
 
 	/**
 	 * @param args
@@ -106,12 +105,12 @@ public class MimicrEE {
         
         MimicreeThreadPool.getExector().shutdown();
         
-		logger.info("Thank you for using MimicrEE");
+		logger.info("Thank you for using MimicrEEToolShed");
 	}
 
 	public static void printVersion()
 	{
-		String version="MimicrEE version 1.12; build "+String.format("%tc",new Date(System.currentTimeMillis()));
+		String version="MimicrEEToolShed version 1.12; build "+String.format("%tc",new Date(System.currentTimeMillis()));
 		System.out.println(version);
 		System.exit(0);
 	}
