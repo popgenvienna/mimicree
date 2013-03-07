@@ -54,7 +54,7 @@ public class Fcs2HapParser {
     public static void printHelp()
     {
         StringBuilder sb=new StringBuilder();
-        sb.append("mode fcs2hap: convert fastcoalsim outpout to MimicrEE haplotypes\n");
+        sb.append("mode fcs2hap: convert fastcoalsim outpout to MimicrEEToolShed haplotypes\n");
         sb.append("--input					    the fastsimcoal file\n");
         sb.append("--chromosome                 the chromosome\n");
         sb.append("--output					the output file (sync)\n");
