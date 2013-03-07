@@ -5,7 +5,7 @@ import mimcore.data.recombination.RecombinationGenerator;
 import mimcore.data.statistic.PACReducer;
 import mimcore.data.statistic.PopulationAlleleCount;
 import mimcore.data.*;
-import mimcore.io.PopulationWriter;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -59,7 +59,11 @@ public class MultiSimulationTimestamp {
 			{
 				this.logger.info("Processing generation "+i+ " of replicate run "+simulationNumber);
 				nextPopulation=nextPopulation.getNextGeneration(this.fitness,this.recGenerator);
-				if(outputGenerations.contains(i)) pacs.add(new PACReducer(nextPopulation).reduce());
+				if(outputGenerations.contains(i))
+				{
+					this.logger.info("Recording population at generation "+i+" of replicate "+simulationNumber);
+					pacs.add(new PACReducer(nextPopulation).reduce());
+				}
 			}
 		}
 		return pacs;

@@ -67,17 +67,14 @@ public class SimulationFrameworkSummary {
 
 		// Load the data
 		FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();
-		ArrayList<DiploidGenome> dipGenomes=new mimcore.io.DiploidGenomeReader(this.haplotypeFile,this.inversionFile,this.logger).readGenomes();
+		ArrayList<DiploidGenome> dipGenomes=new mimcore.io.DiploidGenomeReader(this.haplotypeFile,"",this.logger).readGenomes();
 		RecombinationGenerator recGenerator = new RecombinationGenerator(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),
 				new ChromosomeDefinitionReader(this.chromosomeDefinition).getRandomAssortmentGenerator());
 		
-		// Create initial population
-		Population population=Population.loadPopulation(dipGenomes, fitnessFunction);
-		// Write initial population
-		this.logger.info("Writing base population to file");
-		new PopulationWriter(population,this.outputDir,0,0,this.logger).write();
 
-		ArrayList<PopulationAlleleCount> pacs=new MultiSimulationTimestamp(population,fitnessFunction,recGenerator,simMode.getTimestamps(),this.replicateRuns,this.logger).run();
+
+		ArrayList<PopulationAlleleCount> pacs=new MultiSimulationTimestamp(Population.loadPopulation(dipGenomes, fitnessFunction)
+				,fitnessFunction,recGenerator,simMode.getTimestamps(),this.replicateRuns,this.logger).run();
 
 		ISummaryWriter sw;
 		if(this.outputFileType == OutputFileType.Sum)
@@ -90,12 +87,9 @@ public class SimulationFrameworkSummary {
 		}
 		else
 		{
-			throw new IllegalArgumentException("Unknow output file:"+this.outputFile.toString());
+			throw new IllegalArgumentException("Unknow output file: "+this.outputFile.toString());
 		}
-		
+		sw.write(pacs);
 		this.logger.info("Finished simulations");
-
-		
-		
 	}
 }
