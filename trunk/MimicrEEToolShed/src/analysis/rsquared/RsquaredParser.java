@@ -3,7 +3,6 @@ package analysis.rsquared;
 import java.util.*;
 import java.util.logging.Logger;
 
-import mimicree.MimicrEE;
 
 public class RsquaredParser {
 	
@@ -51,7 +50,10 @@ public class RsquaredParser {
 		sb.append("--haplotypes					the haplotypes\n");
 		sb.append("--output					the output file\n");
 		sb.append("--max-distance					the maximum distance between two SNPs for calculating R^2\n");
-		sb.append(MimicrEE.getGeneralHelpmessage());
+		sb.append("--mode					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--version					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--detailed-log				print detailed log messages\n");
+		sb.append("--help					print the help\n");
 		System.out.print(sb.toString());
 		System.exit(1);
 	}

@@ -3,7 +3,6 @@ package analysis.measurefitness;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 
-import mimicree.MimicrEE;
 
 public class AnalyseFitnessParser {
 	
@@ -54,7 +53,10 @@ public class AnalyseFitnessParser {
 		sb.append("--haplotypes					the haplotypes for which to measure the fitness\n");
 		sb.append("--additive					a file containing the additive fitness effects\n");
 		sb.append("--output-file					the fitness for the haplotypes\n");
-		sb.append(MimicrEE.getGeneralHelpmessage());
+		sb.append("--mode					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--version					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--detailed-log				print detailed log messages\n");
+		sb.append("--help					print the help\n");
 		System.out.print(sb.toString());
 		System.exit(1);
 	}

@@ -3,7 +3,6 @@ package analysis.hap2sum;
 import java.util.*;
 import java.util.logging.Logger;
 
-import mimicree.MimicrEE;
 
 public class Hap2SumParser {
 	
@@ -58,7 +57,10 @@ public class Hap2SumParser {
 		sb.append("--additive					additive SNP effects\n");
 		sb.append("--epistatic					epistatic SNP effects\n");
 		sb.append("--output					the output file (sync)\n");
-		sb.append(MimicrEE.getGeneralHelpmessage());
+		sb.append("--mode					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--version					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--detailed-log				print detailed log messages\n");
+		sb.append("--help					print the help\n");
 		System.out.print(sb.toString());
 		System.exit(1);
 	}

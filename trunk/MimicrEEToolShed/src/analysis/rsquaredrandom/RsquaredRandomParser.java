@@ -3,7 +3,7 @@ package analysis.rsquaredrandom;
 import java.util.*;
 import java.util.logging.Logger;
 
-import mimicree.MimicrEE;
+
 
 public class RsquaredRandomParser {
 	
@@ -57,7 +57,10 @@ public class RsquaredRandomParser {
 		sb.append("--output					the output file\n");
 		sb.append("--random-samples					the number of random pairs of SNPs to sample\n");
 		sb.append("--intra-chromosomal				flag; sample random pairs of SNPs only on the same chromosome; default=inter-chromosomal\n");
-		sb.append(MimicrEE.getGeneralHelpmessage());
+		sb.append("--mode					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--version					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--detailed-log				print detailed log messages\n");
+		sb.append("--help					print the help\n");
 		System.out.print(sb.toString());
 		System.exit(1);
 	}
