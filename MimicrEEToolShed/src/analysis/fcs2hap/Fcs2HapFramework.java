@@ -1,8 +1,8 @@
 package analysis.fcs2hap;
 
-import mimicree.data.haplotypes.Haplotype;
-import mimicree.io.haplotypes.HaplotypeWriter;
-import mimicree.io.misc.FscReader;
+import mimcore.data.haplotypes.Haplotype;
+import mimcore.io.haplotypes.HaplotypeWriter;
+import mimcore.io.misc.FscReader;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;

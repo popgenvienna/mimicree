@@ -3,7 +3,6 @@ package analysis.hap2sync;
 import java.util.*;
 import java.util.logging.Logger;
 
-import mimicree.MimicrEE;
 
 public class Hap2SyncParser {
 	
@@ -46,7 +45,10 @@ public class Hap2SyncParser {
 		sb.append("mode hap2sync: convert haplotypes into a sync file\n");
 		sb.append("-h|--haplotypes					the haplotypes\n");
 		sb.append("--output					the output file (sync)\n");
-		sb.append(MimicrEE.getGeneralHelpmessage());
+		sb.append("--mode					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--version					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--detailed-log				print detailed log messages\n");
+		sb.append("--help					print the help\n");
 		System.out.print(sb.toString());
 		System.exit(1);
 	}

@@ -5,9 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-import mimicree.data.HaploidGenome;
-import mimicree.io.misc.RsquaredWriter;
-import mimicree.data.LD.*;
+import mimcore.data.HaploidGenome;
+import mimcore.io.misc.RsquaredWriter;
+import mimcore.data.LD.*;
 
 
 public class RsquaredRandomFramework {
@@ -40,7 +40,7 @@ public class RsquaredRandomFramework {
 	
 	public void run()
 	{
-		ArrayList<HaploidGenome> genomes= new mimicree.io.HaploidGenomeReader(this.inputFile,"",this.logger).readGenomes();
+		ArrayList<HaploidGenome> genomes= new mimcore.io.HaploidGenomeReader(this.inputFile,"",this.logger).readGenomes();
 		new RsquaredWriter(this.outputFile,this.logger).write(new RsquaredRandomGenomeIterator(genomes,this.randomSamples,this.intraChromosomal));
 		
 		

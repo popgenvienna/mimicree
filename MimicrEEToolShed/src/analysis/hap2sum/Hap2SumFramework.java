@@ -5,9 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-import mimicree.data.fitness.FitnessFunction;
-import mimicree.data.statistic.*;
-import mimicree.io.fitness.FitnessFunctionLoader;
+import mimcore.data.fitness.FitnessFunction;
+import mimcore.data.statistic.*;
+import mimcore.io.fitness.FitnessFunctionLoader;
 public class Hap2SumFramework {
 	private final ArrayList<String> inputFiles;
 	private final String outputFile;
@@ -42,8 +42,8 @@ public class Hap2SumFramework {
 	public void run()
 	{
 		FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistaticFile,this.logger).loadFitnessFunction();
-		ArrayList<PopulationAlleleCount> pac = new mimicree.io.haplotypes.PopulationAlleleCountReader(inputFiles, logger).readPopulations();
-		new mimicree.io.misc.SumWriter(this.outputFile, this.logger).write(pac, fitnessFunction);
+		ArrayList<PopulationAlleleCount> pac = new mimcore.io.haplotypes.PopulationAlleleCountReader(inputFiles, logger).readPopulations();
+		new mimcore.io.misc.SumWriter(this.outputFile, this.logger).write(pac);
 	}
 
 

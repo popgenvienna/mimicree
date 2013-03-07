@@ -1,16 +1,9 @@
 package analysis.fcs2hap;
 
-import mimicree.MimicrEE;
 import java.util.*;
 import java.util.logging.Logger;
 
-/**
- * Created with IntelliJ IDEA.
- * User: robertkofler
- * Date: 1/18/13
- * Time: 1:15 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public class Fcs2HapParser {
 
     public static void parseCommandline(Logger logger, LinkedList<String> args)
@@ -58,8 +51,11 @@ public class Fcs2HapParser {
         sb.append("--input					    the fastsimcoal file\n");
         sb.append("--chromosome                 the chromosome\n");
         sb.append("--output					the output file (sync)\n");
-        sb.append(MimicrEE.getGeneralHelpmessage());
-        System.out.print(sb.toString());
+		sb.append("--mode					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--version					the analysis mode of operation; see manual for supported modes\n");
+		sb.append("--detailed-log				print detailed log messages\n");
+		sb.append("--help					print the help\n");
+		System.out.print(sb.toString());
         System.exit(1);
     }
 }
