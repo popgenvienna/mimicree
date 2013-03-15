@@ -48,9 +48,20 @@ public class TestRecombinationWindow {
 			assertTrue(p.position()>=10);
 			assertTrue(p.position()<=15);
 		}
-		
-		
-		
+
+	}
+
+	@Test
+	public void test_rate() {
+		RecombinationWindow rw=new RecombinationWindow(Chromosome.getChromosome("2L"),10,15,30);
+		assertEquals(rw.recombinationRate(), 30.0,0.0000001);
+
+		rw=new RecombinationWindow(Chromosome.getChromosome("2L"),10,15,10);
+		assertEquals(rw.recombinationRate(), 10.0,0.0000001);
+
+
+		rw=new RecombinationWindow(Chromosome.getChromosome("2L"),10,15,1);
+		assertEquals(rw.recombinationRate(), 1.0,0.0000001);
 	}
 
 }

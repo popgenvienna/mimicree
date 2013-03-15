@@ -50,7 +50,7 @@ public class SimulationFrameworkHaplotype {
 	
 	public void run()
 	{
-		this.logger.info("Starting MimicrEE");
+		this.logger.info("Starting MimicrEEHaplotype");
 
 		// Load the data
 		FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();

@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class SimulationCommandLineParser {
+public class SimulationCommandLineParserLimits {
 	
 	/**
 	 * Parse the command line arguments and return the results
@@ -21,15 +21,18 @@ public class SimulationCommandLineParser {
 
 		String haplotypeFile="";
 		String recombinationFile="";
-		String additiveFile="";
-		String epistasisFile="";
 		String outputFile="";
-		OutputFileType outputFileType=OutputFileType.Sync;
-		String outputGenRaw="";
+
+		int selectionCoefficient=0;
+		int heteroygousEffect=0;
+		int selectedSNPs=0;
+		int maxFrequency=0;
+
 		String chromosomeDefinition="";
 		int replicateRuns=1;
-		boolean detailedLog=false;
+		int maxGenerations=50000;
 		int threadCount=1;
+		boolean detailedLog=false;
 
 	
 		
@@ -59,25 +62,9 @@ public class SimulationCommandLineParser {
             {
             	recombinationFile=args.remove(0);
             }
-			else if(cu.equals("--output-format"))
-			{
-				outputFileType=getOutputFileType(args.remove(0));
-			}
-            else if(cu.equals("--additive"))
-            {
-            	additiveFile=args.remove(0);
-            }
-            else if(cu.equals("--epistasis"))
-            {
-            	epistasisFile=args.remove(0);
-            }
             else if(cu.equals("--chromosome-definition"))
             {
             	chromosomeDefinition=args.remove(0);
-            }
-            else if(cu.equals("--output-mode"))
-            {
-            	outputGenRaw=args.remove(0);
             }
             else if(cu.equals("--replicate-runs"))
             {
@@ -91,6 +78,25 @@ public class SimulationCommandLineParser {
             {
             	printHelpMessage();
             }
+			else if(cu.equals("-s"))
+			{
+				selectionCoefficient=Integer.parseInt(args.remove(0));
+			}
+			else if(cu.equals("-h"))
+			{
+				heteroygousEffect=Integer.parseInt(args.remove(0));
+			}
+			else if(cu.equals("--number-selected")){
+				selectedSNPs=Integer.parseInt(args.remove(0));
+			}
+			else if(cu.equals("--max-frequency"))
+			{
+				maxFrequency=Integer.parseInt(args.remove(0));
+			}
+			else if(cu.equals("--max-generations"))
+			{
+				maxGenerations=Integer.parseInt(args.remove(0));
+			}
             else
             {
                 throw new IllegalArgumentException("Do not recognize command line option "+cu);
@@ -109,17 +115,14 @@ public class SimulationCommandLineParser {
 		logger.setUseParentHandlers(false);
 		logger.setLevel(Level.ALL);
 
-    
-        // Parse the string with the generations
-        SimulationMode simMode = parseOutputGenerations(outputGenRaw);
 
-        SimulationFrameworkSummary mimframe= new SimulationFrameworkSummary(haplotypeFile,recombinationFile,chromosomeDefinition,
-        		additiveFile,epistasisFile,outputFile,outputFileType,simMode,replicateRuns,logger);
+        SimulationFrameworkLimits mimframe= new SimulationFrameworkLimits(haplotypeFile,recombinationFile,chromosomeDefinition,  selectionCoefficient,
+				heteroygousEffect,maxGenerations,maxFrequency,selectedSNPs, outputFile,replicateRuns,logger);
         
         mimframe.run();
 
 		MimicreeThreadPool.getExector().shutdown();
-		logger.info("Thank you for using MimicrEESummary");
+		logger.info("Thank you for using MimicrEELimits");
 	}
 	
 	
@@ -128,13 +131,14 @@ public class SimulationCommandLineParser {
 		StringBuilder sb=new StringBuilder();
 		sb.append("--haplotypes-g0				the haplotype file\n");
 		sb.append("--recombination-rate			the recombination rate for windows of fixed size\n");
-		sb.append("--additive				the additive fitness effect of SNPs\n");
-		sb.append("--epistasis				the epistatic fitness effect of SNPs\n");	
 		sb.append("--chromosome-definition			which chromosomes parts constitute a chromosome\n");
-		sb.append("--output-mode				a coma separated list of generations to output\n");
 		sb.append("--replicate-runs			how often should the simulation be repeated\n");
 		sb.append("--output-file				the output file\n");
-		sb.append("--output-format				the output format, either sync or sum (default=sync)\n");
+		sb.append("--number-selected		the number of selected SNPs\n");
+		sb.append("-s						the selection coefficient of the selected SNPs\n");
+		sb.append("-h						the heterozygous effect of the selected SNPs\n");
+		sb.append("--max-frequency			the maximal frequency of the selected SNPs\n");
+		sb.append("--max-generations		the maximal number of generations to run the simulation before aborting it and choosing different SNPs\n");
 		sb.append("--detailed-log				print detailed log messages\n");
 		sb.append("--threads				the number of threads to use\n");
 		sb.append("--help					print the help\n");
@@ -144,51 +148,10 @@ public class SimulationCommandLineParser {
 
 	public static void printVersion()
 	{
-		String version="MimicrEESummary version 1.03; build "+String.format("%tc",new Date(System.currentTimeMillis()));
+		String version="MimicrEELimits version 1.02; build "+String.format("%tc",new Date(System.currentTimeMillis()));
 		System.out.println(version);
 		System.exit(1);
 	}
 
-	public static OutputFileType getOutputFileType(String arg)
-	{
-		arg=arg.toLowerCase();
-		if(arg.equals("sum"))
-		{
-			  return OutputFileType.Sum;
-		}
-		else if(arg.equals("sync"))
-		{
-			return OutputFileType.Sync;
-		}
-		else
-		{
-			throw new IllegalArgumentException("File type must be either sync or sum; Found "+arg);
-		}
-	}
 
-	
-	public static SimulationMode parseOutputGenerations(String outputGenerationsRaw)
-	{
-		// Parse a String consistent of a comma-separated list of numbers, to a array of integers
-		SimulationMode simMode;
-			String [] tmp;
-			if(outputGenerationsRaw.contains(","))
-			{
-				tmp=outputGenerationsRaw.split(",");
-			}
-			else
-			{
-				tmp=new String[1];
-				tmp[0]=outputGenerationsRaw;
-			}
-			// Convert everything to int
-			ArrayList<Integer> ti=new ArrayList<Integer>();
-			for(String s :tmp)
-			{
-				ti.add(Integer.parseInt(s));
-			}
-			simMode=SimulationMode.Timestamp;
-			simMode.setTimestamps(ti);
-		return simMode;
-	}
 }

@@ -52,6 +52,7 @@ public class MultiSimulationTimestamp {
 			this.logger.info("Starting simulation replicate number " + simulationNumber);
 			this.logger.info("MimicrEESummary will proceed with forward simulations until generation " + this.maxGeneration);
 
+			this.logger.info("Recording base population at generation of replicate " + simulationNumber);
 			pacs.add(new PACReducer(this.basePopulation).reduce());
 			Population nextPopulation =this.basePopulation;
 			// For the number of requested simulations get the next generation, and write it to file if requested
