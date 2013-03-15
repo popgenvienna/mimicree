@@ -141,7 +141,7 @@ public class SimulationCommandLineParser {
 
 	public static void printVersion()
 	{
-		String version="MimicrEEHaplotype version 1.02; build "+String.format("%tc",new Date(System.currentTimeMillis()));
+		String version="MimicrEEHaplotype version 1.03; build "+String.format("%tc",new Date(System.currentTimeMillis()));
 		System.out.println(version);
 		System.exit(1);
 	}

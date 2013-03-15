@@ -15,10 +15,9 @@ public class RecombinationWindow {
 		this.chromosome=chromosome;
 		this.startPosition=startPosition;
 		this.endPosition=endPosition;
-		if(recRate>45.0)throw new IllegalArgumentException("Can not handle recombination rates larger than 45cM/Mb (Kosambi function fails)");
+		if(recRate > 45.0)throw new IllegalArgumentException("Can not handle recombination rates larger than 45cM/Mb (Kosambi function fails)");
 		this.recRate=recRate;
-		int windowsize=endPosition-startPosition+1;
-		if(recRate>50.0) throw new IllegalArgumentException("Recombination rate must not exceed 50");
+		int windowsize=endPosition - startPosition +  1;
 		if(windowsize > 1000000.0) throw new IllegalArgumentException("Window size for recombination events needs to be smaller than 1Mbp");
 		this.p_recombination=calculateP(recRate,windowsize);
 

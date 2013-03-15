@@ -54,6 +54,9 @@ public class RecombinationRateReader {
 		int start=Integer.parseInt(tmp2[0].trim())+1;
 		int end=Integer.parseInt(tmp2[1].trim());
 		double recrate=Double.parseDouble(a[2]);
+
+		// MALES are not recombining and the published recombination rate is for females
+		recrate=recrate * 0.5;
 		return new RecombinationWindow(chr,start,end,recrate);
 		
 	}
@@ -67,6 +70,7 @@ public class RecombinationRateReader {
 		String line;
 		ArrayList<RecombinationWindow> entries=new ArrayList<RecombinationWindow>();
 		this.logger.info("Start reading recombinaton rate from file "+this.recombinationFile);
+		this.logger.info("Males in Drosophila do not recombine; Will thus multiply recombination rate by 1/2");
 		try
 		{
 			while((line=bf.readLine())!=null)
