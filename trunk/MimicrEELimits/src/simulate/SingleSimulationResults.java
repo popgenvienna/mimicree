@@ -16,15 +16,20 @@ public class SingleSimulationResults {
 	private final int fixSelection;
 	private final int fixNeutral;
 	private final int totalSNPNumber;
+	private final int generationsNeutral;
+	private final int generationsSelection;
 	private final ArrayList<MatingDistribution> selectionMatings;
 	private final ArrayList<MatingDistribution> neutralMatings;
-	public SingleSimulationResults(ArrayList<MatingDistribution> selectionMatings, ArrayList<MatingDistribution> neutralMatings, int totalSNPNumber, int fixSelection, int fixNeutral)
+	public SingleSimulationResults(ArrayList<MatingDistribution> selectionMatings, ArrayList<MatingDistribution> neutralMatings, int totalSNPNumber, int fixSelection, int fixNeutral,
+								   int generationsSelection, int generationsNeutral)
 	{
 		this.selectionMatings=new ArrayList<MatingDistribution>(selectionMatings);
 		this.neutralMatings=new ArrayList<MatingDistribution>(neutralMatings);
 		this.totalSNPNumber=totalSNPNumber;
 		this.fixNeutral=fixNeutral;
 		this.fixSelection=fixSelection;
+		this.generationsNeutral=generationsNeutral;
+		this.generationsSelection=generationsSelection;
 
 	}
 
@@ -36,6 +41,13 @@ public class SingleSimulationResults {
 
 	public int getTotalSNPNumber()
 	{return this.totalSNPNumber;}
+
+	public int getGenerationsNeutral()
+	{return this.generationsNeutral;}
+
+	public int getGenerationsSelection()
+	{return this.generationsSelection;}
+
 
 	public ArrayList<MatingDistribution> getNeutralMatings()
 	{

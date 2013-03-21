@@ -23,10 +23,10 @@ public class SimulationCommandLineParserLimits {
 		String recombinationFile="";
 		String outputFile="";
 
-		int selectionCoefficient=0;
-		int heteroygousEffect=0;
+		double selectionCoefficient=0;
+		double heteroygousEffect=0;
 		int selectedSNPs=0;
-		int maxFrequency=0;
+		double maxFrequency=0;
 
 		String chromosomeDefinition="";
 		int replicateRuns=1;
@@ -80,18 +80,18 @@ public class SimulationCommandLineParserLimits {
             }
 			else if(cu.equals("-s"))
 			{
-				selectionCoefficient=Integer.parseInt(args.remove(0));
+				selectionCoefficient=Double.parseDouble(args.remove(0));
 			}
 			else if(cu.equals("-h"))
 			{
-				heteroygousEffect=Integer.parseInt(args.remove(0));
+				heteroygousEffect=Double.parseDouble(args.remove(0));
 			}
 			else if(cu.equals("--number-selected")){
 				selectedSNPs=Integer.parseInt(args.remove(0));
 			}
 			else if(cu.equals("--max-frequency"))
 			{
-				maxFrequency=Integer.parseInt(args.remove(0));
+				maxFrequency=Double.parseDouble(args.remove(0));
 			}
 			else if(cu.equals("--max-generations"))
 			{
