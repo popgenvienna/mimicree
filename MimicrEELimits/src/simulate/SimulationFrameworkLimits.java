@@ -82,16 +82,20 @@ public class SimulationFrameworkLimits {
 		ArrayList<SingleSimulationResults> results=new ArrayList<SingleSimulationResults>();
 		while(results.size() < this.replicateRuns)
 		{
-
+		   	this.logger.info("Starting another round of neutral and non-neutral simulations");
+			this.logger.info("Picking " +this.numberOfSelected+ " SNPs" );
 			AdditiveSNPFitness additiveFitness=randomPicker.getAdditiveSNPs();
+			this.logger.info("Reducing the genome to the selected sites");
 			ArrayList<DiploidGenome> reducedGenome=this.subFilterSelected(dipGenomes,additiveFitness.getSelectedPositions());
-
 
 			LimitsSimulationWrapper sls =new LimitsSimulationWrapper(reducedGenome,additiveFitness,recGenerator,maxGenerations,this.logger);
 			SingleSimulationResults ssr= sls.run();
 
 			if(ssr != null) results.add(ssr);
 		}
+
+		new SimulationResultsWriter(this.outputFile,this.logger).write(results);
+		this.logger.info("Finished - Thank you for using MimicrEELimits...exploring the limits of selection :)");
 
 	}
 

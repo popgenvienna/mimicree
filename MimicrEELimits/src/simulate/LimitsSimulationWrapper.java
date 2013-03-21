@@ -51,8 +51,6 @@ public class LimitsSimulationWrapper {
 
 		return new SingleSimulationResults(selectionResults.getMatingDistribution(),neutralResults.getMatingDistribution(),
 				selectionResults.getTotalSNPNumber(),selectionResults.getFixCorrect(),neutralResults.getFixCorrect());
-
-
 	}
 
 
