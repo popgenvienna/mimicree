@@ -20,12 +20,12 @@ import java.util.HashSet;
  */
 public class AdditiveSNPRandomPicker {
 	private final PopulationAlleleCount pac;
-	private final float s;
-	private final float h;
+	private final double s;
+	private final double h;
 	private final int snpCount;
-	private final float maxFrequency;
+	private final double maxFrequency;
 	private final SNPCollection snpCol;
-	public AdditiveSNPRandomPicker(PopulationAlleleCount pac, float s, float h, int snpCount, float maxFrequency)
+	public AdditiveSNPRandomPicker(PopulationAlleleCount pac, double s, double h, int snpCount, double maxFrequency)
 	{
 		this.pac=pac;
 		this.snpCol=pac.getSNPCollection();

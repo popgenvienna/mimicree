@@ -50,7 +50,8 @@ public class LimitsSimulationWrapper {
 		if(selectionResults==null) return null;
 
 		return new SingleSimulationResults(selectionResults.getMatingDistribution(),neutralResults.getMatingDistribution(),
-				selectionResults.getTotalSNPNumber(),selectionResults.getFixCorrect(),neutralResults.getFixCorrect());
+				selectionResults.getTotalSNPNumber(),selectionResults.getFixCorrect(),neutralResults.getFixCorrect(),
+				selectionResults.getGenerationsToFix(),neutralResults.getGenerationsToFix());
 	}
 
 
@@ -88,14 +89,14 @@ class SingleLimitsSimulation
 				this.logger.info("Abborting simulation; SNPs did not fix in "+ this.maxGenerations+ " generations; Will restart simulations");
 				return null;
 			}
-			this.logger.info("Processing generation "+counter);
+			if(counter % 200==0) this.logger.info("Processing generation "+counter);
 			nextPopulation=nextPopulation.getNextGeneration(this.fitness,this.recGen);
 			matingDistris.add(nextPopulation.getMatingDistribution());
 			counter++;
 		}
 		int fixCorrect=this.fitness.getAdditiveSNPFitness().countAdditiveFixedCorrectly(nextPopulation);
 		this.logger.info("Finished simulations in "+counter + " generations");
-		return new SimulationResults(matingDistris,fitness.getAdditiveSNPFitness().getAdditiveSNPs().size(),fixCorrect);
+		return new SimulationResults(matingDistris,fitness.getAdditiveSNPFitness().getAdditiveSNPs().size(),fixCorrect,counter);
 	}
 
 
@@ -105,12 +106,15 @@ class SimulationResults
 {
 	private final int fixCorrect;
 	private final int totalSNPNumber;
+	private final int generationsToFix;
 	private final ArrayList<MatingDistribution> matingDistribution;
-	public SimulationResults(ArrayList<MatingDistribution> matingDistribution, int totalSNPNumber, int fixCorrect)
+
+	public SimulationResults(ArrayList<MatingDistribution> matingDistribution, int totalSNPNumber, int fixCorrect,int generationsToFix)
 	{
 		this.fixCorrect=fixCorrect;
 		this.matingDistribution=new ArrayList<MatingDistribution>(matingDistribution);
 		this.totalSNPNumber=totalSNPNumber;
+		this.generationsToFix=generationsToFix;
 	}
 
 	public int getFixCorrect()
@@ -118,6 +122,9 @@ class SimulationResults
 
 	public int getTotalSNPNumber()
 	{return this.totalSNPNumber;}
+
+	public int getGenerationsToFix()
+	{return this.generationsToFix;}
 
 	public ArrayList<MatingDistribution> getMatingDistribution()
 	{

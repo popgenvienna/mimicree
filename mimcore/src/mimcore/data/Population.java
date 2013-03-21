@@ -90,7 +90,7 @@ public class Population {
 				if( e.getValue() > max) max=e.getValue();
 			}
 
-			int[] matingDistribution=new int[max];
+			int[] matingDistribution=new int[max+1];
 			// number of individuals without mating; is simply the population size (= individuals that could mate) minus individuals which actually mated.
 			int loosers= this.specimen.size()-matingCounts.size();
 			matingDistribution[0]=loosers;

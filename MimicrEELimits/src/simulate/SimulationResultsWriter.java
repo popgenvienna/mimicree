@@ -60,6 +60,8 @@ public class SimulationResultsWriter{
 			sb.append(sr.getTotalSNPNumber()); sb.append('\t');
 			sb.append(sr.getFixNeutral()); sb.append('\t');
 			sb.append(sr.getFixSelection()); sb.append('\t');
+			sb.append(sr.getGenerationsNeutral()); sb.append('\t');
+			sb.append(sr.getGenerationsSelection());
 			try{
 				 bf.write(sb.toString());
 			}

@@ -16,10 +16,10 @@ public class SimulationFrameworkLimits {
 	private final String haplotypeFile;
 	private final String recombinationFile;
 	private final String chromosomeDefinition;
-	private final int selectionCoefficient;
-	private final int heterozygousEffect;
+	private final double selectionCoefficient;
+	private final double heterozygousEffect;
 	private final int maxGenerations;
-	private final int maxFrequency;
+	private final double maxFrequency;
 	private final int numberOfSelected;
 	private final String outputFile;
 	private final int replicateRuns;
@@ -27,8 +27,8 @@ public class SimulationFrameworkLimits {
 
 
 	private final java.util.logging.Logger logger;
-	public SimulationFrameworkLimits(String haplotypeFile, String recombinationFile, String chromosomeDefinition, int selectionCoefficient, int heterozygousEffect,
-									 int maxGenerations, int maxFrequency, int numberOfSelected,
+	public SimulationFrameworkLimits(String haplotypeFile, String recombinationFile, String chromosomeDefinition, double selectionCoefficient, double heterozygousEffect,
+									 int maxGenerations, double maxFrequency, int numberOfSelected,
 									 String outputFile, int replicateRuns, java.util.logging.Logger logger)
 	{
 		// 'File' represents files and directories
