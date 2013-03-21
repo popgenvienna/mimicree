@@ -42,7 +42,7 @@ public class SingleSimulationResults {
 		return new ArrayList<MatingDistribution>(this.neutralMatings);
 	}
 
-	public ArrayList<MatingDistribution> getSelectionMatingsMatings()
+	public ArrayList<MatingDistribution> getSelectionMatings()
 	{
 		return new ArrayList<MatingDistribution>(this.selectionMatings);
 	}
