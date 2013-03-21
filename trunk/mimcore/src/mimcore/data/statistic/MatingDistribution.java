@@ -15,6 +15,12 @@ public class MatingDistribution {
 	{
 		this.matingDistribution=matingDistribution;
 	}
+
+	/**
+	 * Length of the mating distribution
+	 * Corresponding to the largest number of matings
+	 * @return
+	 */
 	public int length()
 	{
 		return matingDistribution.length;
@@ -22,6 +28,7 @@ public class MatingDistribution {
 
 	/**
 	 * Get the number of occurences for a given number of matings;
+	 * Can be imagined as how often a family has the given size (index)
 	 * @param index
 	 * @return
 	 */

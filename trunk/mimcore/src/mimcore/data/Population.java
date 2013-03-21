@@ -9,6 +9,7 @@ import com.sun.javaws.exceptions.InvalidArgumentException;
 import mimcore.data.recombination.*;
 import mimcore.data.fitness.FitnessFunction;
 import mimcore.data.fitness.MatingFunction;
+import mimcore.data.statistic.MatingDistribution;
 import mimcore.misc.MimicreeThreadPool;
 
 
@@ -65,7 +66,7 @@ public class Population {
 	 * Return the distribution of matings that led to the specific population
 	 * @return
 	 */
-	public Integer[] getMatingDistribution()
+	public MatingDistribution getMatingDistribution()
 	{
 		     // First creat a parent name, offspring matrix; Thus count for each parent the number of offspring
 			HashMap<Long,Integer> matingCounts=new HashMap<Long, Integer>();
@@ -89,7 +90,7 @@ public class Population {
 				if( e.getValue() > max) max=e.getValue();
 			}
 
-			Integer[] matingDistribution=new Integer[max];
+			int[] matingDistribution=new int[max];
 			// number of individuals without mating; is simply the population size (= individuals that could mate) minus individuals which actually mated.
 			int loosers= this.specimen.size()-matingCounts.size();
 			matingDistribution[0]=loosers;
@@ -105,7 +106,7 @@ public class Population {
 				int val=e.getValue();
 				matingDistribution[val]++;
 			}
-			return matingDistribution;
+			return new MatingDistribution(matingDistribution);
 	}
 
 	
