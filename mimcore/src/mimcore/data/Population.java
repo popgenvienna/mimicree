@@ -5,6 +5,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import mimcore.data.recombination.*;
 import mimcore.data.fitness.FitnessFunction;
 import mimcore.data.fitness.MatingFunction;
@@ -19,9 +20,10 @@ import mimcore.misc.MimicreeThreadPool;
  */
 public class Population {
 	private final ArrayList<Specimen> specimen;
-	
+	// The matings that lead to the certain population
 	public Population(ArrayList<Specimen> specimen)
 	{
+
 		this.specimen=new ArrayList<Specimen>(specimen);
 	}
 	/**
@@ -35,7 +37,7 @@ public class Population {
 		ArrayList<Specimen> specimen=new ArrayList<Specimen>();
 		for(DiploidGenome genome: genomes)
 		{
-			Specimen s=fitnessFunction.getSpecimen(genome);
+			Specimen s=fitnessFunction.getSpecimen(genome,0,0);
 			specimen.add(s);
 		}
 		
@@ -55,8 +57,57 @@ public class Population {
 	{
 		MatingFunction mf=MatingFunction.getMatingFunction(this);
 		SpecimenGenerator specGen=new SpecimenGenerator(mf,fitnessFunction,recGenerator,this.size());
+
 		return new Population(specGen.getSpecimen());
 	}
+
+	/**
+	 * Return the distribution of matings that led to the specific population
+	 * @return
+	 */
+	public Integer[] getMatingDistribution()
+	{
+		     // First creat a parent name, offspring matrix; Thus count for each parent the number of offspring
+			HashMap<Long,Integer> matingCounts=new HashMap<Long, Integer>();
+		   	for(Specimen spec : this.specimen)
+			   {
+				   long mother=spec.mother();
+				   long father=spec.father();
+				   if(mother==0 || father ==0) continue;
+
+				   if(!matingCounts.containsKey(mother)) matingCounts.put(mother,0);
+				   if(!matingCounts.containsKey(father)) matingCounts.put(father,0);
+				   matingCounts.put(father,matingCounts.get(father)+1);
+				   matingCounts.put(mother,matingCounts.get(mother)+1);
+			   }
+
+
+		    // Determine the highest number of offspring any parent has
+			int max=0;
+			for(Map.Entry<Long,Integer> e : matingCounts.entrySet())
+			{
+				if( e.getValue() > max) max=e.getValue();
+			}
+
+			Integer[] matingDistribution=new Integer[max];
+			// number of individuals without mating; is simply the population size (= individuals that could mate) minus individuals which actually mated.
+			int loosers= this.specimen.size()-matingCounts.size();
+			matingDistribution[0]=loosers;
+		    // initialize as zero of course except the first :)
+			for(int i=1; i< matingDistribution.length; i++)
+			{
+				matingDistribution[i]=0;
+			}
+
+		    // convert this to a list, indicating how many parents have 0 offspring
+			for(Map.Entry<Long,Integer> e : matingCounts.entrySet())
+			{
+				int val=e.getValue();
+				matingDistribution[val]++;
+			}
+			return matingDistribution;
+	}
+
 	
 	/**
 	 * Retrieve the specimen constituting a population
@@ -88,16 +139,40 @@ public class Population {
 	
 	public boolean isFixed(GenomicPosition position)
 	{
-		int countMajor=0;
+		int countAncestral=0;
 		int hapCount=this.specimen.size()*2;
 		for(Specimen spec: this.specimen)
 		{
-			if(spec.getGenome().getHaplotypeA().hasAncestral(position)) countMajor++;
-			if(spec.getGenome().getHaplotypeB().hasAncestral(position)) countMajor++;
+			if(spec.getGenome().getHaplotypeA().hasAncestral(position)) countAncestral++;
+			if(spec.getGenome().getHaplotypeB().hasAncestral(position)) countAncestral++;
 		}
-		if(countMajor==0 || countMajor==hapCount) return true;
+		if(countAncestral==0 || countAncestral==hapCount) return true;
 		return false;
 	}
+
+	/**
+	 * Determine whether the ancestral allele fixed
+	 * @param position
+	 * @return
+	 */
+	public boolean isAncestralFixed(GenomicPosition position)
+	{
+		int countAncestral=0;
+		int hapCount=this.specimen.size()*2;
+		for(Specimen spec: this.specimen)
+		{
+			if(spec.getGenome().getHaplotypeA().hasAncestral(position)) countAncestral++;
+			if(spec.getGenome().getHaplotypeB().hasAncestral(position)) countAncestral++;
+		}
+		if(! (countAncestral==0 || countAncestral==hapCount)) throw new IllegalArgumentException("Population is not yet fixed");
+		if(countAncestral==hapCount)
+		{
+			return true;
+		}
+		return false;
+	}
+
+
 	
 	public boolean areSelectedFixed(FitnessFunction fitness)
 	{
@@ -119,6 +194,7 @@ class SpecimenGenerator
 	private final int populationSize;
 	private final FitnessFunction ff;
 	private final RecombinationGenerator recGen;
+
 	
 	public SpecimenGenerator(MatingFunction mf,FitnessFunction ff, RecombinationGenerator recGen, int populationSize)
 	{
@@ -127,24 +203,25 @@ class SpecimenGenerator
 		this.populationSize=populationSize;
 		this.ff=ff;
 		this.recGen=recGen;
+
+
 	}
-	
+
 	public ArrayList<Specimen> getSpecimen()
 	{
 		SpecimenCollector col=new SpecimenCollector();
-		
 		ExecutorService executor=MimicreeThreadPool.getExector();
 		ArrayList<Callable<Object>> call=new ArrayList<Callable<Object>>();
-		
+
 		for(int i=0; i<this.populationSize; i++)
 		{
 			call.add(Executors.callable(new SingleSpecimenGenerator(this.mf,this.ff,this.recGen,col)));
 		}
-		
+
 		try
-		{	
+		{
 			// Run them all!
-			executor.invokeAll(call);	
+			executor.invokeAll(call);
 		}
 		catch(InterruptedException e)
 		{
@@ -154,6 +231,15 @@ class SpecimenGenerator
 		ArrayList<Specimen> specs=col.getSpecimen();
 		assert(specs.size()==populationSize);
 		return specs;
+	}
+
+
+	
+	private void  run()
+	{
+
+
+
 	}
 	
 
@@ -167,12 +253,15 @@ class SpecimenGenerator
 class SpecimenCollector
 {
 	private final ArrayList<Specimen> specs =new ArrayList<Specimen>();
+
+
 	public SpecimenCollector(){}
 	
 	public synchronized void addSpecimen(Specimen specimen)
 			{
 		this.specs.add(specimen);
 	}
+
 	
 	public synchronized ArrayList<Specimen> getSpecimen()
 	{
@@ -205,7 +294,7 @@ class SingleSpecimenGenerator implements Runnable
 		HaploidGenome semen	=merryCouple[0].getGamete(recGenerator);
 		HaploidGenome egg	=merryCouple[1].getGamete(recGenerator);
 		DiploidGenome fertilizedEgg=new DiploidGenome(semen,egg);
-		Specimen spec=ff.getSpecimen(fertilizedEgg);
+		Specimen spec=ff.getSpecimen(fertilizedEgg,merryCouple[0].name(),merryCouple[1].name());
 		collector.addSpecimen(spec);
 	}
 	

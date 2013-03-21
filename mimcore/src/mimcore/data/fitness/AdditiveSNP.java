@@ -75,6 +75,19 @@ public class AdditiveSNP {
 	{
 		return this.h;
 	}
+
+	public boolean isAncestralSelected(char ancestral)
+	{
+		if(ancestral == this.w11char)
+		{
+			// anc = A    w11 = A  thus neutral
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 	
 	
 	

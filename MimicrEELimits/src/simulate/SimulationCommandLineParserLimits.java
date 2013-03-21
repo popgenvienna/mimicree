@@ -148,7 +148,7 @@ public class SimulationCommandLineParserLimits {
 
 	public static void printVersion()
 	{
-		String version="MimicrEELimits version 1.02; build "+String.format("%tc",new Date(System.currentTimeMillis()));
+		String version="MimicrEELimits version 1.01; build "+String.format("%tc",new Date(System.currentTimeMillis()));
 		System.out.println(version);
 		System.exit(1);
 	}
