@@ -2,6 +2,7 @@ package mimcore.data.fitness;
 
 import java.util.*; 
 import mimcore.data.*;
+import mimcore.data.haplotypes.*;
 
 /**
  * Represents a summary of the additive fitness effects of SNPs
@@ -54,6 +55,36 @@ public class AdditiveSNPFitness {
 		}
 		return true;
 	}
+
+
+	/**
+	 * Count the number of additive SNPs that fixed in the correct direction
+	 * Additive SNPs need to be fixed, it will throw an error if one of them are not fixed
+	 * @param population
+	 * @return
+	 */
+	public int countAdditiveFixedCorrectly(Population population)
+	{
+		SNPCollection snpCol=population.getSpecimen().get(0).getGenome().getHaplotypeA().getSNPHaplotype().getSNPCollection();
+
+		int countCorrect=0;
+		for(AdditiveSNP as:this.additiveSNPs)
+		{
+			 SNP snp=snpCol.getSNPforPosition(as.getPosition());
+			 boolean ancestralFixed=population.isAncestralFixed(as.getPosition());
+			 boolean isAncestralSelected=as.isAncestralSelected(snp.ancestralAllele());
+				if(ancestralFixed && isAncestralSelected)
+				{
+					countCorrect++;
+				}
+				else if( (!ancestralFixed) && (!isAncestralSelected))
+				{
+					countCorrect++;
+				}
+		}
+		return countCorrect;
+	}
+
 	
 	
 	/**
@@ -71,6 +102,30 @@ public class AdditiveSNPFitness {
 	{
 		return new ArrayList<GenomicPosition>(new HashSet<GenomicPosition>(this.pos2add.keySet()));
 	}
+
+
+	public ArrayList<AdditiveSNP> getAdditiveSNPs()
+	{
+		return new ArrayList<AdditiveSNP>(this.additiveSNPs);
+	}
+
+	/**
+	 * Get a neutral representation of the additive SNP fitness
+	 * Thus setting s=h=0.0
+	 * @return
+	 */
+	public AdditiveSNPFitness getNeutralAdditiveFitness()
+	{
+		ArrayList<AdditiveSNP> toret =new ArrayList<AdditiveSNP>();
+		for(AdditiveSNP as: this.additiveSNPs)
+		{
+			  AdditiveSNP ns = new AdditiveSNP(as.getPosition(),as.w11Char(),0.0,0.0);
+			toret.add(ns);
+		}
+		return new AdditiveSNPFitness(toret);
+	}
+
+
 	
 	
 }

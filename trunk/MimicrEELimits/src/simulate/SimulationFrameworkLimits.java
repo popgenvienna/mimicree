@@ -1,10 +1,12 @@
 package simulate;
 
 import mimcore.data.fitness.AdditiveSNPFitness;
+import mimcore.data.recombination.RecombinationGenerator;
 import mimcore.data.statistic.AdditiveSNPRandomPicker;
 import mimcore.data.statistic.PACReducer;
-import mimcore.data.statistic.PopulationAlleleCount;
 import mimcore.data.*;
+import mimcore.io.ChromosomeDefinitionReader;
+import mimcore.io.RecombinationRateReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,25 +75,23 @@ public class SimulationFrameworkLimits {
 		AdditiveSNPRandomPicker randomPicker=new AdditiveSNPRandomPicker(new PACReducer(dipGenomes).reduce(),this.selectionCoefficient,this.heterozygousEffect,
 				this.numberOfSelected,this.maxFrequency);
 
-		int successfullSimulations=0;
-		while(successfullSimulations<this.replicateRuns)
+		RecombinationGenerator recGenerator = new RecombinationGenerator(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),
+				new ChromosomeDefinitionReader(this.chromosomeDefinition).getRandomAssortmentGenerator());
+
+
+		ArrayList<SingleSimulationResults> results=new ArrayList<SingleSimulationResults>();
+		while(results.size() < this.replicateRuns)
 		{
+
 			AdditiveSNPFitness additiveFitness=randomPicker.getAdditiveSNPs();
 			ArrayList<DiploidGenome> reducedGenome=this.subFilterSelected(dipGenomes,additiveFitness.getSelectedPositions());
+
+
+			LimitsSimulationWrapper sls =new LimitsSimulationWrapper(reducedGenome,additiveFitness,recGenerator,maxGenerations,this.logger);
+			SingleSimulationResults ssr= sls.run();
+
+			if(ssr != null) results.add(ssr);
 		}
-
-
-
-
-
-		//RecombinationGenerator recGenerator = new RecombinationGenerator(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),
-	//			new ChromosomeDefinitionReader(this.chromosomeDefinition).getRandomAssortmentGenerator());
-		
-
-
-//		ArrayList<PopulationAlleleCount> pacs=new MultiSimulationTimestamp(Population.loadPopulation(dipGenomes, fitnessFunction)
-//				,fitnessFunction,recGenerator,simMode.getTimestamps(),this.replicateRuns,this.logger).run();
-
 
 	}
 

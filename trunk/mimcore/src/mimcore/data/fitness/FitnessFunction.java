@@ -47,12 +47,12 @@ public class FitnessFunction {
 	 * @param genome
 	 * @return
 	 */
-	public Specimen getSpecimen(DiploidGenome genome)
+	public Specimen getSpecimen(DiploidGenome genome,long mother, long father)
 	{
 		double addi=getAdditiveFitness(genome);
 		double epi=getEpistaticFitness(genome);
 		double fitness=addi*epi;
-		return new Specimen(fitness,addi,epi,genome);
+		return new Specimen(fitness,addi,epi,genome,mother,father);
 	}
 	
 	public AdditiveSNPFitness getAdditiveSNPFitness()
