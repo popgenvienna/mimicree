@@ -7,24 +7,34 @@ import mimcore.data.haplotypes.*;
 
 public class PACReducer {
 
-	private final Population population;
+	private final ArrayList<Haplotype> haplotypes;
+
+	public PACReducer(ArrayList<DiploidGenome> genomes)
+	{
+		this.haplotypes =new ArrayList<Haplotype>();
+		for(DiploidGenome dg : genomes)
+		{
+			haplotypes.add(dg.getHaplotypeA().getSNPHaplotype());
+			haplotypes.add(dg.getHaplotypeB().getSNPHaplotype());
+		}
+	}
+
+
 	public PACReducer(Population population)
 	{
-		this.population=population;
+		ArrayList<Specimen> specs=population.getSpecimen();
+		this.haplotypes=new ArrayList<Haplotype>();
+		for(Specimen s :specs)
+		{
+			haplotypes.add(s.getGenome().getHaplotypeA().getSNPHaplotype());
+			haplotypes.add(s.getGenome().getHaplotypeB().getSNPHaplotype());
+		}
 	}
 
 
 
 	public PopulationAlleleCount reduce()
 	{
-		    ArrayList<Specimen> specs=population.getSpecimen();
-			ArrayList<Haplotype> haplotypes=new ArrayList<Haplotype>();
-			for(Specimen s :specs)
-			{
-				haplotypes.add(s.getGenome().getHaplotypeA().getSNPHaplotype());
-				haplotypes.add(s.getGenome().getHaplotypeB().getSNPHaplotype());
-			}
-
 			return getPAC(haplotypes);
 	}
 

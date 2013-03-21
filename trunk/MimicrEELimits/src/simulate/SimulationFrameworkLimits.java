@@ -1,6 +1,10 @@
 package simulate;
 
+import mimcore.data.fitness.AdditiveSNPFitness;
+import mimcore.data.statistic.AdditiveSNPRandomPicker;
+import mimcore.data.statistic.PACReducer;
 import mimcore.data.statistic.PopulationAlleleCount;
+import mimcore.data.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,9 +69,21 @@ public class SimulationFrameworkLimits {
 	{
 		this.logger.info("Starting MimicrEELimits");
 
-		// Load the data
-		//FitnessFunction fitnessFunction=new FitnessFunctionLoader(this.additiveFile,this.epistasisFile,this.logger).loadFitnessFunction();
-		//ArrayList<DiploidGenome> dipGenomes=new mimcore.io.DiploidGenomeReader(this.haplotypeFile,"",this.logger).readGenomes();
+		ArrayList<DiploidGenome> dipGenomes=new mimcore.io.DiploidGenomeReader(this.haplotypeFile,"",this.logger).readGenomes();
+		AdditiveSNPRandomPicker randomPicker=new AdditiveSNPRandomPicker(new PACReducer(dipGenomes).reduce(),this.selectionCoefficient,this.heterozygousEffect,
+				this.numberOfSelected,this.maxFrequency);
+
+		int successfullSimulations=0;
+		while(successfullSimulations<this.replicateRuns)
+		{
+			AdditiveSNPFitness additiveFitness=randomPicker.getAdditiveSNPs();
+			ArrayList<DiploidGenome> reducedGenome=this.subFilterSelected(dipGenomes,additiveFitness.getSelectedPositions());
+		}
+
+
+
+
+
 		//RecombinationGenerator recGenerator = new RecombinationGenerator(new RecombinationRateReader(this.recombinationFile,this.logger).getRecombinationRate(),
 	//			new ChromosomeDefinitionReader(this.chromosomeDefinition).getRandomAssortmentGenerator());
 		
@@ -77,5 +93,23 @@ public class SimulationFrameworkLimits {
 //				,fitnessFunction,recGenerator,simMode.getTimestamps(),this.replicateRuns,this.logger).run();
 
 
+	}
+
+	/**
+	 * Filter the diploid genome for the selected SNPs;
+	 * @param toFilter
+	 * @param filterPositions
+	 * @return
+	 */
+	private ArrayList<DiploidGenome> subFilterSelected(ArrayList<DiploidGenome> toFilter, ArrayList<GenomicPosition> filterPositions)
+	{
+		ArrayList<DiploidGenome> toret=new ArrayList<DiploidGenome>();
+		for(DiploidGenome dipgen: toFilter)
+		{
+			HaploidGenome g1=new HaploidGenome(dipgen.getHaplotypeA().getSNPHaplotype().getSubHaplotype(filterPositions),dipgen.getHaplotypeA().getInversionHaplotype());
+			HaploidGenome g2=new HaploidGenome(dipgen.getHaplotypeB().getSNPHaplotype().getSubHaplotype(filterPositions),dipgen.getHaplotypeB().getInversionHaplotype());
+			toret.add(new DiploidGenome(g1,g2));
+		}
+		return toret;
 	}
 }
