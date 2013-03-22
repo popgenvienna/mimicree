@@ -270,6 +270,29 @@ public class SharedDataFactory {
 		return new DiploidGenome(g1,g2);
 	}
 
+	public static ArrayList<DiploidGenome> getDiploidGenomesMf08()
+	{
+		ArrayList<DiploidGenome> genomes= new ArrayList<DiploidGenome>();
+		genomes.add(getDiploidGenome_11());
+		genomes.add(getDiploidGenome_11());
+		genomes.add(getDiploidGenome_11());
+		genomes.add(getDiploidGenome_11());
+		genomes.add(getDiploidGenome_00());
+		return genomes;
+	}
+
+	public static ArrayList<DiploidGenome> getDiploidGenomesMf02()
+	{
+		ArrayList<DiploidGenome> genomes= new ArrayList<DiploidGenome>();
+		genomes.add(getDiploidGenome_11());
+		genomes.add(getDiploidGenome_00());
+		genomes.add(getDiploidGenome_00());
+		genomes.add(getDiploidGenome_00());
+		genomes.add(getDiploidGenome_00());
+		return genomes;
+	}
+
+
 	public static Specimen getSpecimen(double fitness, double additiveFitness)
 	{
 		DiploidGenome genome=getDiploidGenome_11();

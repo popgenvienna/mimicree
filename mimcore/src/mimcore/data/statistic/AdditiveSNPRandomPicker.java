@@ -59,14 +59,16 @@ public class AdditiveSNPRandomPicker {
 			SNP snp = snpCol.getSNPforIndex(randindex);
 			char w11;
 			double frequency;
-			if(Math.random()<0.5) // Ancestral allele
+			if(Math.random() < 0.5) // Ancestral allele
 			{
+
 				// selectedAllele=s.ancestralAllele();
 				frequency=pac.ancestralFrequency(randindex);
 				w11 = snp.derivedAllele();
 			}
 			else  // Derived allele
 			{
+				// eg ancestral A=0.8 - derived C=0.2 maxfreq=0.3
 				 // selectedAllele=s.derivedAllele();
 				frequency=pac.derivedFrequency(randindex);
 				w11=snp.ancestralAllele();
