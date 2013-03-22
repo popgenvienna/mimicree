@@ -63,7 +63,7 @@ public class SimulationResultsWriter{
 			sb.append(sr.getGenerationsNeutral()); sb.append('\t');
 			sb.append(sr.getGenerationsSelection());
 			try{
-				 bf.write(sb.toString());
+				 bf.write(sb.toString()+"\n");
 			}
 			catch(IOException e)
 			{
@@ -93,10 +93,9 @@ public class SimulationResultsWriter{
 					sb.append("\t");
 					sb.append(active.get(i));
 				}
-
 				try
 				{
-					bf.write(sb.toString());
+					bf.write(sb.toString()+"\n");
 				}
 				catch(IOException e)
 				{
