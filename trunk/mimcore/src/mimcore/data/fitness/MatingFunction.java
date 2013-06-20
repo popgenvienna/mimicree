@@ -1,6 +1,8 @@
 package mimcore.data.fitness;
 
 import mimcore.data.*;
+import mimcore.misc.MimicrEERandom;
+
 import java.util.*;
 
 /**
@@ -65,11 +67,11 @@ public class MatingFunction {
 	public Specimen[] getCouple()
 	{
 		
-		FitnessTransformedSpecimen s1=getSpecimenForRandomNumber(Math.random());
-		FitnessTransformedSpecimen s2=getSpecimenForRandomNumber(Math.random());
+		FitnessTransformedSpecimen s1=getSpecimenForRandomNumber(MimicrEERandom.getDouble());
+		FitnessTransformedSpecimen s2=getSpecimenForRandomNumber(MimicrEERandom.getDouble());
 		while(s1.index==s2.index)
 		{
-			s2=getSpecimenForRandomNumber(Math.random());
+			s2=getSpecimenForRandomNumber(MimicrEERandom.getDouble());
 		}		
 		Specimen[] merryCouple=new Specimen[2];
 		merryCouple[0]=s1.specimen;

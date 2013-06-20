@@ -1,6 +1,8 @@
 package mimcore.data.recombination;
 
 import mimcore.data.*;
+import mimcore.misc.MimicrEERandom;
+
 import java.math.*;
 
 public class RecombinationWindow {
@@ -69,7 +71,7 @@ public class RecombinationWindow {
 	public boolean hasRecombinationEvent()
 	{
 		
-		double rand=Math.random();
+		double rand=MimicrEERandom.getDouble();
 		if(rand<this.p_recombination)return true;
 		return false;
 	}
@@ -84,7 +86,7 @@ public class RecombinationWindow {
 		int length=(this.endPosition - this.startPosition + 1);
 		
 		// basically values between 0-99 (random numbers between 0 and 0.999)
-		int randAdd= (int)(Math.random()*length);
+		int randAdd= (int)(MimicrEERandom.getDouble()*length);
 		
 		// a random GenomicPosition within the window
 		return new GenomicPosition(chromosome, this.startPosition+randAdd);

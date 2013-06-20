@@ -2,6 +2,7 @@ package mimcore.data.recombination;
 
 import java.util.*;
 import mimcore.data.*;
+import mimcore.misc.MimicrEERandom;
 
 /**
  * Contains information about linkage of chromosomes, e.g.: which chromosome arms constitute a chromsomse
@@ -36,7 +37,7 @@ public class RandomAssortmentGenerator {
 		{
 			// Assign a random haplotype to the first chromosome in the list
 			assert(chromlist.size()>0);
-			boolean randGenotype=Math.random()<0.5?true:false;
+			boolean randGenotype= MimicrEERandom.getDouble()<0.5?true:false;
 			Chromosome c=chromlist.get(0);
 			randAssort.put(c, randGenotype);
 			
