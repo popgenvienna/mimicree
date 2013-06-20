@@ -1,5 +1,6 @@
 package simulate;
 
+import mimcore.misc.MimicrEERandom;
 import mimcore.misc.MimicreeThreadPool;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class SimulationCommandLineParserLimits {
 		double heteroygousEffect=0;
 		int selectedSNPs=0;
 		double maxFrequency=0;
-
+		Integer seed=null;
 		String chromosomeDefinition="";
 		int replicateRuns=1;
 		int maxGenerations=50000;
@@ -82,6 +83,10 @@ public class SimulationCommandLineParserLimits {
 			{
 				selectionCoefficient=Double.parseDouble(args.remove(0));
 			}
+			else if(cu.equals("--seed"))
+			{
+				seed=Integer.parseInt(args.remove(0));
+			}
 			else if(cu.equals("-h"))
 			{
 				heteroygousEffect=Double.parseDouble(args.remove(0));
@@ -104,6 +109,7 @@ public class SimulationCommandLineParserLimits {
         }
 
 		MimicreeThreadPool.setThreads(threadCount);
+		if(seed != null) MimicrEERandom.setSeed(seed, threadCount);
 
 		// Create a logger to System.err
 		Logger logger= Logger.getLogger("Mimicree Logger");
@@ -141,6 +147,7 @@ public class SimulationCommandLineParserLimits {
 		sb.append("--max-generations		the maximal number of generations to run the simulation before aborting it and choosing different SNPs\n");
 		sb.append("--detailed-log				print detailed log messages\n");
 		sb.append("--threads				the number of threads to use\n");
+		sb.append("--seed					the seed for the random number generator\n");
 		sb.append("--help					print the help\n");
 		System.out.print(sb.toString());
 		System.exit(1);

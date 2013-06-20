@@ -4,6 +4,7 @@ import java.util.*;
 
 import mimcore.data.*;
 import mimcore.data.haplotypes.*;
+import mimcore.misc.MimicrEERandom;
 
 public class RsquaredRandomGenomeIterator implements IRsquaredIterator{
 	private final HaploidGenomeCollection genomes;
@@ -84,7 +85,7 @@ public class RsquaredRandomGenomeIterator implements IRsquaredIterator{
 	 */
 	private LocusPair getNextPair()
 	{	
-		SNP first=this.snpcol.getSNPforIndex((int)(Math.random()*this.snpcol.size()));
+		SNP first=this.snpcol.getSNPforIndex((int)(MimicrEERandom.getDouble()*this.snpcol.size()));
 		SNP second;
 		do
 		{
@@ -92,11 +93,11 @@ public class RsquaredRandomGenomeIterator implements IRsquaredIterator{
 			if(this.intraChromosomal)
 			{
 				ArrayList<SNP> chrspec=this.chr2snp.get(first.genomicPosition().chromosome());
-				second=chrspec.get((int)(Math.random()* chrspec.size()));
+				second=chrspec.get((int)(MimicrEERandom.getDouble()* chrspec.size()));
 			}
 			else
 			{
-				second=this.snpcol.getSNPforIndex((int)(Math.random()*this.snpcol.size()));
+				second=this.snpcol.getSNPforIndex((int)(MimicrEERandom.getDouble()*this.snpcol.size()));
 			}
 			
 		}while(first.genomicPosition().equals(second.genomicPosition()));

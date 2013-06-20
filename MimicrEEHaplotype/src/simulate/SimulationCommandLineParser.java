@@ -3,6 +3,7 @@ package simulate;
 import java.util.*;
 import java.util.logging.Level;
 
+import mimcore.misc.MimicrEERandom;
 import mimcore.misc.MimicreeThreadPool;
 
 
@@ -24,6 +25,7 @@ public class SimulationCommandLineParser {
 		String outputDir="";
 		String outputGenRaw="";
 		String chromosomeDefinition="";
+		Integer seed=null;
 		int replicateRuns=1;
 		boolean detailedLog=false;
 		int threadCount=1;
@@ -47,6 +49,10 @@ public class SimulationCommandLineParser {
 			{
 
 				threadCount=Integer.parseInt(args.removeFirst());
+			}
+			else if(cu.equals("--seed"))
+			{
+				seed=Integer.parseInt(args.remove(0));
 			}
             else if(cu.equals("--haplotypes-g0"))
             {
@@ -95,6 +101,7 @@ public class SimulationCommandLineParser {
         }
 
 		MimicreeThreadPool.setThreads(threadCount);
+		if(seed != null) MimicrEERandom.setSeed(seed,threadCount);
 
 		// Create a logger to System.err
 		java.util.logging.Logger logger=java.util.logging.Logger.getLogger("Mimicree Logger");
@@ -134,6 +141,7 @@ public class SimulationCommandLineParser {
 		sb.append("--output-dir				the output directory\n");
 		sb.append("--detailed-log				print detailed log messages\n");
 		sb.append("--threads				the number of threads to use\n");
+		sb.append("--seed					the seed for the random number generator\n");
 		sb.append("--help					print the help\n");
 		System.out.print(sb.toString());
 		System.exit(1);

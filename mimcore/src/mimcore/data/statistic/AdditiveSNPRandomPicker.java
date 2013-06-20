@@ -4,6 +4,7 @@ import mimcore.data.GenomicPosition;
 import mimcore.data.fitness.AdditiveSNP;
 import mimcore.data.fitness.AdditiveSNPFitness;
 import mimcore.data.haplotypes.*;
+import mimcore.misc.MimicrEERandom;
 
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
@@ -51,7 +52,7 @@ public class AdditiveSNPRandomPicker {
 		int successfullCount=0;
 		while(successfullCount < this.snpCount)
 		{
-			int randindex =  (int)(Math.random()* snpCol.size());
+			int randindex =  (int)(MimicrEERandom.getDouble()* snpCol.size());
 			// Discard already sampled positions
 			if(sampledPositions.contains((Integer)randindex)) continue;
 
@@ -59,7 +60,7 @@ public class AdditiveSNPRandomPicker {
 			SNP snp = snpCol.getSNPforIndex(randindex);
 			char w11;
 			double frequency;
-			if(Math.random() < 0.5) // Ancestral allele
+			if(MimicrEERandom.getDouble() < 0.5) // Ancestral allele
 			{
 
 				// selectedAllele=s.ancestralAllele();
